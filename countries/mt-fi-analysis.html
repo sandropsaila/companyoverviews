@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MT-FI analysis — Malta &amp; Finland crypto and payments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.deloitte{background:var(--amber-soft); color:var(--amber);}
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .table-wrap table{min-width:560px;}
+
+  @media (max-width: 640px){
+    section, header.hero{scroll-margin-top:64px;}
+    .table-wrap tr:last-child td{border-bottom:none;}
+    .table-wrap{overflow:visible;}
+    .table-wrap table{min-width:0;}
+    .table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap td{display:block;width:100%;}
+    .table-wrap tr:first-child{display:none;}
+    .table-wrap tr{background:var(--panel);border:1px solid var(--line);margin-bottom:.7rem;padding:.35rem 0;}
+    .table-wrap td{white-space:normal;border-bottom:none;padding:.35rem .9rem;display:grid;grid-template-columns:7.5rem 1fr;gap:.6rem;}
+    .table-wrap td::before{content:attr(data-label);font-size:.74rem;font-weight:600;color:var(--ink-soft);}
+    .table-wrap td:empty{display:none;}
+    .org-row .entity .sub{font-size:.8rem;}
+    .panel ul, .market-cols ul{padding-left:1rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">MT-FI analysis</div>
+    <div><a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button></div>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#regulation">Regulatory landscape</a>
+    <a href="#mt-crypto">Malta — crypto</a>
+    <a href="#mt-payments">Malta — payments</a>
+    <a href="#fi-crypto">Finland — crypto</a>
+    <a href="#fi-payments">Finland — payments</a>
+    <a href="#common">Common companies</a>
+    <a href="#deloitte">Relevance to Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">MT-FI analysis</div>
+    <div class="brand-sub">Country analysis</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#regulation">Regulatory landscape</a>
+    <a href="#mt-crypto">Malta — crypto</a>
+    <a href="#mt-payments">Malta — payments</a>
+    <a href="#fi-crypto">Finland — crypto</a>
+    <a href="#fi-payments">Finland — payments</a>
+    <a href="#common">Common companies</a>
+    <a href="#deloitte">Relevance to Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Position as at 26 September 2026. Compiled from ESMA-register trackers, practice guides (Chambers, Legal 500), company announcements and PSD2 register data.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Country analysis — Crypto &amp; Payments</div>
+      <h1>Malta &amp; Finland</h1>
+      <p class="tagline">Crypto-asset service providers and payment / e-money institutions based in Malta and Finland, how the two markets connect, and where Deloitte fits.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Malta MiCA CASPs</div><div class="value">22</div></div>
+        <div class="fact"><div class="label">Finland MiCA CASPs</div><div class="value">5</div></div>
+        <div class="fact"><div class="label">Malta EMIs operating</div><div class="value">37</div></div>
+        <div class="fact"><div class="label">Finland EMIs operating</div><div class="value">8</div></div>
+        <div class="fact"><div class="label">Common groups (own entity in both)</div><div class="value">None found</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>An international hub and a small domestic market</h2>
+      <p class="lede">Malta licenses the EU arms of global exchanges; Finland's crypto market is served by five home-grown CASPs and by global platforms passporting in — several of them from Malta.</p>
+      <p>Finland ran one of the shortest MiCA transitions in the EU: legacy VASP registrations lapsed on 30 June 2025, a year before Malta's deadline. By then the FIN-FSA had begun authorising its own CASPs — Coinmotion first, followed by Tesseract, Bittimaatti, NorthCrypto and Kvarn Capital. Finland's standout contribution is on stablecoins: Paxos Issuance Europe Oy, a Finnish EMI, issues USDG, among the first MiCA-compliant US-dollar stablecoins in the EU.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">22 / 5</div><div class="l">MiCA CASPs, MT / FI</div></div>
+        <div class="stat"><div class="n">30 Jun 2025</div><div class="l">End of Finnish transition</div></div>
+        <div class="stat"><div class="n">37 / 8</div><div class="l">EMIs operating, MT / FI</div></div>
+        <div class="stat"><div class="n">118</div><div class="l">Finnish PSD2 register entries (incl. exempt)</div></div>
+      </div>
+    </section>
+
+    <section id="regulation">
+      <div class="section-label">Regulatory landscape</div>
+      <h2>Who supervises what</h2>
+      <div class="market-cols">
+        <div>
+          <h4>Malta</h4>
+          <ul>
+            <li>MFSA licenses CASPs, EMIs and PIs; FIAU supervises AML.</li>
+            <li>VFA Act (2018) replaced by MiCA; transitional period ran to 1 July 2026.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Finland</h4>
+          <ul>
+            <li>FIN-FSA is the single licensing and supervisory authority for CASPs, PIs and EMIs, and enforces AML.</li>
+            <li>National Act on Crypto-Asset Service Providers implements MiCA; the earlier VASP Act (2019) was repealed.</li>
+            <li>Six-month transition ended 30 June 2025. Updated AML guidance from 1 July 2025 brings CASPs explicitly into scope.</li>
+            <li>CASPs handling fiat or stablecoin payments need a separate PI/EMI licence or a licensed partner — Finnish CASPs largely hold dual authorisation.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="mt-crypto">
+      <div class="section-label">Malta — crypto</div>
+      <h2>MFSA-authorised CASPs (MiCA)</h2>
+      <p class="lede">Same Malta dataset as the other country analyses; key entries shown.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Legal entity</th><th>Brand / group</th><th>Authorised</th></tr>
+        <tr><td data-label="Legal entity">OKX Europe Limited</td><td data-label="Brand / group"><a href="../companypages/okx.html">OKX</a></td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">Foris DAX MT Limited</td><td data-label="Brand / group"><a href="../companypages/crypto-com.html">Crypto.com</a></td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">BP23 CA Limited</td><td data-label="Brand / group">Bitpanda</td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">Zillion Bits Limited</td><td data-label="Brand / group">ZBX</td><td data-label="Authorised">6 Feb 2025</td></tr>
+        <tr><td data-label="Legal entity">Gemini Intergalactic EU Ltd</td><td data-label="Brand / group">Gemini</td><td data-label="Authorised">21 Aug 2025</td></tr>
+        <tr><td data-label="Legal entity">Socios Europe Services Limited</td><td data-label="Brand / group">Socios.com</td><td data-label="Authorised">10 Sep 2025</td></tr>
+        <tr><td data-label="Legal entity">Gate Technology Limited</td><td data-label="Brand / group"><a href="../companypages/gate.html">Gate</a></td><td data-label="Authorised">29 Sep 2025</td></tr>
+        <tr><td data-label="Legal entity">Blockchain.com Operations (Malta) Limited</td><td data-label="Brand / group">Blockchain.com</td><td data-label="Authorised">22 Oct 2025</td></tr>
+        <tr><td data-label="Legal entity">OP Digital Services Limited</td><td data-label="Brand / group">OpenPayd</td><td data-label="Authorised">23 Jun 2026</td></tr>
+        <tr><td data-label="Legal entity">FalconX Limited</td><td data-label="Brand / group">FalconX</td><td data-label="Authorised">26 Jun 2026</td></tr>
+        <tr><td data-label="Legal entity">System Pay Services (Malta) Limited</td><td data-label="Brand / group">BVNK</td><td data-label="Authorised">n/a</td></tr>
+      </table>
+      </div>
+      <p class="note">Full Malta list (21 of 22 entries) on the <a href="mt-it-analysis.html#mt-crypto">MT-IT page</a>.</p>
+    </section>
+
+    <section id="mt-payments">
+      <div class="section-label">Malta — payments</div>
+      <h2>MFSA-licensed EMIs and payment institutions</h2>
+      <div class="grid">
+        <div class="cell"><h4>OpenPayd FS Malta</h4><p>EMI since May 2019; passported to all 30 EEA states.</p></div>
+        <div class="cell"><h4><a href="../companypages/paytently.html">Paytently</a></h4><p>MFSA Payment Institution (Oct 2025).</p></div>
+        <div class="cell"><h4>Crypto-exchange PIs</h4><p><a href="../companypages/okx.html">OKX Europe</a> (PI, Feb 2026) and <a href="../companypages/gate.html">Gate Technology</a> (PI, Feb 2026) for stablecoin payments.</p></div>
+        <div class="cell"><h4>Group EU e-money hubs</h4><p>Foris MT (Crypto.com), BP23 PAY (Bitpanda), eToro Money Malta, Nium FS Malta, DLocal.</p></div>
+      </div>
+    </section>
+
+    <section id="fi-crypto">
+      <div class="section-label">Finland — crypto</div>
+      <h2>FIN-FSA-authorised CASPs (MiCA)</h2>
+      <p class="lede">All five Finnish CASPs in the ESMA register, with authorisation dates and passport reach.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Legal entity</th><th>Brand</th><th>Authorised</th><th>Notes</th></tr>
+        <tr><td data-label="Legal entity">Coinmotion Oy</td><td data-label="Brand">Coinmotion / Bittiraha</td><td data-label="Authorised">2 Jul 2025</td><td data-label="Notes">First Finnish CASP; also a payment institution; used by 31% of Finnish crypto owners (K33 survey). Passport: FI, SE</td></tr>
+        <tr><td data-label="Legal entity">Tesseract Investment Oy</td><td data-label="Brand">Tesseract</td><td data-label="Authorised">12 Sep 2025</td><td data-label="Notes">Custody, advice, portfolio management; passported EEA-wide incl. Malta</td></tr>
+        <tr><td data-label="Legal entity">Bittimaatti Oy</td><td data-label="Brand">Bittimaatti</td><td data-label="Authorised">12 Sep 2025</td><td data-label="Notes">Crypto ATM network; fiat-to-crypto exchange only, Finland only</td></tr>
+        <tr><td data-label="Legal entity">NorthCrypto Oy</td><td data-label="Brand">Northcrypto</td><td data-label="Authorised">25 Nov 2025</td><td data-label="Notes">Turku; part of Stockholm-listed GreenMerc since 2024; CEO Ville Runola. Passport: FI, NO, SE</td></tr>
+        <tr><td data-label="Legal entity">Kvarn Capital Oy</td><td data-label="Brand">Kvarn X</td><td data-label="Authorised">2 Dec 2025</td><td data-label="Notes">Custody, execution, transfers; passported EEA-wide incl. Malta</td></tr>
+      </table>
+      </div>
+      <p class="note">Dates follow ESMA-register trackers; some secondary sources give slightly different dates (e.g. Coinmotion 30 Jun 2025).</p>
+    </section>
+
+    <section id="fi-payments">
+      <div class="section-label">Finland — payments</div>
+      <h2>FIN-FSA-licensed payment players</h2>
+      <p class="lede">Finland's e-money sector is small (8 EMIs) but notable for stablecoin issuance and card infrastructure.</p>
+      <div class="grid">
+        <div class="cell"><h4>Paxos Issuance Europe Oy</h4><p>EMI (formerly Membrane Finance, licensed Jan 2022; acquired by Paxos 2024). Issues USDG and EUROe, MiCA-compliant EMTs passported across the EEA.</p></div>
+        <div class="cell"><h4>Enfuce</h4><p>Card issuing and payment processing (Enfuce License Services Oy).</p></div>
+        <div class="cell"><h4>PaySaxas Oy</h4><p>EMI focused on B2B and cross-border payments, with crypto-asset exchange functionality.</p></div>
+        <div class="cell"><h4>Other EMIs</h4><p>Wamo Solutions (business accounts), Zevoy (expense management), Wolt License Services (internal Wolt entity).</p></div>
+        <div class="cell"><h4>Crypto-linked PIs</h4><p>Coinmotion Oy (PI) and Ivy Pay (PI).</p></div>
+        <div class="cell"><h4>Payment services</h4><p>Paytrail, Enable Banking and others on the Finnish PSD2 register.</p></div>
+      </div>
+    </section>
+
+    <section id="common">
+      <div class="section-label">Common companies</div>
+      <h2>How the two markets connect</h2>
+      <p class="lede">No group was found with its own licensed entity in both Malta and Finland. The connection runs through MiCA and e-money passporting — and through a Finnish stablecoin used by a Malta-licensed exchange.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Group</th><th>Malta</th><th>Finland</th></tr>
+        <tr><td data-label="Group"><strong><a href="../companypages/okx.html">OKX</a></strong></td><td data-label="Malta">CASP + PI (OKX Europe Ltd)</td><td data-label="Finland">Serves Finland via Malta passport; OKX Card supports Finnish-issued USDG</td></tr>
+        <tr><td data-label="Group"><strong><a href="../companypages/gate.html">Gate</a></strong></td><td data-label="Malta">CASP + PI (Gate Technology Ltd)</td><td data-label="Finland">Serves Finland via Malta passport</td></tr>
+        <tr><td data-label="Group"><strong><a href="../companypages/crypto-com.html">Crypto.com</a></strong></td><td data-label="Malta">CASP + EMI (Foris DAX MT / Foris MT)</td><td data-label="Finland">Finland in its 29-state passport list</td></tr>
+        <tr><td data-label="Group"><strong>Paxos</strong></td><td data-label="Malta">No entity identified</td><td data-label="Finland">Paxos Issuance Europe Oy (EMI) — USDG usable on Malta-licensed platforms</td></tr>
+        <tr><td data-label="Group"><strong>Tesseract / Kvarn X</strong></td><td data-label="Malta">Passported into Malta</td><td data-label="Finland">FIN-FSA CASPs</td></tr>
+      </table>
+      </div>
+      <div class="panel amber">
+        <h3>What this tells us</h3>
+        <ul>
+          <li>Unlike Italy and the Netherlands, Finland has no history of Malta-licensed groups opening local entities; they serve Finns purely by passport.</li>
+          <li>Flow is two-way but asymmetric: large Malta exchanges into Finland; only two small Finnish CASPs passport into Malta.</li>
+          <li>The strongest structural link is stablecoins — Finland issues USDG, Malta-licensed exchanges distribute it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Relevance to Deloitte</div>
+      <h2>Where Deloitte fits</h2>
+      <p class="lede">No Deloitte audit or assurance relationship with the Finnish CASPs or EMIs listed was found in public sources; auditors are not asserted.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0"><span class="indent">FI</span><span class="entity">Coinmotion, Tesseract, Bittimaatti, NorthCrypto, Kvarn, Paxos Issuance Europe, Enfuce<span class="sub">Auditor not verified — available from Finnish Trade Register filings</span></span><span class="auditor none">Not verified</span></div>
+        <div class="org-row depth-0"><span class="indent">EU</span><span class="entity"><a href="../companypages/circle.html">Circle (USDC / EURC)</a><span class="sub">Deloitte-audited; USDC is the main MiCA-compliant competitor to Finland's USDG</span></span><span class="auditor deloitte">Deloitte</span></div>
+        <div class="org-row depth-0"><span class="indent">MT</span><span class="entity">OKX, Gate, Crypto.com<span class="sub">No Deloitte relationship identified — see company profiles</span></span><span class="auditor none">None found</span></div>
+      </div>
+      <div class="panel amber">
+        <h3>Opportunity lens (analysis, not sourced fact)</h3>
+        <ul>
+          <li><strong>Stablecoin issuer assurance:</strong> EMT issuers such as Paxos Issuance Europe need reserve reporting and safeguarding assurance comparable to Deloitte's Circle work.</li>
+          <li><strong>Dual-licence Finnish CASPs:</strong> Coinmotion (CASP + PI) mirrors the OKX and Gate model in Malta — combined custody, safeguarding and DORA ICT scope.</li>
+          <li><strong>Cross-border coordination:</strong> Malta exchanges' Finnish customer base and Finnish CASPs' Malta passports suit joint Deloitte Malta – Deloitte Finland teams, subject to independence checks.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-label">Sources</div>
+      <h2>Sources</h2>
+      <ul style="color:var(--ink-soft);font-size:.9rem;padding-left:1.2rem;">
+        <li>Chambers Practice Guides — Blockchain &amp; Crypto-Assets 2026: Finland; Blockchain 2025 comparisons</li>
+        <li>Legal 500 — Finland Blockchain &amp; Crypto Assets (Nov 2025)</li>
+        <li>micalist.com; casptracker.eu; norriwire.com — Finnish CASP register entries and passport lists</li>
+        <li>Datawallet — Best crypto exchanges in Finland (2026)</li>
+        <li>TheBanks.eu — List of EMIs in Finland; Citium — Finnish PSD2 register</li>
+        <li>Paxos — Acquisition of Membrane Finance (19 Nov 2024); eco.com — MiCA-compliant stablecoins list</li>
+        <li>Global Law Experts — Finnish PI/EMI authorisation</li>
+        <li>Bitcoinkeskus — Northcrypto company profile</li>
+        <li>Finance Magnates — OKX Malta PI licence and OKX Card (USDG)</li>
+        <li>Malta data as cited on the MT-IT and MT-NL pages</li>
+      </ul>
+      <p class="note">Counts and entity lists move weekly. The ESMA interim MiCA register, FIN-FSA register and MFSA Financial Services Register are the authoritative references.</p>
+    </section>
+  </main>
+</div>
+<script>
+  const links = document.querySelectorAll('nav.toc a[href^="#"]');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

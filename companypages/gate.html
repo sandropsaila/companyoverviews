@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gate — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.deloitte{background:var(--amber-soft); color:var(--amber);}
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+
+  @media (max-width: 640px){
+    section, header.hero{scroll-margin-top:64px;}
+    .table-wrap{overflow:visible;}
+    .table-wrap table{min-width:0;}
+    .table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap td{display:block;width:100%;}
+    .table-wrap thead{display:none;}
+    .table-wrap tr{background:var(--panel);border:1px solid var(--line);margin-bottom:.7rem;padding:.35rem 0;}
+    .table-wrap td{white-space:normal;border-bottom:none !important;padding:.35rem .9rem;display:grid;grid-template-columns:7.5rem 1fr;gap:.6rem;text-align:left !important;}
+    .table-wrap td::before{content:attr(data-label);font-size:.74rem;font-weight:600;color:var(--ink-soft);}
+    .org-row .entity .sub{font-size:.8rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Gate</div>
+    <div><a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button></div>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Gate</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from Gate announcements, ESMA-register trackers, Hacken and press coverage. Position as at 26 September 2026.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Crypto Exchange</div>
+      <h1>Gate</h1>
+      <p class="tagline">A long-running global crypto exchange (formerly Gate.io) with one of the widest altcoin catalogues, now licensed in Malta for exchange, custody and payments across the EEA.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2013 (as Bter.com)</div></div>
+        <div class="fact"><div class="label">Group base</div><div class="value">Cayman Islands (reported)</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Private, founder-led</div></div>
+        <div class="fact"><div class="label">EU entity</div><div class="value">Gate Technology Ltd, Malta</div></div>
+        <div class="fact"><div class="label">Revenue</div><div class="value">Not disclosed</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Gate does</h2>
+      <p class="lede">Gate operates spot, margin and derivatives trading across thousands of crypto-assets, plus earn, wallet, payment and — more recently — stock and TradFi products.</p>
+      <p>The exchange launched in China in 2013 as Bter.com and relaunched as Gate.io in 2017; a 2025 rebrand moved it to Gate.com. Founder Dr. Han (Lin Han) still leads the group. It was an early adopter of 100% proof of reserves and has expanded its regulated footprint sharply since 2025: MiCA and PSD2 licences in Malta, and a separate US arm, Gate US, launched in August 2025.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">$1.72T</div><div class="l">annual trading volume, 2023 (company)</div></div>
+        <div class="stat"><div class="n">≈ 122%</div><div class="l">reserve ratio, Mar 2026 (reported)</div></div>
+        <div class="stat"><div class="n">40M+</div><div class="l">users, Nov 2025 (reported)</div></div>
+        <div class="stat"><div class="n">881</div><div class="l">employees, May 2026 (Tracxn)</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">Services</div>
+      <h2>Product lines</h2>
+      <div class="grid">
+        <div class="cell"><h4>Spot &amp; margin</h4><p>Order-book trading across one of the widest token catalogues; convert, P2P and block trading.</p></div>
+        <div class="cell"><h4>Derivatives</h4><p>Perpetual futures, European-style options and ETF-style leveraged tokens (outside MiCA scope in the EU).</p></div>
+        <div class="cell"><h4>Earn &amp; wealth</h4><p>Simple Earn, staking, dual investment, crypto loans and Gate Wealth private wealth services.</p></div>
+        <div class="cell"><h4>Launch products</h4><p>Startup token offerings, Launchpool and airdrop programmes.</p></div>
+        <div class="cell"><h4>Payments</h4><p>Gate Pay, Gate Card and — in the EU — stablecoin payment services under the Malta PI licence.</p></div>
+        <div class="cell"><h4>Web3</h4><p>Gate Web3 wallet, DEX access and the Gate Layer L2 network around the GT token.</p></div>
+        <div class="cell"><h4>TradFi &amp; stocks</h4><p>CFDs on gold/FX, US and Hong Kong stock trading; Alpaca partnership (Aug 2026) for US stocks, ETFs and tokenised stocks.</p></div>
+        <div class="cell"><h4>Institutional</h4><p>VIP, OTC, broker and API programmes.</p></div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">Revenue streams</div>
+      <h2>How it makes money</h2>
+      <p class="lede">Gate publishes no revenue breakdown. The streams below follow from its product set.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Trading</h4>
+          <ul>
+            <li>Spot and margin trading fees.</li>
+            <li>Futures and options fees, funding and liquidation income.</li>
+            <li>Listing and launch-platform fees.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Other</h4>
+          <ul>
+            <li>Lending and earn-product spreads.</li>
+            <li>Payment and card fees.</li>
+            <li>GT token ecosystem economics.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Markets</div>
+      <h2>Where it operates</h2>
+      <div class="market-cols">
+        <div>
+          <h4>Licences / registrations</h4>
+          <ul>
+            <li><strong>EU:</strong> Gate Technology Ltd — MiCA CASP (MFSA, 29 Sep 2025) and PSD2 Payment Institution (announced 26 Feb 2026).</li>
+            <li><strong>Italy:</strong> Gate Italy s.r.l., OAM register no. PSV83 (May 2023).</li>
+            <li><strong>US:</strong> Gate US, launched August 2025.</li>
+            <li>Company-cited: Cyprus, Bahamas, Hong Kong, Japan, Australia, Dubai, Lithuania, Turkey.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Restrictions and gaps</h4>
+          <ul>
+            <li>Blocks users in several regions, including mainland China and Canada (reported).</li>
+            <li>No UK FCA registration identified.</li>
+            <li>Sponsorships: Oracle Red Bull Racing; official sleeve partner of FC Inter.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">Gate is one of the groups present in both Malta and Italy — see the <a href="../countries/mt-it-analysis.html#common">MT-IT analysis</a>.</p>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <p class="lede">Gate is private and publishes no consolidated financial statements or revenue figure. Only operating metrics are available, all company-stated or press-reported.</p>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metric</th><th class="num">Figure</th><th>Basis</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Metric">Revenue</td><td class="num" data-label="Figure">Not disclosed</td><td data-label="Basis">No reliable public figure found</td></tr>
+          <tr><td data-label="Metric">Annual trading volume (2023)</td><td class="num" data-label="Figure">$1.72T</td><td data-label="Basis">Company release (May 2024)</td></tr>
+          <tr><td data-label="Metric">Total reserves (2024)</td><td class="num" data-label="Figure">&gt; $6.4bn, 115% ratio</td><td data-label="Basis">Company proof of reserves (May 2024)</td></tr>
+          <tr><td data-label="Metric">Reserve ratio (Mar 2026)</td><td class="num" data-label="Figure">≈ 122% (BTC ≈ 147%)</td><td data-label="Basis">Datawallet, citing Gate PoR report</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">One aggregator estimates revenue at $5–25m, which is implausible for an exchange of this scale and is disregarded.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Auditors</div>
+      <h2>Audit and assurance</h2>
+      <div class="org-tree">
+        <div class="org-row depth-0"><span class="indent">GRP</span><span class="entity">Group parent<span class="sub">Statutory auditor not publicly identified</span></span><span class="auditor none">Not verified</span></div>
+        <div class="org-row depth-0"><span class="indent">MT</span><span class="entity">Gate Technology Ltd (CASP + PI)<span class="sub">Statutory auditor not publicly identified — obtainable from filed accounts at the Malta Business Registry</span></span><span class="auditor none">Not verified</span></div>
+        <div class="org-row depth-0"><span class="indent">PoR</span><span class="entity">Proof of reserves (zk-SNARK)<span class="sub">Hacken security assessment of the implementation found no critical, high, medium or low vulnerabilities. This is a code review, not a financial audit.</span></span><span class="auditor none">Hacken</span></div>
+      </div>
+      <p class="note">Hacken also operates CER.live, which rates Gate AA — so that rating is not independent of the PoR reviewer. Datawallet reports a comparable CertiK Skynet score and ISO 27001 certification.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">Leadership</div>
+      <h2>Key people</h2>
+      <div class="people-grid">
+        <div class="person"><div class="name">Dr. Han (Lin Han)</div><div class="role">Founder &amp; CEO, Gate Group</div><p>Founded the exchange in 2013 and continues to lead the group.</p></div>
+        <div class="person"><div class="name">Giovanni Cunti</div><div class="role">CEO, Gate Technology Ltd (Gate Europe)</div><p>Leads the Malta entity; quoted on the MiCA and PSD2 licences.</p></div>
+      </div>
+      <p class="note">Gate publishes no formal group C-suite list.</p>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Relationship with Malta</div>
+      <h2>European base in Malta</h2>
+      <p class="lede">Gate describes Malta as its European base; its EU regulated activity runs through one Maltese entity.</p>
+      <div class="panel">
+        <h3>Malta footprint</h3>
+        <ul>
+          <li><strong>Gate Technology Ltd ("Gate Europe")</strong> — MiCA CASP authorised by the MFSA on 29 September 2025 (announced 1 October 2025) for exchange and custody services, with passporting across the EEA.</li>
+          <li><strong>PSD2 Payment Institution licence</strong> from the MFSA (announced 26 February 2026) for regulated stablecoin payment services in the EU.</li>
+          <li>Gate had a local presence in Malta before MiCA, per its May 2024 anniversary release.</li>
+        </ul>
+      </div>
+      <p class="note">Context: a July 2025 ESMA peer review found the MFSA had only partially met expectations when authorising one (unnamed) CASP. That review pre-dates Gate's authorisation and is not linked to Gate.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Relationship with Deloitte</div>
+      <h2>Deloitte</h2>
+      <div class="panel grey">
+        <h3>No relationship identified</h3>
+        <ul>
+          <li>No public source links Deloitte to Gate as auditor, reserve attestor or adviser.</li>
+          <li>Known third-party assurance is limited to Hacken's proof-of-reserves code assessment.</li>
+        </ul>
+      </div>
+      <div class="panel amber">
+        <h3>Opportunity lens (analysis, not sourced fact)</h3>
+        <ul>
+          <li>Gate Technology Ltd holds both a MiCA CASP and a PSD2 PI licence in Malta — combined custody, safeguarding, DORA ICT and statutory audit scope, subject to independence checks.</li>
+          <li>Proof of reserves currently rests on a code review rather than an assurance engagement; an ISAE 3000 reserve or controls engagement would materially strengthen it.</li>
+          <li>The group's disclosure history (an alleged undisclosed 2018 breach reported by on-chain investigators) is a client-acceptance and risk-assessment point.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-label">Sources</div>
+      <h2>Sources</h2>
+      <ul style="color:var(--ink-soft);font-size:.9rem;padding-left:1.2rem;">
+        <li>Gate — MiCA licence announcement (1 Oct 2025); Payment Institution licence announcement (26 Feb 2026)</li>
+        <li>Bitcoin.com News / Chainwire; Business Insider / Chainwire; StablecoinInsider — licence coverage</li>
+        <li>casptracker.eu — Gate Technology Ltd ESMA register entry (29 Sep 2025)</li>
+        <li>PR Newswire — Gate Italy s.r.l. OAM registration PSV83 (3 May 2023)</li>
+        <li>Newsfile — Gate.io 11th anniversary release (23 May 2024)</li>
+        <li>Hacken — Gate.io proof-of-reserves security assessment</li>
+        <li>Datawallet (Sep 2026) — licences, reserve ratio, Gate US, security history</li>
+        <li>Tracxn — employee count, founder, Alpaca partnership; Owler — revenue estimate (disregarded)</li>
+        <li>Cointelegraph (10 Jul 2025) — ESMA peer review of MFSA</li>
+      </ul>
+    </section>
+  </main>
+</div>
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

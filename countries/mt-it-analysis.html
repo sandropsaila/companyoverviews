@@ -388,6 +388,21 @@
 
   .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .table-wrap table{min-width:560px;}
+
+  @media (max-width: 640px){
+    section, header.hero{scroll-margin-top:64px;}
+    .table-wrap tr:last-child td{border-bottom:none;}
+    .table-wrap{overflow:visible;}
+    .table-wrap table{min-width:0;}
+    .table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap td{display:block;width:100%;}
+    .table-wrap tr:first-child{display:none;}
+    .table-wrap tr{background:var(--panel);border:1px solid var(--line);margin-bottom:.7rem;padding:.35rem 0;}
+    .table-wrap td{white-space:normal;border-bottom:none;padding:.35rem .9rem;display:grid;grid-template-columns:7.5rem 1fr;gap:.6rem;}
+    .table-wrap td::before{content:attr(data-label);font-size:.74rem;font-weight:600;color:var(--ink-soft);}
+    .table-wrap td:empty{display:none;}
+    .org-row .entity .sub{font-size:.8rem;}
+    .panel ul, .market-cols ul{padding-left:1rem;}
+  }
 </style>
 </head>
 <body>
@@ -485,27 +500,27 @@
       <div class="table-wrap">
       <table>
         <tr><th>Legal entity</th><th>Brand / group</th><th>Authorised</th><th>Notes</th></tr>
-        <tr><td>OKX Europe Limited</td><td>OKX</td><td>27 Jan 2025</td><td>Broad scope incl. trading platform</td></tr>
-        <tr><td>Foris DAX MT Limited</td><td>Crypto.com</td><td>27 Jan 2025</td><td>Also Foris MT Ltd (EMI)</td></tr>
-        <tr><td>BP23 CA Limited</td><td>Bitpanda</td><td>27 Jan 2025</td><td>Also BP23 PAY Ltd (EMI)</td></tr>
-        <tr><td>Zillion Bits Limited</td><td>ZBX</td><td>6 Feb 2025</td><td></td></tr>
-        <tr><td>Altarius Asset Management Limited</td><td>Altarius</td><td>24 Mar 2025</td><td></td></tr>
-        <tr><td>Gemini Intergalactic EU Ltd</td><td>Gemini</td><td>21 Aug 2025</td><td></td></tr>
-        <tr><td>Socios Europe Services Limited</td><td>Socios.com</td><td>10 Sep 2025</td><td>Fan tokens</td></tr>
-        <tr><td>Gate Technology Limited</td><td>Gate</td><td>29 Sep 2025</td><td></td></tr>
-        <tr><td>Blockchain.com Operations (Malta) Limited</td><td>Blockchain.com</td><td>22 Oct 2025</td><td></td></tr>
-        <tr><td>Payhound Limited</td><td>Payhound</td><td>24 Nov 2025</td><td></td></tr>
-        <tr><td>Damex Digital Ltd</td><td>Damex</td><td>29 Jan 2026</td><td></td></tr>
-        <tr><td>Olmipay Limited</td><td>Olmipay</td><td>29 May 2026</td><td></td></tr>
-        <tr><td>Stable Mint Ltd</td><td>Stable Mint</td><td>29 May 2026</td><td>Also MiCA EMT issuer (EURSM, USDSM)</td></tr>
-        <tr><td>Legion Malta Limited</td><td>Legion</td><td>23 Jun 2026</td><td></td></tr>
-        <tr><td>OP Digital Services Limited</td><td>OpenPayd</td><td>23 Jun 2026</td><td>Crypto arm of OpenPayd</td></tr>
-        <tr><td>Zap (Strike) Europe Limited</td><td>Strike</td><td>25 Jun 2026</td><td></td></tr>
-        <tr><td>FalconX Limited</td><td>FalconX</td><td>26 Jun 2026</td><td>Institutional</td></tr>
-        <tr><td>CF Technologies Ltd</td><td>Xcoins</td><td>27 Jun 2026</td><td></td></tr>
-        <tr><td>Everest Network Limited</td><td>Everest</td><td>30 Jun 2026</td><td></td></tr>
-        <tr><td>Bequant Pro Limited</td><td>Bequant</td><td>30 Jun 2026</td><td></td></tr>
-        <tr><td>System Pay Services (Malta) Limited</td><td>BVNK</td><td>n/a</td><td>Also MFSA EMI (stablecoin payments)</td></tr>
+        <tr><td data-label="Legal entity">OKX Europe Limited</td><td data-label="Brand / group">OKX</td><td data-label="Authorised">27 Jan 2025</td><td data-label="Notes">Broad scope incl. trading platform</td></tr>
+        <tr><td data-label="Legal entity">Foris DAX MT Limited</td><td data-label="Brand / group">Crypto.com</td><td data-label="Authorised">27 Jan 2025</td><td data-label="Notes">Also Foris MT Ltd (EMI)</td></tr>
+        <tr><td data-label="Legal entity">BP23 CA Limited</td><td data-label="Brand / group">Bitpanda</td><td data-label="Authorised">27 Jan 2025</td><td data-label="Notes">Also BP23 PAY Ltd (EMI)</td></tr>
+        <tr><td data-label="Legal entity">Zillion Bits Limited</td><td data-label="Brand / group">ZBX</td><td data-label="Authorised">6 Feb 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Altarius Asset Management Limited</td><td data-label="Brand / group">Altarius</td><td data-label="Authorised">24 Mar 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Gemini Intergalactic EU Ltd</td><td data-label="Brand / group">Gemini</td><td data-label="Authorised">21 Aug 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Socios Europe Services Limited</td><td data-label="Brand / group">Socios.com</td><td data-label="Authorised">10 Sep 2025</td><td data-label="Notes">Fan tokens</td></tr>
+        <tr><td data-label="Legal entity">Gate Technology Limited</td><td data-label="Brand / group">Gate</td><td data-label="Authorised">29 Sep 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Blockchain.com Operations (Malta) Limited</td><td data-label="Brand / group">Blockchain.com</td><td data-label="Authorised">22 Oct 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Payhound Limited</td><td data-label="Brand / group">Payhound</td><td data-label="Authorised">24 Nov 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Damex Digital Ltd</td><td data-label="Brand / group">Damex</td><td data-label="Authorised">29 Jan 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Olmipay Limited</td><td data-label="Brand / group">Olmipay</td><td data-label="Authorised">29 May 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Stable Mint Ltd</td><td data-label="Brand / group">Stable Mint</td><td data-label="Authorised">29 May 2026</td><td data-label="Notes">Also MiCA EMT issuer (EURSM, USDSM)</td></tr>
+        <tr><td data-label="Legal entity">Legion Malta Limited</td><td data-label="Brand / group">Legion</td><td data-label="Authorised">23 Jun 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">OP Digital Services Limited</td><td data-label="Brand / group">OpenPayd</td><td data-label="Authorised">23 Jun 2026</td><td data-label="Notes">Crypto arm of OpenPayd</td></tr>
+        <tr><td data-label="Legal entity">Zap (Strike) Europe Limited</td><td data-label="Brand / group">Strike</td><td data-label="Authorised">25 Jun 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">FalconX Limited</td><td data-label="Brand / group">FalconX</td><td data-label="Authorised">26 Jun 2026</td><td data-label="Notes">Institutional</td></tr>
+        <tr><td data-label="Legal entity">CF Technologies Ltd</td><td data-label="Brand / group">Xcoins</td><td data-label="Authorised">27 Jun 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Everest Network Limited</td><td data-label="Brand / group">Everest</td><td data-label="Authorised">30 Jun 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Bequant Pro Limited</td><td data-label="Brand / group">Bequant</td><td data-label="Authorised">30 Jun 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">System Pay Services (Malta) Limited</td><td data-label="Brand / group">BVNK</td><td data-label="Authorised">n/a</td><td data-label="Notes">Also MFSA EMI (stablecoin payments)</td></tr>
       </table>
       </div>
       <p class="note">21 of the 22 Malta entries are listed; the remaining entry could not be matched reliably from the tracker data. StablR Ltd (EURR, USDR) is a further Malta-authorised MiCA EMT issuer. Nine Malta authorisations landed in May–June 2026, just before the transitional deadline. Verify against the ESMA interim register before relying on any single entry.</p>
@@ -518,20 +533,20 @@
       <div class="table-wrap">
       <table>
         <tr><th>Entity</th><th>Type</th><th>Focus</th></tr>
-        <tr><td>OpenPayd Financial Services Malta Ltd</td><td>EMI (auth. 6 May 2019)</td><td>Banking-as-a-service, virtual IBANs; passported to all 30 EEA states</td></tr>
-        <tr><td><a href="../companypages/paytently.html">Paytently</a></td><td>Payment Institution (Oct 2025)</td><td>Payment orchestration — see full profile</td></tr>
-        <tr><td>System Pay Services (Malta) Ltd (BVNK)</td><td>EMI + CASP</td><td>Stablecoin payment infrastructure</td></tr>
-        <tr><td>FinXP Limited</td><td>EMI</td><td>B2B / B2B2C banking and payments</td></tr>
-        <tr><td>Paydo EU Ltd</td><td>EMI</td><td>Multi-currency virtual IBANs</td></tr>
-        <tr><td>DLocal Limited</td><td>EMI</td><td>Cross-border payments for emerging markets</td></tr>
-        <tr><td>Em@ney plc</td><td>EMI</td><td>Internet banking solutions</td></tr>
-        <tr><td>Foris MT Limited (Crypto.com)</td><td>EMI</td><td>Group e-money entity</td></tr>
-        <tr><td>BP23 PAY Ltd (Bitpanda)</td><td>EMI</td><td>Group e-money entity</td></tr>
-        <tr><td>eToro Money Malta Limited</td><td>EMI</td><td>Group e-money / debit cards</td></tr>
-        <tr><td>Nium Financial Services Malta Ltd</td><td>EMI</td><td>Travel payments</td></tr>
-        <tr><td>Andaria Financial Services Ltd</td><td>EMI</td><td>Embedded finance</td></tr>
-        <tr><td>Alpha FX Europe / ALT21 Europe / Ballinger EU</td><td>EMIs</td><td>FX and cross-border business payments</td></tr>
-        <tr><td>C2D Payment Solutions / EPG Financial Services</td><td>EMIs</td><td>Cash payment platform / merchant payments</td></tr>
+        <tr><td data-label="Entity">OpenPayd Financial Services Malta Ltd</td><td data-label="Type">EMI (auth. 6 May 2019)</td><td data-label="Focus">Banking-as-a-service, virtual IBANs; passported to all 30 EEA states</td></tr>
+        <tr><td data-label="Entity"><a href="../companypages/paytently.html">Paytently</a></td><td data-label="Type">Payment Institution (Oct 2025)</td><td data-label="Focus">Payment orchestration — see full profile</td></tr>
+        <tr><td data-label="Entity">System Pay Services (Malta) Ltd (BVNK)</td><td data-label="Type">EMI + CASP</td><td data-label="Focus">Stablecoin payment infrastructure</td></tr>
+        <tr><td data-label="Entity">FinXP Limited</td><td data-label="Type">EMI</td><td data-label="Focus">B2B / B2B2C banking and payments</td></tr>
+        <tr><td data-label="Entity">Paydo EU Ltd</td><td data-label="Type">EMI</td><td data-label="Focus">Multi-currency virtual IBANs</td></tr>
+        <tr><td data-label="Entity">DLocal Limited</td><td data-label="Type">EMI</td><td data-label="Focus">Cross-border payments for emerging markets</td></tr>
+        <tr><td data-label="Entity">Em@ney plc</td><td data-label="Type">EMI</td><td data-label="Focus">Internet banking solutions</td></tr>
+        <tr><td data-label="Entity">Foris MT Limited (Crypto.com)</td><td data-label="Type">EMI</td><td data-label="Focus">Group e-money entity</td></tr>
+        <tr><td data-label="Entity">BP23 PAY Ltd (Bitpanda)</td><td data-label="Type">EMI</td><td data-label="Focus">Group e-money entity</td></tr>
+        <tr><td data-label="Entity">eToro Money Malta Limited</td><td data-label="Type">EMI</td><td data-label="Focus">Group e-money / debit cards</td></tr>
+        <tr><td data-label="Entity">Nium Financial Services Malta Ltd</td><td data-label="Type">EMI</td><td data-label="Focus">Travel payments</td></tr>
+        <tr><td data-label="Entity">Andaria Financial Services Ltd</td><td data-label="Type">EMI</td><td data-label="Focus">Embedded finance</td></tr>
+        <tr><td data-label="Entity">Alpha FX Europe / ALT21 Europe / Ballinger EU</td><td data-label="Type">EMIs</td><td data-label="Focus">FX and cross-border business payments</td></tr>
+        <tr><td data-label="Entity">C2D Payment Solutions / EPG Financial Services</td><td data-label="Type">EMIs</td><td data-label="Focus">Cash payment platform / merchant payments</td></tr>
       </table>
       </div>
       <p class="note">Crypto and payments converge in Malta: Crypto.com, Bitpanda, OpenPayd and BVNK each hold both a CASP and an EMI licence locally.</p>
@@ -544,15 +559,15 @@
       <div class="table-wrap">
       <table>
         <tr><th>Entity</th><th>Background</th></tr>
-        <tr><td>CheckSig S.r.l.</td><td>Founded 2019 by Ferdinando Ametrano as a spin-off of Digital Gold Institute; reported as the first Italian CASP (≈ May 2026)</td></tr>
-        <tr><td>Conio S.r.l.</td><td>Founded 2015 by Christian Miccoli; investors include Poste Italiane (2016) and Banca Generali (2020); custody and tokenisation</td></tr>
-        <tr><td>CryptoSmart S.p.A.</td><td>Padua; backed by Banca Popolare di Cortona; CONSOB resolution no. 24047 (24 Jun 2026)</td></tr>
-        <tr><td>Hercle S.r.l.</td><td>Authorised by 30 Jun 2026</td></tr>
-        <tr><td>Hodlie S.r.l.</td><td>Authorised by 30 Jun 2026</td></tr>
-        <tr><td>Olliv Italia S.r.l.</td><td>Part of Chicago-based Olliv, developer of CoinFlip crypto ATMs</td></tr>
-        <tr><td>Riv Digital S.r.l.</td><td>Italian subsidiary of RIV Capital Group</td></tr>
-        <tr><td>Young Platform S.p.A.</td><td>Turin; backed by Azimut; 2.5M+ clients; authorised 30 Jun 2026 for 8 of 10 MiCA services</td></tr>
-        <tr><td>Banca Sella S.p.A.</td><td>Bank — notified Banca d'Italia to provide crypto-asset services (not a CASP authorisation)</td></tr>
+        <tr><td data-label="Entity">CheckSig S.r.l.</td><td data-label="Background">Founded 2019 by Ferdinando Ametrano as a spin-off of Digital Gold Institute; reported as the first Italian CASP (≈ May 2026)</td></tr>
+        <tr><td data-label="Entity">Conio S.r.l.</td><td data-label="Background">Founded 2015 by Christian Miccoli; investors include Poste Italiane (2016) and Banca Generali (2020); custody and tokenisation</td></tr>
+        <tr><td data-label="Entity">CryptoSmart S.p.A.</td><td data-label="Background">Padua; backed by Banca Popolare di Cortona; CONSOB resolution no. 24047 (24 Jun 2026)</td></tr>
+        <tr><td data-label="Entity">Hercle S.r.l.</td><td data-label="Background">Authorised by 30 Jun 2026</td></tr>
+        <tr><td data-label="Entity">Hodlie S.r.l.</td><td data-label="Background">Authorised by 30 Jun 2026</td></tr>
+        <tr><td data-label="Entity">Olliv Italia S.r.l.</td><td data-label="Background">Part of Chicago-based Olliv, developer of CoinFlip crypto ATMs</td></tr>
+        <tr><td data-label="Entity">Riv Digital S.r.l.</td><td data-label="Background">Italian subsidiary of RIV Capital Group</td></tr>
+        <tr><td data-label="Entity">Young Platform S.p.A.</td><td data-label="Background">Turin; backed by Azimut; 2.5M+ clients; authorised 30 Jun 2026 for 8 of 10 MiCA services</td></tr>
+        <tr><td data-label="Entity">Banca Sella S.p.A.</td><td data-label="Background">Bank — notified Banca d'Italia to provide crypto-asset services (not a CASP authorisation)</td></tr>
       </table>
       </div>
       <p class="note">Italy's pre-MiCA OAM register was far larger (it included Binance Italy, Coinbase, Kraken's Payward, Bitpanda, Crypto.com, Nexo, Tinaba and others). Firms not authorised in at least one EU state had to wind down Italian activity from 1 July 2026.</p>
@@ -579,12 +594,12 @@
       <div class="table-wrap">
       <table>
         <tr><th>Group</th><th>Malta</th><th>Italy</th></tr>
-        <tr><td><strong>Crypto.com</strong></td><td>Foris DAX MT Ltd (CASP, Jan 2025) + Foris MT Ltd (EMI)</td><td>OAM registration Jul 2022 — Foris DAX MT Ltd itself on the register</td></tr>
-        <tr><td><strong>Bitpanda</strong></td><td>BP23 CA Ltd (CASP, Jan 2025) + BP23 PAY Ltd (EMI)</td><td>Launched in Italy Mar 2021; Bitpanda GmbH OAM-registered May 2022</td></tr>
-        <tr><td><strong>Gate</strong></td><td>Gate Technology Ltd (CASP, Sep 2025)</td><td>Gate Italy s.r.l., OAM no. PSV83 (May 2023)</td></tr>
-        <tr><td><strong>Gemini</strong></td><td>Gemini Intergalactic EU Ltd (CASP, Aug 2025)</td><td>Gemini Digital Assets Ltd on the OAM register</td></tr>
-        <tr><td><strong>Blockchain.com</strong></td><td>Blockchain.com Operations (Malta) Ltd (CASP, Oct 2025)</td><td>OAM registration (2022)</td></tr>
-        <tr><td><strong>Socios.com</strong></td><td>Socios Europe Services Ltd (CASP, Sep 2025)</td><td>Socios Services Ltd on the OAM register</td></tr>
+        <tr><td data-label="Group"><strong>Crypto.com</strong></td><td data-label="Malta">Foris DAX MT Ltd (CASP, Jan 2025) + Foris MT Ltd (EMI)</td><td data-label="Italy">OAM registration Jul 2022 — Foris DAX MT Ltd itself on the register</td></tr>
+        <tr><td data-label="Group"><strong>Bitpanda</strong></td><td data-label="Malta">BP23 CA Ltd (CASP, Jan 2025) + BP23 PAY Ltd (EMI)</td><td data-label="Italy">Launched in Italy Mar 2021; Bitpanda GmbH OAM-registered May 2022</td></tr>
+        <tr><td data-label="Group"><strong>Gate</strong></td><td data-label="Malta">Gate Technology Ltd (CASP, Sep 2025)</td><td data-label="Italy">Gate Italy s.r.l., OAM no. PSV83 (May 2023)</td></tr>
+        <tr><td data-label="Group"><strong>Gemini</strong></td><td data-label="Malta">Gemini Intergalactic EU Ltd (CASP, Aug 2025)</td><td data-label="Italy">Gemini Digital Assets Ltd on the OAM register</td></tr>
+        <tr><td data-label="Group"><strong>Blockchain.com</strong></td><td data-label="Malta">Blockchain.com Operations (Malta) Ltd (CASP, Oct 2025)</td><td data-label="Italy">OAM registration (2022)</td></tr>
+        <tr><td data-label="Group"><strong>Socios.com</strong></td><td data-label="Malta">Socios Europe Services Ltd (CASP, Sep 2025)</td><td data-label="Italy">Socios Services Ltd on the OAM register</td></tr>
       </table>
       </div>
       <div class="panel grey">

@@ -388,6 +388,21 @@
 
   .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .table-wrap table{min-width:560px;}
+
+  @media (max-width: 640px){
+    section, header.hero{scroll-margin-top:64px;}
+    .table-wrap tr:last-child td{border-bottom:none;}
+    .table-wrap{overflow:visible;}
+    .table-wrap table{min-width:0;}
+    .table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap td{display:block;width:100%;}
+    .table-wrap tr:first-child{display:none;}
+    .table-wrap tr{background:var(--panel);border:1px solid var(--line);margin-bottom:.7rem;padding:.35rem 0;}
+    .table-wrap td{white-space:normal;border-bottom:none;padding:.35rem .9rem;display:grid;grid-template-columns:7.5rem 1fr;gap:.6rem;}
+    .table-wrap td::before{content:attr(data-label);font-size:.74rem;font-weight:600;color:var(--ink-soft);}
+    .table-wrap td:empty{display:none;}
+    .org-row .entity .sub{font-size:.8rem;}
+    .panel ul, .market-cols ul{padding-left:1rem;}
+  }
 </style>
 </head>
 <body>
@@ -485,24 +500,24 @@
       <div class="table-wrap">
       <table>
         <tr><th>Legal entity</th><th>Brand / group</th><th>Authorised</th></tr>
-        <tr><td>OKX Europe Limited</td><td>OKX</td><td>27 Jan 2025</td></tr>
-        <tr><td>Foris DAX MT Limited</td><td>Crypto.com</td><td>27 Jan 2025</td></tr>
-        <tr><td>BP23 CA Limited</td><td>Bitpanda</td><td>27 Jan 2025</td></tr>
-        <tr><td>Zillion Bits Limited</td><td>ZBX</td><td>6 Feb 2025</td></tr>
-        <tr><td>Altarius Asset Management Limited</td><td>Altarius</td><td>24 Mar 2025</td></tr>
-        <tr><td>Gemini Intergalactic EU Ltd</td><td>Gemini</td><td>21 Aug 2025</td></tr>
-        <tr><td>Socios Europe Services Limited</td><td>Socios.com</td><td>10 Sep 2025</td></tr>
-        <tr><td>Gate Technology Limited</td><td>Gate</td><td>29 Sep 2025</td></tr>
-        <tr><td>Blockchain.com Operations (Malta) Limited</td><td>Blockchain.com</td><td>22 Oct 2025</td></tr>
-        <tr><td>Payhound Limited</td><td>Payhound</td><td>24 Nov 2025</td></tr>
-        <tr><td>Damex Digital Ltd</td><td>Damex</td><td>29 Jan 2026</td></tr>
-        <tr><td>Olmipay Limited / Stable Mint Ltd</td><td>Olmipay / Stable Mint</td><td>29 May 2026</td></tr>
-        <tr><td>Legion Malta Ltd / OP Digital Services Ltd</td><td>Legion / OpenPayd</td><td>23 Jun 2026</td></tr>
-        <tr><td>Zap (Strike) Europe Limited</td><td>Strike</td><td>25 Jun 2026</td></tr>
-        <tr><td>FalconX Limited</td><td>FalconX</td><td>26 Jun 2026</td></tr>
-        <tr><td>CF Technologies Ltd</td><td>Xcoins</td><td>27 Jun 2026</td></tr>
-        <tr><td>Everest Network Ltd / Bequant Pro Ltd</td><td>Everest / Bequant</td><td>30 Jun 2026</td></tr>
-        <tr><td>System Pay Services (Malta) Limited</td><td>BVNK</td><td>n/a</td></tr>
+        <tr><td data-label="Legal entity">OKX Europe Limited</td><td data-label="Brand / group">OKX</td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">Foris DAX MT Limited</td><td data-label="Brand / group">Crypto.com</td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">BP23 CA Limited</td><td data-label="Brand / group">Bitpanda</td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">Zillion Bits Limited</td><td data-label="Brand / group">ZBX</td><td data-label="Authorised">6 Feb 2025</td></tr>
+        <tr><td data-label="Legal entity">Altarius Asset Management Limited</td><td data-label="Brand / group">Altarius</td><td data-label="Authorised">24 Mar 2025</td></tr>
+        <tr><td data-label="Legal entity">Gemini Intergalactic EU Ltd</td><td data-label="Brand / group">Gemini</td><td data-label="Authorised">21 Aug 2025</td></tr>
+        <tr><td data-label="Legal entity">Socios Europe Services Limited</td><td data-label="Brand / group">Socios.com</td><td data-label="Authorised">10 Sep 2025</td></tr>
+        <tr><td data-label="Legal entity">Gate Technology Limited</td><td data-label="Brand / group">Gate</td><td data-label="Authorised">29 Sep 2025</td></tr>
+        <tr><td data-label="Legal entity">Blockchain.com Operations (Malta) Limited</td><td data-label="Brand / group">Blockchain.com</td><td data-label="Authorised">22 Oct 2025</td></tr>
+        <tr><td data-label="Legal entity">Payhound Limited</td><td data-label="Brand / group">Payhound</td><td data-label="Authorised">24 Nov 2025</td></tr>
+        <tr><td data-label="Legal entity">Damex Digital Ltd</td><td data-label="Brand / group">Damex</td><td data-label="Authorised">29 Jan 2026</td></tr>
+        <tr><td data-label="Legal entity">Olmipay Limited / Stable Mint Ltd</td><td data-label="Brand / group">Olmipay / Stable Mint</td><td data-label="Authorised">29 May 2026</td></tr>
+        <tr><td data-label="Legal entity">Legion Malta Ltd / OP Digital Services Ltd</td><td data-label="Brand / group">Legion / OpenPayd</td><td data-label="Authorised">23 Jun 2026</td></tr>
+        <tr><td data-label="Legal entity">Zap (Strike) Europe Limited</td><td data-label="Brand / group">Strike</td><td data-label="Authorised">25 Jun 2026</td></tr>
+        <tr><td data-label="Legal entity">FalconX Limited</td><td data-label="Brand / group">FalconX</td><td data-label="Authorised">26 Jun 2026</td></tr>
+        <tr><td data-label="Legal entity">CF Technologies Ltd</td><td data-label="Brand / group">Xcoins</td><td data-label="Authorised">27 Jun 2026</td></tr>
+        <tr><td data-label="Legal entity">Everest Network Ltd / Bequant Pro Ltd</td><td data-label="Brand / group">Everest / Bequant</td><td data-label="Authorised">30 Jun 2026</td></tr>
+        <tr><td data-label="Legal entity">System Pay Services (Malta) Limited</td><td data-label="Brand / group">BVNK</td><td data-label="Authorised">n/a</td></tr>
       </table>
       </div>
       <p class="note">21 of 22 Malta entries listed. Verify against the ESMA interim register before relying on any single entry.</p>
@@ -528,32 +543,32 @@
       <div class="table-wrap">
       <table>
         <tr><th>Legal entity</th><th>Brand</th><th>Authorised</th><th>Notes</th></tr>
-        <tr><td>MoonPay Europe B.V.</td><td>MoonPay</td><td>30 Dec 2024</td><td>Among EU's first four CASPs; DNB EMI licence added 8 Sep 2026</td></tr>
-        <tr><td>BitStaete B.V.</td><td>BitStaete</td><td>30 Dec 2024</td><td>Portfolio management</td></tr>
-        <tr><td>Zebedee Europe B.V.</td><td>ZBD</td><td>30 Dec 2024</td><td>Also a Dutch EMI (2025)</td></tr>
-        <tr><td>Hidden Road Partners CIV NL B.V.</td><td>Hidden Road</td><td>30 Dec 2024</td><td>Institutional</td></tr>
-        <tr><td>AvianLabs Netherlands B.V.</td><td>Sling</td><td>2 Apr 2025</td><td></td></tr>
-        <tr><td>Vivid Money B.V.</td><td>Vivid</td><td>1 May 2025</td><td>Neobank crypto offering</td></tr>
-        <tr><td>One Trading Exchange B.V.</td><td>One Trading</td><td>15 May 2025</td><td>Former Bitpanda Pro, spun off 2023</td></tr>
-        <tr><td>BTC Direct Europe B.V.</td><td>BTC Direct</td><td>18 Jun 2025</td><td></td></tr>
-        <tr><td>Bitvavo B.V.</td><td>Bitvavo</td><td>26 Jun 2025</td><td>Largest Dutch exchange; custody, trading platform, transfers</td></tr>
-        <tr><td>Amdax B.V.</td><td>Amdax</td><td>26 Jun 2025</td><td></td></tr>
-        <tr><td>Finst B.V.</td><td>Finst</td><td>24 Jul 2025</td><td></td></tr>
-        <tr><td>Decubate B.V.</td><td>Decubate</td><td>31 Jul 2025</td><td></td></tr>
-        <tr><td>Fiat Republic Netherlands B.V.</td><td>Fiat Republic</td><td>5 Aug 2025</td><td>Also MiCA EMT issuer</td></tr>
-        <tr><td>BLOX B.V.</td><td>BLOX</td><td>30 Sep 2025</td><td></td></tr>
-        <tr><td>EU Internet Ventures B.V.</td><td>Banxa</td><td>8 Oct 2025</td><td></td></tr>
-        <tr><td>zerohash europe B.V.</td><td>zerohash</td><td>29 Oct 2025</td><td>Infrastructure</td></tr>
-        <tr><td>Coinmerce B.V.</td><td>Coinmerce</td><td>5 Nov 2025</td><td></td></tr>
-        <tr><td>Bitmymoney B.V.</td><td>Bitmymoney</td><td>20 Nov 2025</td><td></td></tr>
-        <tr><td>Bitonic B.V.</td><td>Bitonic</td><td>21 Nov 2025</td><td></td></tr>
-        <tr><td>Blockrise Capital B.V.</td><td>Blockrise</td><td>25 Nov 2025</td><td></td></tr>
-        <tr><td>ClearBank Europe N.V.</td><td>ClearBank</td><td>3 Apr 2026</td><td>Bank</td></tr>
-        <tr><td>Change Securities B.V.</td><td>Change</td><td>20 Apr 2026</td><td></td></tr>
-        <tr><td>Webull Securities (Europe) B.V.</td><td>Webull</td><td>30 Jun 2026</td><td></td></tr>
-        <tr><td>Digital Currency Services B.V.</td><td>HappyCoins</td><td>30 Jun 2026</td><td></td></tr>
-        <tr><td>BitPay B.V.</td><td>BitPay</td><td>16 Jul 2026</td><td></td></tr>
-        <tr><td>Acheron Europe B.V. / WEB3 Technology B.V. / Monflo B.V.</td><td>Acheron / Ari10 / Monflo</td><td>n/a</td><td>Listed in register; dates not captured</td></tr>
+        <tr><td data-label="Legal entity">MoonPay Europe B.V.</td><td data-label="Brand">MoonPay</td><td data-label="Authorised">30 Dec 2024</td><td data-label="Notes">Among EU's first four CASPs; DNB EMI licence added 8 Sep 2026</td></tr>
+        <tr><td data-label="Legal entity">BitStaete B.V.</td><td data-label="Brand">BitStaete</td><td data-label="Authorised">30 Dec 2024</td><td data-label="Notes">Portfolio management</td></tr>
+        <tr><td data-label="Legal entity">Zebedee Europe B.V.</td><td data-label="Brand">ZBD</td><td data-label="Authorised">30 Dec 2024</td><td data-label="Notes">Also a Dutch EMI (2025)</td></tr>
+        <tr><td data-label="Legal entity">Hidden Road Partners CIV NL B.V.</td><td data-label="Brand">Hidden Road</td><td data-label="Authorised">30 Dec 2024</td><td data-label="Notes">Institutional</td></tr>
+        <tr><td data-label="Legal entity">AvianLabs Netherlands B.V.</td><td data-label="Brand">Sling</td><td data-label="Authorised">2 Apr 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Vivid Money B.V.</td><td data-label="Brand">Vivid</td><td data-label="Authorised">1 May 2025</td><td data-label="Notes">Neobank crypto offering</td></tr>
+        <tr><td data-label="Legal entity">One Trading Exchange B.V.</td><td data-label="Brand">One Trading</td><td data-label="Authorised">15 May 2025</td><td data-label="Notes">Former Bitpanda Pro, spun off 2023</td></tr>
+        <tr><td data-label="Legal entity">BTC Direct Europe B.V.</td><td data-label="Brand">BTC Direct</td><td data-label="Authorised">18 Jun 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Bitvavo B.V.</td><td data-label="Brand">Bitvavo</td><td data-label="Authorised">26 Jun 2025</td><td data-label="Notes">Largest Dutch exchange; custody, trading platform, transfers</td></tr>
+        <tr><td data-label="Legal entity">Amdax B.V.</td><td data-label="Brand">Amdax</td><td data-label="Authorised">26 Jun 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Finst B.V.</td><td data-label="Brand">Finst</td><td data-label="Authorised">24 Jul 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Decubate B.V.</td><td data-label="Brand">Decubate</td><td data-label="Authorised">31 Jul 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Fiat Republic Netherlands B.V.</td><td data-label="Brand">Fiat Republic</td><td data-label="Authorised">5 Aug 2025</td><td data-label="Notes">Also MiCA EMT issuer</td></tr>
+        <tr><td data-label="Legal entity">BLOX B.V.</td><td data-label="Brand">BLOX</td><td data-label="Authorised">30 Sep 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">EU Internet Ventures B.V.</td><td data-label="Brand">Banxa</td><td data-label="Authorised">8 Oct 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">zerohash europe B.V.</td><td data-label="Brand">zerohash</td><td data-label="Authorised">29 Oct 2025</td><td data-label="Notes">Infrastructure</td></tr>
+        <tr><td data-label="Legal entity">Coinmerce B.V.</td><td data-label="Brand">Coinmerce</td><td data-label="Authorised">5 Nov 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Bitmymoney B.V.</td><td data-label="Brand">Bitmymoney</td><td data-label="Authorised">20 Nov 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Bitonic B.V.</td><td data-label="Brand">Bitonic</td><td data-label="Authorised">21 Nov 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Blockrise Capital B.V.</td><td data-label="Brand">Blockrise</td><td data-label="Authorised">25 Nov 2025</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">ClearBank Europe N.V.</td><td data-label="Brand">ClearBank</td><td data-label="Authorised">3 Apr 2026</td><td data-label="Notes">Bank</td></tr>
+        <tr><td data-label="Legal entity">Change Securities B.V.</td><td data-label="Brand">Change</td><td data-label="Authorised">20 Apr 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Webull Securities (Europe) B.V.</td><td data-label="Brand">Webull</td><td data-label="Authorised">30 Jun 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Digital Currency Services B.V.</td><td data-label="Brand">HappyCoins</td><td data-label="Authorised">30 Jun 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">BitPay B.V.</td><td data-label="Brand">BitPay</td><td data-label="Authorised">16 Jul 2026</td><td data-label="Notes"></td></tr>
+        <tr><td data-label="Legal entity">Acheron Europe B.V. / WEB3 Technology B.V. / Monflo B.V.</td><td data-label="Brand">Acheron / Ari10 / Monflo</td><td data-label="Authorised">n/a</td><td data-label="Notes">Listed in register; dates not captured</td></tr>
       </table>
       </div>
       <p class="note">28 of 29 Netherlands entries listed. Name clash: ZBD (Zebedee, Netherlands) is unrelated to ZBX (Zillion Bits, Malta).</p>
@@ -580,10 +595,10 @@
       <div class="table-wrap">
       <table>
         <tr><th>Group</th><th>Malta</th><th>Netherlands</th></tr>
-        <tr><td><strong>Crypto.com</strong></td><td>Foris DAX MT Ltd (CASP, Jan 2025) + Foris MT Ltd (EMI)</td><td>Foris DAX Global Ltd registered with DNB as crypto provider (Jul 2023); registration regime lapsed 30 Jun 2025 — now via Malta passport</td></tr>
-        <tr><td><strong>OpenPayd</strong></td><td>OpenPayd FS Malta Ltd (EMI) + OP Digital Services Ltd (CASP, Jun 2026)</td><td>OpenPayd Services Limited, Dutch branch (reg. no. 75070014)</td></tr>
-        <tr><td><strong>Nium</strong></td><td>Nium Financial Services Malta Ltd (EMI)</td><td>Nium Europe B.V. (DNB EMI)</td></tr>
-        <tr><td><strong>eToro</strong></td><td>eToro Money Malta Ltd (EMI)</td><td>Among DNB-registered crypto firms (2023 reporting)</td></tr>
+        <tr><td data-label="Group"><strong>Crypto.com</strong></td><td data-label="Malta">Foris DAX MT Ltd (CASP, Jan 2025) + Foris MT Ltd (EMI)</td><td data-label="Netherlands">Foris DAX Global Ltd registered with DNB as crypto provider (Jul 2023); registration regime lapsed 30 Jun 2025 — now via Malta passport</td></tr>
+        <tr><td data-label="Group"><strong>OpenPayd</strong></td><td data-label="Malta">OpenPayd FS Malta Ltd (EMI) + OP Digital Services Ltd (CASP, Jun 2026)</td><td data-label="Netherlands">OpenPayd Services Limited, Dutch branch (reg. no. 75070014)</td></tr>
+        <tr><td data-label="Group"><strong>Nium</strong></td><td data-label="Malta">Nium Financial Services Malta Ltd (EMI)</td><td data-label="Netherlands">Nium Europe B.V. (DNB EMI)</td></tr>
+        <tr><td data-label="Group"><strong>eToro</strong></td><td data-label="Malta">eToro Money Malta Ltd (EMI)</td><td data-label="Netherlands">Among DNB-registered crypto firms (2023 reporting)</td></tr>
       </table>
       </div>
       <div class="panel grey">

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circle — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.deloitte{background:var(--amber-soft); color:var(--amber);}
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Circle</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Circle</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from Circle's SEC filings and investor releases, its transparency page, and press coverage. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Digital Assets &amp; Stablecoins</div>
+      <h1>Circle</h1>
+      <p class="tagline">The issuer of USDC, the world's second-largest stablecoin, and the first major stablecoin company to go public — built around transparency and full regulatory compliance as its core competitive positioning.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2013</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">New York, NY (One World Trade Center)</div></div>
+        <div class="fact"><div class="label">Listing</div><div class="value">NYSE: CRCL (IPO June 2025)</div></div>
+        <div class="fact"><div class="label">USDC in circulation</div><div class="value">≈ $65bn (Aug 2025)</div></div>
+        <div class="fact"><div class="label">FY2025 revenue</div><div class="value">≈ $2.75bn</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Circle does</h2>
+      <p class="lede">Circle issues USDC, a US dollar–pegged stablecoin, and EURC, its euro-pegged counterpart. Unlike Tether, Circle has built its business around being the "regulated, transparent alternative" — publishing detailed, independently attested reserve reports and pursuing licences in every major jurisdiction it operates in, rather than avoiding them.</p>
+      <p>Founded in 2013 by Jeremy Allaire and Sean Neville, Circle launched USDC in 2018 through the Centre Consortium, a joint venture with Coinbase, before assuming full governance of the stablecoin in 2023. The company redomiciled from the Republic of Ireland to Delaware ahead of its IPO, and went public on the NYSE on 5 June 2025 in the first-ever stablecoin IPO, raising roughly $1.1 billion and closing its debut day at an 168% first-day gain.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">$65.2bn</div><div class="l">USDC in circulation (Aug 2025)</div></div>
+        <div class="stat"><div class="n">$25T+</div><div class="l">cumulative on-chain USDC transaction volume</div></div>
+        <div class="stat"><div class="n">28%</div><div class="l">global stablecoin market share</div></div>
+        <div class="stat"><div class="n">600M+</div><div class="l">users touched via partners</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Circle's product suite centres on USDC itself, plus an expanding set of infrastructure products for institutions building on stablecoins.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>USDC &amp; EURC</h4>
+          <p>US dollar and euro–pegged stablecoins, redeemable 1:1, reserves custodied at BNY Mellon and managed by BlackRock via the Circle Reserve Fund.</p>
+        </div>
+        <div class="cell">
+          <h4>Circle Mint</h4>
+          <p>The institutional account that lets approved businesses mint and redeem USDC/EURC directly with Circle at zero spread — the primary market for USDC issuance.</p>
+        </div>
+        <div class="cell">
+          <h4>Circle Payments Network (CPN)</h4>
+          <p>Launched May 2025, a platform letting financial institutions settle cross-border payments over stablecoins; more than 100 institutions in the pipeline.</p>
+        </div>
+        <div class="cell">
+          <h4>Web3 Services &amp; Circle Wallets</h4>
+          <p>Developer tools for deploying smart contracts, managing wallets and cross-chain fund flows, and integrating blockchain payments into applications.</p>
+        </div>
+        <div class="cell">
+          <h4>Arc</h4>
+          <p>An open, EVM-compatible Layer-1 blockchain purpose-built for stablecoin finance, with USDC as native gas — Circle's move into owning settlement infrastructure, not just the token.</p>
+        </div>
+        <div class="cell">
+          <h4>USYC (via Hashnote)</h4>
+          <p>A tokenised US Treasury product acquired with Circle's 2025 purchase of Hashnote, extending Circle into tokenised money-market instruments for institutional treasury use.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Circle's revenue model closely mirrors Tether's in structure — interest on reserves — but Circle discloses the concentration risk explicitly and is actively diversifying.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Core streams</h4>
+          <ul>
+            <li><strong>Reserve income</strong>: interest earned on the cash and short-dated US Treasuries backing USDC and EURC — historically over 99% of total revenue</li>
+            <li><strong>Other revenue</strong>: a fast-growing category covering subscription and services revenue (e.g. blockchain network partnerships) and transaction revenue from value-added network services</li>
+          </ul>
+        </div>
+        <div>
+          <h4>What it pays out</h4>
+          <ul>
+            <li>Distribution costs paid to partners that hold or distribute USDC — over $1 billion in 2024, of which roughly $900 million went to Coinbase alone</li>
+            <li>Circle's own S-1 disclosed that a 1-percentage-point drop in interest rates could remove roughly $441 million of reserve income, underscoring the concentration risk</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">"Other revenue" (subscription/services plus transaction revenue) grew 252% year-on-year to $24 million in Q2 2025 alone — still small next to reserve income, but the clearest sign of Circle's stated diversification push.</p>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Circle has pursued licensing in every major market it touches rather than operating from unregulated offshore bases — the opposite posture to Tether.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Regulatory footprint</h4>
+          <ul>
+            <li>United States — New York State BitLicense (2015), money transmitter licences in 49 states, and compliance with the GENIUS Act (signed July 2025), the first federal US stablecoin law</li>
+            <li>European Union — Circle Mint France SAS holds an Electronic Money Institution licence from France's ACPR (July 2024), making Circle the first major issuer fully cleared for EU retail distribution under MiCA</li>
+            <li>Bermuda — Circle International Bermuda, licensed under the Digital Assets Business Act, handles non-US customer business</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Where USDC is used</h4>
+          <ul>
+            <li>Global crypto trading and DeFi collateral</li>
+            <li>Institutional treasury and cross-border settlement, via Circle Payments Network</li>
+            <li>Consumer and enterprise payments through partners including Visa, Binance, OKX, Corpay, FIS and Fiserv</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">crypto trading</span>
+        <span class="tag">institutional treasury</span>
+        <span class="tag">cross-border payments</span>
+        <span class="tag">DeFi</span>
+        <span class="tag">fintech infrastructure</span>
+      </div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <p class="lede">As a NYSE-listed company, Circle files full quarterly and annual consolidated financial statements with the SEC — a materially higher disclosure bar than either Tether or Paytently.</p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th class="num">FY2024</th><th class="num">FY2025</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Total revenue and reserve income</td><td class="num">$1.68bn</td><td class="num">≈ $2.75bn</td></tr>
+          <tr><td>Net income (loss)</td><td class="num">$156m</td><td class="num">≈ $(69.5)m</td></tr>
+          <tr><td>Adjusted EBITDA (Q2 2025 quarter)</td><td class="num">$83m (Q2'24)</td><td class="num">$126m (Q2'25)</td></tr>
+          <tr><td>USDC in circulation, period-end</td><td class="num">$43.9bn</td><td class="num">$65.2bn (Aug 2025)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">Circle's FY2025 net loss, despite 64% revenue growth, was driven almost entirely by one-time, non-cash IPO-related charges — chiefly $424 million of stock-based compensation tied to RSU vesting triggered by the IPO and a $167 million fair-value increase in convertible debt. Total assets stood at $64.2 billion as of 30 June 2025, with $61.4 billion held as cash segregated for the benefit of stablecoin holders.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">Circle runs a dual-track assurance model: full annual financial-statement audits alongside monthly reserve attestations — both currently performed by the same firm.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Circle Internet Group, Inc. <span class="sub">Delaware — NYSE-listed parent, full annual audit</span></span>
+          <span class="auditor deloitte">Deloitte &amp; Touche LLP</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">USDC / EURC reserves <span class="sub">Monthly reserve attestation</span></span>
+          <span class="auditor deloitte">Deloitte &amp; Touche LLP</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Prior auditor <span class="sub">2018–2022</span></span>
+          <span class="auditor none">Grant Thornton LLP</span>
+        </div>
+      </div>
+      <p class="note">Circle switched from Grant Thornton to Deloitte in January 2023 for both engagements — a rare case of one Big Four firm handling both the full-entity PCAOB-standard financial statement audit and the monthly AICPA agreed-upon-procedures reserve attestation for the same stablecoin issuer.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">Circle's leadership team combines its original founders with a wave of senior hires brought in ahead of the IPO, including a former CFTC chairman as President.</p>
+      <div class="people-grid">
+        <div class="person">
+          <div class="name">Jeremy Allaire</div>
+          <div class="role">Co-Founder, Chief Executive Officer &amp; Chairman</div>
+          <p>Co-founded Circle in 2013; became a billionaire on the IPO's first trading day in June 2025.</p>
+        </div>
+        <div class="person">
+          <div class="name">Heath Tarbert</div>
+          <div class="role">President</div>
+          <p>Former Chairman of the US Commodity Futures Trading Commission (CFTC), bringing a senior regulatory profile to Circle's leadership.</p>
+        </div>
+        <div class="person">
+          <div class="name">Jeremy Fox-Geen</div>
+          <div class="role">Chief Financial Officer</div>
+          <p>Led Circle's IPO process and investor communications; previously CFO roles at Zenefits and other growth-stage companies.</p>
+        </div>
+        <div class="person">
+          <div class="name">Nikhil Chandhok</div>
+          <div class="role">Chief Product &amp; Technology Officer</div>
+          <p>Oversees product and engineering, including the Arc blockchain and Circle Payments Network.</p>
+        </div>
+        <div class="person">
+          <div class="name">Dante Disparte</div>
+          <div class="role">Chief Strategy Officer &amp; Head of Global Policy</div>
+          <p>Leads Circle's regulatory and policy engagement globally, a central function given the company's compliance-first positioning.</p>
+        </div>
+        <div class="person">
+          <div class="name">Mandeep Walia</div>
+          <div class="role">Chief Compliance &amp; Risk Officer</div>
+          <p>Oversees compliance and risk across Circle's licensed entities in the US, EU and Bermuda.</p>
+        </div>
+        <div class="person">
+          <div class="name">Sean Neville</div>
+          <div class="role">Co-Founder</div>
+          <p>Co-founded Circle alongside Allaire in 2013; stepped back from an executive role in 2019 but remains a founding figure.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">Like Tether, Circle has no corporate presence in Malta — but unlike Tether, Circle's EU compliance means USDC and EURC remain fully legal to trade on Malta-regulated exchanges.</p>
+      <div class="panel">
+        <h3>Indirect relationship, but on the compliant side of MiCA</h3>
+        <ul>
+          <li>Circle's EU licence sits with <strong>Circle Mint France SAS</strong>, authorised as an Electronic Money Institution by France's ACPR — not with any Maltese entity.</li>
+          <li>Because Circle is fully MiCA-authorised, Malta's MFSA-licensed crypto-asset service providers (which include globally significant names such as OKX and Bitpanda) can continue listing and distributing USDC and EURC without the restrictions that hit Tether's USDT.</li>
+          <li>Malta's MGA-licensed online gaming operators — an industry that has used stablecoins for crypto-denominated deposits and payouts — can use USDC through MFSA-regulated exchanges without the MiCA-driven access issues affecting non-compliant stablecoins.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">In short, Malta's relevance to Circle is again regulatory rather than corporate — but here it works in Circle's favour: the same MiCA framework that narrowed Tether's EU access is precisely the regime Circle built its compliance strategy around, so Malta-based users and MFSA-licensed platforms face no equivalent disruption in accessing USDC.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <div class="panel amber">
+        <h3>The strongest Deloitte relationship of any company profiled here</h3>
+        <ul>
+          <li>Deloitte &amp; Touche LLP has served as Circle's independent registered public accounting firm since January 2023, replacing Grant Thornton, which had audited Circle since 2018.</li>
+          <li>Deloitte performs <strong>both</strong> of Circle's assurance engagements: the full annual PCAOB-standard audit of Circle's consolidated financial statements (filed with the SEC as part of its 10-K), and the <strong>monthly</strong> AICPA agreed-upon-procedures attestation of USDC and EURC reserve composition, published at circle.com/transparency.</li>
+          <li>This dual mandate is unusual in the stablecoin sector: most issuers, where they have any external assurance at all, use one firm for periodic attestations and either no auditor or a different one for full financial statements.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">For context against the other companies in this index: Deloitte is also Trustly AB (publ)'s statutory auditor in Sweden, but has no known relationship with Tether or Paytently. Circle is the clearest and most extensive Deloitte engagement among the four — both as full-entity auditor and as the ongoing, monthly public face of Circle's reserve transparency.</p>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li>Circle Internet Group, Inc., <em>Second Quarter 2025 Results</em> press release and condensed consolidated financial statements (12 Aug 2025), investor.circle.com.</li>
+        <li>Forbes, "Circle Soars In First-Ever Stablecoin IPO, Making CEO A Billionaire" (5 Jun 2025).</li>
+        <li>Circle Internet Corp. Form S-1 and prospectus, U.S. Securities and Exchange Commission EDGAR (2025).</li>
+        <li>Yahoo Finance / Benzinga, "Circle's Jumps 168% In NYSE Debut, Marking Largest Crypto IPO Since Coinbase" (12 Jun 2025).</li>
+        <li>MarketsWiki, "Circle Internet Financial Ltd." (corporate history, products, leadership).</li>
+        <li>Simply Wall St, Circle Internet Group (NYSE:CRCL) earnings and revenue history.</li>
+        <li>Bloomberg Law, "Stablecoin Issuer Circle Adds Big Four Firm Deloitte for Audits" (Jan 2023).</li>
+        <li>Astraea Law, "Circle's USDC Compliance Playbook: Lessons from the Market Leader" (auditor transition detail, reserve architecture).</li>
+        <li>Circle transparency page (circle.com/transparency) — monthly Deloitte reserve attestations.</li>
+        <li>CMS Expert Guide to Crypto Regulation in Malta; coverage of MiCA-authorised issuers by jurisdiction (2026).</li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes; figures and appointments reflect the most recent public disclosures found at the time of research and may have changed since. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

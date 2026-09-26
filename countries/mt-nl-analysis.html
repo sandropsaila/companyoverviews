@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MT-NL analysis — Malta &amp; Netherlands crypto and payments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.deloitte{background:var(--amber-soft); color:var(--amber);}
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .table-wrap table{min-width:560px;}
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">MT-NL analysis</div>
+    <div><a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button></div>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#regulation">Regulatory landscape</a>
+    <a href="#mt-crypto">Malta — crypto</a>
+    <a href="#mt-payments">Malta — payments</a>
+    <a href="#nl-crypto">Netherlands — crypto</a>
+    <a href="#nl-payments">Netherlands — payments</a>
+    <a href="#common">Common companies</a>
+    <a href="#deloitte">Relevance to Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">MT-NL analysis</div>
+    <div class="brand-sub">Country analysis</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#regulation">Regulatory landscape</a>
+    <a href="#mt-crypto">Malta — crypto</a>
+    <a href="#mt-payments">Malta — payments</a>
+    <a href="#nl-crypto">Netherlands — crypto</a>
+    <a href="#nl-payments">Netherlands — payments</a>
+    <a href="#common">Common companies</a>
+    <a href="#deloitte">Relevance to Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Position as at 26 September 2026. Compiled from ESMA-register trackers, regulator and company announcements, iDEAL scheme data and audit-profession press.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Country analysis — Crypto &amp; Payments</div>
+      <h1>Malta &amp; the Netherlands</h1>
+      <p class="tagline">Crypto-asset service providers and payment / e-money institutions based in Malta and the Netherlands, the groups present in both, and where Deloitte fits.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Malta MiCA CASPs</div><div class="value">22</div></div>
+        <div class="fact"><div class="label">Netherlands MiCA CASPs</div><div class="value">29 (Sep 2026)</div></div>
+        <div class="fact"><div class="label">Malta EMIs operating</div><div class="value">37</div></div>
+        <div class="fact"><div class="label">Netherlands EMIs operating</div><div class="value">25</div></div>
+        <div class="fact"><div class="label">Common groups identified</div><div class="value">4 direct + 4 passport / exited</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>Two established hubs, two different models</h2>
+      <p class="lede">Both countries are major MiCA home states, but they attract different firms: Malta hosts the EU entities of large global exchanges; the Netherlands is dominated by home-grown Dutch platforms and payments champions.</p>
+      <p>The Dutch AFM issued the EU's first CASP licences on 30 December 2024 (MoonPay, BitStaete, ZBD and Hidden Road) and, with 29 entries, the Netherlands ranks third in the ESMA register behind Germany and France. The Dutch transitional period was the shortest in the EU — legacy DNB registrations lapsed on 30 June 2025, a year before Malta's deadline. Malta's 22 CASPs include OKX, Crypto.com, Bitpanda, Gemini and Gate.</p>
+      <p>On payments, the Netherlands is the home of iDEAL and of Adyen, Mollie and bunq; it has around 25 operating EMIs. Malta has around 37, many of them EU hubs for foreign groups.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">29 / 22</div><div class="l">MiCA CASPs, NL / MT</div></div>
+        <div class="stat"><div class="n">30 Dec 2024</div><div class="l">First EU CASP licences — AFM</div></div>
+        <div class="stat"><div class="n">25 / 37</div><div class="l">EMIs operating, NL / MT</div></div>
+        <div class="stat"><div class="n">4</div><div class="l">Groups with direct presence in both</div></div>
+      </div>
+    </section>
+
+    <section id="regulation">
+      <div class="section-label">Regulatory landscape</div>
+      <h2>Who supervises what</h2>
+      <div class="market-cols">
+        <div>
+          <h4>Malta</h4>
+          <ul>
+            <li>Single regulator: MFSA for CASPs, EMIs and payment institutions.</li>
+            <li>VFA Act (2018) phased out in favour of MiCA CASP authorisation; transitional period ran to 1 July 2026.</li>
+            <li>EMIs and PIs licensed under the Financial Institutions Act (Cap. 376).</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Netherlands</h4>
+          <ul>
+            <li>CASPs: AFM authorises and supervises conduct; DNB supervises EMT/ART issuers and prudential aspects.</li>
+            <li>EMIs / PIs: DNB under the Wft (Art. 2:10a / 2:3a), with AFM on conduct.</li>
+            <li>Pre-MiCA DNB crypto registration (Wwft, from May 2020) lapsed 30 June 2025 — six-month transition instead of eighteen.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">The shorter Dutch transition pushed several international exchanges out of the Netherlands before MiCA (Binance 2023, Gemini 2023, Bitpanda 2024). Some now serve Dutch clients again by passporting a licence from another state, including Malta.</p>
+    </section>
+
+    <section id="mt-crypto">
+      <div class="section-label">Malta — crypto</div>
+      <h2>MFSA-authorised CASPs (MiCA)</h2>
+      <p class="lede">Same Malta dataset as the MT-IT analysis; see that page for full dates and notes.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Legal entity</th><th>Brand / group</th><th>Authorised</th></tr>
+        <tr><td>OKX Europe Limited</td><td>OKX</td><td>27 Jan 2025</td></tr>
+        <tr><td>Foris DAX MT Limited</td><td>Crypto.com</td><td>27 Jan 2025</td></tr>
+        <tr><td>BP23 CA Limited</td><td>Bitpanda</td><td>27 Jan 2025</td></tr>
+        <tr><td>Zillion Bits Limited</td><td>ZBX</td><td>6 Feb 2025</td></tr>
+        <tr><td>Altarius Asset Management Limited</td><td>Altarius</td><td>24 Mar 2025</td></tr>
+        <tr><td>Gemini Intergalactic EU Ltd</td><td>Gemini</td><td>21 Aug 2025</td></tr>
+        <tr><td>Socios Europe Services Limited</td><td>Socios.com</td><td>10 Sep 2025</td></tr>
+        <tr><td>Gate Technology Limited</td><td>Gate</td><td>29 Sep 2025</td></tr>
+        <tr><td>Blockchain.com Operations (Malta) Limited</td><td>Blockchain.com</td><td>22 Oct 2025</td></tr>
+        <tr><td>Payhound Limited</td><td>Payhound</td><td>24 Nov 2025</td></tr>
+        <tr><td>Damex Digital Ltd</td><td>Damex</td><td>29 Jan 2026</td></tr>
+        <tr><td>Olmipay Limited / Stable Mint Ltd</td><td>Olmipay / Stable Mint</td><td>29 May 2026</td></tr>
+        <tr><td>Legion Malta Ltd / OP Digital Services Ltd</td><td>Legion / OpenPayd</td><td>23 Jun 2026</td></tr>
+        <tr><td>Zap (Strike) Europe Limited</td><td>Strike</td><td>25 Jun 2026</td></tr>
+        <tr><td>FalconX Limited</td><td>FalconX</td><td>26 Jun 2026</td></tr>
+        <tr><td>CF Technologies Ltd</td><td>Xcoins</td><td>27 Jun 2026</td></tr>
+        <tr><td>Everest Network Ltd / Bequant Pro Ltd</td><td>Everest / Bequant</td><td>30 Jun 2026</td></tr>
+        <tr><td>System Pay Services (Malta) Limited</td><td>BVNK</td><td>n/a</td></tr>
+      </table>
+      </div>
+      <p class="note">21 of 22 Malta entries listed. Verify against the ESMA interim register before relying on any single entry.</p>
+    </section>
+
+    <section id="mt-payments">
+      <div class="section-label">Malta — payments</div>
+      <h2>MFSA-licensed EMIs and payment institutions</h2>
+      <div class="grid">
+        <div class="cell"><h4>OpenPayd Financial Services Malta</h4><p>EMI since May 2019; BaaS and virtual IBANs, passported to all 30 EEA states. Crypto arm OP Digital Services is a Malta CASP.</p></div>
+        <div class="cell"><h4><a href="../companypages/paytently.html">Paytently</a></h4><p>MFSA Payment Institution (Oct 2025); payment orchestration — see full profile.</p></div>
+        <div class="cell"><h4>BVNK (System Pay Services Malta)</h4><p>EMI + CASP; stablecoin payment infrastructure.</p></div>
+        <div class="cell"><h4>Group EU e-money hubs</h4><p>Foris MT (Crypto.com), BP23 PAY (Bitpanda), eToro Money Malta, Nium Financial Services Malta, DLocal Limited.</p></div>
+        <div class="cell"><h4>Independent Maltese EMIs</h4><p>FinXP, Paydo EU, Em@ney, Andaria, C2D Payment Solutions, EPG Financial Services.</p></div>
+        <div class="cell"><h4>FX / cross-border</h4><p>Alpha FX Europe, ALT21 Europe, Ballinger EU.</p></div>
+      </div>
+    </section>
+
+    <section id="nl-crypto">
+      <div class="section-label">Netherlands — crypto</div>
+      <h2>AFM-authorised CASPs (MiCA)</h2>
+      <p class="lede">Netherlands home-state entries in the ESMA CASP register, ordered by authorisation date.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Legal entity</th><th>Brand</th><th>Authorised</th><th>Notes</th></tr>
+        <tr><td>MoonPay Europe B.V.</td><td>MoonPay</td><td>30 Dec 2024</td><td>Among EU's first four CASPs; DNB EMI licence added 8 Sep 2026</td></tr>
+        <tr><td>BitStaete B.V.</td><td>BitStaete</td><td>30 Dec 2024</td><td>Portfolio management</td></tr>
+        <tr><td>Zebedee Europe B.V.</td><td>ZBD</td><td>30 Dec 2024</td><td>Also a Dutch EMI (2025)</td></tr>
+        <tr><td>Hidden Road Partners CIV NL B.V.</td><td>Hidden Road</td><td>30 Dec 2024</td><td>Institutional</td></tr>
+        <tr><td>AvianLabs Netherlands B.V.</td><td>Sling</td><td>2 Apr 2025</td><td></td></tr>
+        <tr><td>Vivid Money B.V.</td><td>Vivid</td><td>1 May 2025</td><td>Neobank crypto offering</td></tr>
+        <tr><td>One Trading Exchange B.V.</td><td>One Trading</td><td>15 May 2025</td><td>Former Bitpanda Pro, spun off 2023</td></tr>
+        <tr><td>BTC Direct Europe B.V.</td><td>BTC Direct</td><td>18 Jun 2025</td><td></td></tr>
+        <tr><td>Bitvavo B.V.</td><td>Bitvavo</td><td>26 Jun 2025</td><td>Largest Dutch exchange; custody, trading platform, transfers</td></tr>
+        <tr><td>Amdax B.V.</td><td>Amdax</td><td>26 Jun 2025</td><td></td></tr>
+        <tr><td>Finst B.V.</td><td>Finst</td><td>24 Jul 2025</td><td></td></tr>
+        <tr><td>Decubate B.V.</td><td>Decubate</td><td>31 Jul 2025</td><td></td></tr>
+        <tr><td>Fiat Republic Netherlands B.V.</td><td>Fiat Republic</td><td>5 Aug 2025</td><td>Also MiCA EMT issuer</td></tr>
+        <tr><td>BLOX B.V.</td><td>BLOX</td><td>30 Sep 2025</td><td></td></tr>
+        <tr><td>EU Internet Ventures B.V.</td><td>Banxa</td><td>8 Oct 2025</td><td></td></tr>
+        <tr><td>zerohash europe B.V.</td><td>zerohash</td><td>29 Oct 2025</td><td>Infrastructure</td></tr>
+        <tr><td>Coinmerce B.V.</td><td>Coinmerce</td><td>5 Nov 2025</td><td></td></tr>
+        <tr><td>Bitmymoney B.V.</td><td>Bitmymoney</td><td>20 Nov 2025</td><td></td></tr>
+        <tr><td>Bitonic B.V.</td><td>Bitonic</td><td>21 Nov 2025</td><td></td></tr>
+        <tr><td>Blockrise Capital B.V.</td><td>Blockrise</td><td>25 Nov 2025</td><td></td></tr>
+        <tr><td>ClearBank Europe N.V.</td><td>ClearBank</td><td>3 Apr 2026</td><td>Bank</td></tr>
+        <tr><td>Change Securities B.V.</td><td>Change</td><td>20 Apr 2026</td><td></td></tr>
+        <tr><td>Webull Securities (Europe) B.V.</td><td>Webull</td><td>30 Jun 2026</td><td></td></tr>
+        <tr><td>Digital Currency Services B.V.</td><td>HappyCoins</td><td>30 Jun 2026</td><td></td></tr>
+        <tr><td>BitPay B.V.</td><td>BitPay</td><td>16 Jul 2026</td><td></td></tr>
+        <tr><td>Acheron Europe B.V. / WEB3 Technology B.V. / Monflo B.V.</td><td>Acheron / Ari10 / Monflo</td><td>n/a</td><td>Listed in register; dates not captured</td></tr>
+      </table>
+      </div>
+      <p class="note">28 of 29 Netherlands entries listed. Name clash: ZBD (Zebedee, Netherlands) is unrelated to ZBX (Zillion Bits, Malta).</p>
+    </section>
+
+    <section id="nl-payments">
+      <div class="section-label">Netherlands — payments</div>
+      <h2>DNB-licensed payment players</h2>
+      <p class="lede">The market that built iDEAL; licensed acquirers and collecting PSPs are home-grown.</p>
+      <div class="grid">
+        <div class="cell"><h4>Adyen N.V.</h4><p>Dutch-licensed iDEAL acquirer; listed on Euronext Amsterdam. External auditor PwC (2025, reappointed 2026).</p></div>
+        <div class="cell"><h4>Mollie B.V.</h4><p>DNB EMI and iDEAL acquirer; online and in-person business payments.</p></div>
+        <div class="cell"><h4>Buckaroo / MultiSafepay</h4><p>Dutch payment licences; Buckaroo is an iDEAL acquirer and CPSP, MultiSafepay an iDEAL CPSP.</p></div>
+        <div class="cell"><h4>bunq</h4><p>DNB-supervised online bank; audited by Deloitte since 2018.</p></div>
+        <div class="cell"><h4>Crypto-linked EMIs</h4><p>MoonPay Europe (EMI Sep 2026), ZBD, Aplauz NL (fiat-crypto infrastructure), iLedgends.</p></div>
+        <div class="cell"><h4>Global groups' EU EMIs</h4><p>Nium Europe, Airwallex (2024), World First Netherlands, XTransfer, FINOM Payments, Privalgo, Mondu, Uber Payments.</p></div>
+      </div>
+    </section>
+
+    <section id="common">
+      <div class="section-label">Common companies</div>
+      <h2>Groups present in both countries</h2>
+      <p class="lede">Four groups have a licensed or registered entity in Malta and their own entity or registration in the Netherlands.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Group</th><th>Malta</th><th>Netherlands</th></tr>
+        <tr><td><strong>Crypto.com</strong></td><td>Foris DAX MT Ltd (CASP, Jan 2025) + Foris MT Ltd (EMI)</td><td>Foris DAX Global Ltd registered with DNB as crypto provider (Jul 2023); registration regime lapsed 30 Jun 2025 — now via Malta passport</td></tr>
+        <tr><td><strong>OpenPayd</strong></td><td>OpenPayd FS Malta Ltd (EMI) + OP Digital Services Ltd (CASP, Jun 2026)</td><td>OpenPayd Services Limited, Dutch branch (reg. no. 75070014)</td></tr>
+        <tr><td><strong>Nium</strong></td><td>Nium Financial Services Malta Ltd (EMI)</td><td>Nium Europe B.V. (DNB EMI)</td></tr>
+        <tr><td><strong>eToro</strong></td><td>eToro Money Malta Ltd (EMI)</td><td>Among DNB-registered crypto firms (2023 reporting)</td></tr>
+      </table>
+      </div>
+      <div class="panel grey">
+        <h3>Passport-only or exited</h3>
+        <ul>
+          <li><strong>Bitpanda</strong> — Malta CASP; never DNB-registered and off-boarded Dutch users from 1 Feb 2024. Its former exchange, Bitpanda Pro, now operates independently as One Trading, a Dutch CASP.</li>
+          <li><strong>Gemini</strong> — Malta CASP; left the Netherlands in 2023 citing DNB requirements, stating it intended to return under MiCA.</li>
+          <li><strong>OKX</strong> and the other Malta CASPs — can passport into the Netherlands; no Dutch entity identified.</li>
+          <li><strong>Dutch CASPs into Malta</strong> — Bitvavo, MoonPay, Amdax, Finst, One Trading and others list Malta among their passported host states; none was found with a Malta licence.</li>
+        </ul>
+      </div>
+      <div class="panel amber">
+        <h3>What this tells us</h3>
+        <ul>
+          <li>Overlap is strongest in payments (OpenPayd, Nium, eToro, Crypto.com e-money) rather than crypto exchanges.</li>
+          <li>The Netherlands' early, strict regime drove several Malta-licensed exchanges out; MiCA passporting is now their route back.</li>
+          <li>Dutch pre-MiCA registrations no longer confer operating rights; current status should be checked on the ESMA, AFM and DNB registers.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Relevance to Deloitte</div>
+      <h2>Where Deloitte fits</h2>
+      <p class="lede">Confirmed relationships are kept separate from opportunity analysis. Auditors for most firms listed could not be verified and are not asserted.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0"><span class="indent">NL</span><span class="entity">bunq<span class="sub">Deloitte Accountants has audited bunq since 2018; confirmed for FY2024. bunq is a DNB-supervised public-interest entity.</span></span><span class="auditor deloitte">Deloitte</span></div>
+        <div class="org-row depth-0"><span class="indent">NL</span><span class="entity">ING<span class="sub">Deloitte Accountants B.V. external auditor for four years from 1 Jan 2026. ING is one of the main safeguarding banks for Dutch EMIs.</span></span><span class="auditor deloitte">Deloitte</span></div>
+        <div class="org-row depth-0"><span class="indent">EU</span><span class="entity"><a href="../companypages/circle.html">Circle (USDC / EURC)</a><span class="sub">Deloitte audits Circle and attests its reserves; USDC is tradable on MiCA-licensed venues</span></span><span class="auditor deloitte">Deloitte</span></div>
+        <div class="org-row depth-0"><span class="indent">NL</span><span class="entity">Adyen<span class="sub">External auditor PwC (2025, reappointed 2026)</span></span><span class="auditor none">PwC</span></div>
+        <div class="org-row depth-0"><span class="indent">MT/NL</span><span class="entity">Other CASPs and EMIs listed above<span class="sub">Auditor not verified</span></span><span class="auditor none">Not verified</span></div>
+      </div>
+      <div class="grid">
+        <div class="cell"><h4>Deloitte Netherlands</h4><p>Audit advisory for financial services (accounting, internal control, audit readiness); partner Dirk Lommerse signed the bunq audit.</p></div>
+        <div class="cell"><h4>Deloitte Malta</h4><p>Blockchain services across audit, consulting, tax and risk advisory, including Wallet Transactions Assurance and crypto-exchange assurance.</p></div>
+        <div class="cell"><h4>Related profiles</h4><p><a href="../companypages/paytently.html">Paytently</a>, <a href="../companypages/trustly.html">Trustly</a> and the <a href="mt-it-analysis.html">MT-IT analysis</a>.</p></div>
+      </div>
+      <div class="panel amber">
+        <h3>Opportunity lens (analysis, not sourced fact)</h3>
+        <ul>
+          <li><strong>Mature Dutch CASP cohort:</strong> most Dutch CASPs are one to two years post-authorisation, moving from licensing work to recurring statutory audit, client-asset safeguarding reviews and DORA ICT assessments.</li>
+          <li><strong>Dual-licence firms:</strong> MoonPay, ZBD and Fiat Republic combine CASP and EMI/EMT status in the Netherlands, as Crypto.com, Bitpanda, OpenPayd and BVNK do in Malta — scope for combined e-money safeguarding and crypto custody assurance (ISAE 3402 / SOC 1–2, GITC).</li>
+          <li><strong>Cross-border groups:</strong> Crypto.com, OpenPayd, Nium and eToro span both countries, suiting coordinated Deloitte Malta – Deloitte Netherlands teams.</li>
+          <li><strong>Independence:</strong> firms banking or safeguarding with ING, or connected to bunq, need independence checks given Deloitte's audit roles.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-label">Sources</div>
+      <h2>Sources</h2>
+      <ul style="color:var(--ink-soft);font-size:.9rem;padding-left:1.2rem;">
+        <li>ESMA-register trackers: casptracker.eu (17 Sep 2026); micalist.com; defi-intel.com Netherlands guide (ESMA CSV, 3 Jul 2026); chainscreen.io; outrun.at</li>
+        <li>eumica.com and penning.io — Bitvavo, Finst, One Trading, Amdax register entries</li>
+        <li>Tangem and bitcoinmarket.net — Dutch MiCA transition and AFM enforcement</li>
+        <li>CoinGabbar — MoonPay DNB EMI licence (8 Sep 2026)</li>
+        <li>TheBanks.eu — Lists of EMIs in Malta and the Netherlands; OpenPayd FS Malta profile</li>
+        <li>Prifinance and Cadena Brokers — DNB PI/EMI regime, Airwallex, Privalgo and ZBD EMI authorisations</li>
+        <li>iDEAL — Acquirers and CPSPs list</li>
+        <li>OpenPayd — Group overview (entities incl. Dutch branch)</li>
+        <li>Crypto.com company news (28 Jul 2023); The Block; Cointelegraph — DNB registration</li>
+        <li>CoinDesk and FinanceFeeds — Bitpanda and Gemini exits from the Netherlands</li>
+        <li>Adyen — 2025 and 2026 AGM results (auditor)</li>
+        <li>Accountant.nl — bunq / Deloitte audit report (7 Mar 2025); ING — Deloitte proposed as external auditor</li>
+        <li>Deloitte Netherlands — Audit Advisory Financial Services; Deloitte Malta — Blockchain services</li>
+        <li>whoswho.mt / The Paypers — Paytently PI licence</li>
+      </ul>
+      <p class="note">Counts and entity lists move weekly. The ESMA interim MiCA register, AFM crypto register, DNB public register and MFSA Financial Services Register are the authoritative references.</p>
+    </section>
+  </main>
+</div>
+<script>
+  const links = document.querySelectorAll('nav.toc a[href^="#"]');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

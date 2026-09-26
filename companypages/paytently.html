@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paytently — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  /* Mobile top bar: hidden on desktop, replaces the sidebar on narrow screens */
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.unknown{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .depth-1{padding-left:2.6rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  /* ---------- Responsive ---------- */
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Paytently</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Paytently</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from the company's own website, press coverage and public company-data aggregators. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Payments &amp; Fintech</div>
+      <h1>Paytently</h1>
+      <p class="tagline">A Malta-headquartered payment orchestration platform that routes merchant transactions across a network of acquiring banks and alternative payment methods, built for regulated and specialised industries.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2022</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">Sliema, Malta</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Privately held — founder-led, VC-backed</div></div>
+        <div class="fact"><div class="label">Employees</div><div class="value">c. 35–50</div></div>
+        <div class="fact"><div class="label">Regulatory status</div><div class="value">MFSA-licensed Payment Institution</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Paytently does</h2>
+      <p class="lede">Paytently is a payment orchestration platform: rather than processing payments itself end-to-end, it sits between merchants and a curated network of card acquirers, alternative payment methods and banks, using AI-driven routing to send each transaction to whichever partner is most likely to approve it at the lowest cost. It was founded in 2022 by three payments-industry veterans and has grown quickly within specialised, highly regulated verticals — particularly online gaming.</p>
+      <p>The company is legally structured around <strong>Paytently Ltd</strong> (its original operating entity) and, since October 2025, <strong>Paytently PI Limited</strong> (company no. C 113188), which holds the group's Payment Institution licence from the Malta Financial Services Authority (MFSA), licence no. PPI-25221. It also operates a UK entity, Paytently (Paymo UK Ltd), and has staff or offices in Belgium and Portugal in addition to Malta and London.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">200+</div><div class="l">local &amp; international payment methods</div></div>
+        <div class="stat"><div class="n">60+</div><div class="l">global acquirers</div></div>
+        <div class="stat"><div class="n">35+</div><div class="l">markets</div></div>
+        <div class="stat"><div class="n">€1.5bn+</div><div class="l">processed to date</div></div>
+        <div class="stat"><div class="n">23</div><div class="l">currencies</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Paytently's offering is organised as a set of payment products plus a dedicated risk service, all accessed through a single API.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Card processing</h4>
+          <p>Acceptance of major card scheme payments across 35+ markets, PCI DSS-compliant, positioned on uptime and approval-rate performance.</p>
+        </div>
+        <div class="cell">
+          <h4>Intelligent (AI) routing</h4>
+          <p>Machine-learning-driven transaction routing across 60+ acquirers, with customisable rules and real-time routing strategies to lift acceptance rates and cut cost.</p>
+        </div>
+        <div class="cell">
+          <h4>Recurring payments</h4>
+          <p>Subscription billing tooling — automatic billing, one-click payments and smart retries — aimed at reducing involuntary churn.</p>
+        </div>
+        <div class="cell">
+          <h4>Open banking</h4>
+          <p>"Paytently Open Banking powered by Mastercard" — an account-to-account payment option launched in 2025 that lets customers pay directly from their bank account at checkout.</p>
+        </div>
+        <div class="cell">
+          <h4>Alternative payment methods</h4>
+          <p>Access to 200+ local APMs, including digital wallets, bank transfers, mobile payments and crypto/stablecoin payment options (via a partnership with BVNK).</p>
+        </div>
+        <div class="cell">
+          <h4>Digital banking &amp; chargeback mitigation</h4>
+          <p>Digital banking infrastructure for clients, plus a dedicated chargeback mitigation service to reduce dispute-related losses.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">As a payment orchestration and, since late 2025, licensed payment institution, Paytently's income is generated primarily from processing merchants' transaction volume rather than software subscriptions.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Core streams</h4>
+          <ul>
+            <li>Transaction/processing fees on volume routed to acquirers and alternative payment methods</li>
+            <li>Fees for recurring-billing and subscription-management tooling</li>
+            <li>Fees tied to its own regulated payment-institution services, following its October 2025 MFSA licence</li>
+            <li>Value-added services such as chargeback mitigation and fraud/AML tooling (including its SEON partnership)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Disclosure basis</h4>
+          <ul>
+            <li>Paytently is a private company and does not publish a detailed revenue breakdown by product</li>
+            <li>Third-party company-data providers estimate annual revenue in the US$1–10 million range</li>
+            <li>The company markets "€1.5bn+ processed" as a cumulative volume metric — an indicator of transaction flow rather than reported revenue</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Paytently positions itself around specialised, regulation-heavy sectors rather than any single geography, operating across more than 35 markets from a European base.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Corporate footprint</h4>
+          <ul>
+            <li>Malta (Sliema) — group headquarters and MFSA-licensed entity</li>
+            <li>United Kingdom — Paytently (Paymo UK Ltd), London</li>
+            <li>Belgium — office/team presence</li>
+            <li>Portugal — office/team presence</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Industry verticals served</h4>
+          <ul>
+            <li>Gaming — high-volume, time-sensitive betting and gambling transactions</li>
+            <li>Financial services — fintechs and established institutions</li>
+            <li>Travel — cross-border payments and seasonal demand spikes</li>
+            <li>Ecommerce — checkout optimisation and local payment-method coverage</li>
+            <li>Digital entertainment — recurring subscriptions and content payments</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">iGaming &amp; betting</span>
+        <span class="tag">fintech</span>
+        <span class="tag">travel</span>
+        <span class="tag">ecommerce</span>
+        <span class="tag">digital entertainment</span>
+      </div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <div class="panel grey">
+        <h3>No public consolidated financial statements identified</h3>
+        <p style="margin-bottom:0;">Paytently is a small, privately held company, and — unlike a listed or bond-issuing group — it does not publish consolidated financial statements, an annual report or audited accounts on its investor or corporate pages. The figures below are the only externally available indicators of its financial scale, sourced from company-data aggregators rather than Paytently's own filings.</p>
+      </div>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th class="num">Reported figure</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Estimated annual revenue</td><td class="num">US$1M – US$10M (third-party estimate)</td></tr>
+          <tr><td>Total disclosed funding</td><td class="num">≈ €1.3M pre-seed + US$2.2M seed (Mar 2023)</td></tr>
+          <tr><td>Cumulative volume processed</td><td class="num">€1.5bn+ (company-reported, as of website's last update)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">As a Malta-registered company, Paytently is required to file annual accounts with the Malta Business Registry; small private companies below statutory thresholds may file abridged, unaudited accounts. No filed Malta Business Registry financial statement for Paytently Ltd or Paytently PI Limited was reviewed as part of this profile — a formal MBR search would be needed to confirm reported turnover, assets and audit status.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Paytently Ltd <span class="sub">Original operating entity</span></span>
+          <span class="auditor unknown">Not publicly disclosed</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Paytently PI Limited <span class="sub">Malta, Company No. C 113188 — MFSA-licensed Payment Institution (PPI-25221)</span></span>
+          <span class="auditor unknown">Not publicly disclosed</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Paytently (Paymo UK Ltd) <span class="sub">United Kingdom entity</span></span>
+          <span class="auditor unknown">Not publicly disclosed</span>
+        </div>
+      </div>
+      <p class="note">No named external auditor for any Paytently entity was found in the public sources reviewed (company website, press coverage, Crunchbase, LeadIQ, LinkedIn). As an MFSA-regulated Payment Institution, Paytently PI Limited will be subject to MFSA prudential and audit requirements, and — per general Maltese company law — is required to file audited (or, if it qualifies as a small company, abridged) accounts with the Malta Business Registry. Confirming the actual appointed audit firm would require a direct Malta Business Registry search, which was outside the scope of the web sources used here.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">Paytently was founded by three payments-industry veterans with backgrounds at Barclays, Checkout.com, Trustly, TrueLayer, Viva Wallet and Lloyds Bank, and has since built out a wider leadership bench.</p>
+      <div class="people-grid">
+        <div class="person">
+          <div class="name">Samuel Barrett</div>
+          <div class="role">Co-Founder &amp; Chief Executive Officer</div>
+          <p>Previously built and exited the gaming division of Trustly; 15 years in financial technology commercial leadership, gaming and payments.</p>
+        </div>
+        <div class="person">
+          <div class="name">Laurent Reysbosch</div>
+          <div class="role">Co-Founder &amp; Chief Business Development Officer</div>
+          <p>Built HiPay into a leading gaming-acquiring brand; held management roles at Checkout.com and Viva Wallet.</p>
+        </div>
+        <div class="person">
+          <div class="name">Nick Tucker</div>
+          <div class="role">Co-Founder &amp; Chief Commercial Officer</div>
+          <p>Former partner at Ebury and CBDO of Orbital; earlier career in Lloyds' money markets team and VP of Financial Services at TrueLayer.</p>
+        </div>
+        <div class="person">
+          <div class="name">Lawrence Koo</div>
+          <div class="role">Chief Operating Officer</div>
+          <p>Leads day-to-day operations across Paytently's Malta, UK, Belgium and Portugal teams.</p>
+        </div>
+        <div class="person">
+          <div class="name">Stephanie Agius Lia</div>
+          <div class="role">Chief Compliance Officer</div>
+          <p>Leads regulatory compliance, a central function following Paytently's 2025 MFSA Payment Institution licence.</p>
+        </div>
+        <div class="person">
+          <div class="name">Chawin Tree</div>
+          <div class="role">Chief Technology Officer</div>
+          <p>Leads platform engineering; the company's technology leadership has evolved since its 2022 launch, when co-founder Phil Smith held the CTO role.</p>
+        </div>
+        <div class="person">
+          <div class="name">Caroline Buhagiar</div>
+          <div class="role">Director of Finance</div>
+          <p>Leads the finance function for the group.</p>
+        </div>
+        <div class="person">
+          <div class="name">Isabelle Delisle</div>
+          <div class="role">Strategic Board Advisor</div>
+          <p>Advises the board; brings director of payments experience from the iGaming operator side of the industry.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">Unlike a foreign company with a Maltese branch, Paytently is a Maltese company at its core: Malta is its registered home, its regulator, and the base from which it has grown.</p>
+      <div class="panel">
+        <h3>Malta as home base and regulator</h3>
+        <ul>
+          <li>Group headquarters at 231 The Adelaide Building, Tower Road, Sliema, Malta — the address used for both Paytently Ltd and Paytently PI Limited.</li>
+          <li>In October 2025, Paytently PI Limited (Company No. C 113188) was granted a Payment Institution licence (No. PPI-25221) by the Malta Financial Services Authority, authorising it to provide regulated payment services across the EU.</li>
+          <li>Silvio Schembri, Malta's Minister for the Economy, Enterprise and Strategic Projects, visited Paytently's headquarters ahead of the licence announcement, publicly citing the company as an example strengthening Malta's reputation as a fintech hub.</li>
+          <li>Paytently's own account of its first year describes operations spanning "Malta, Belgium, London and Portugal" — with Malta named first as the base of the group.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">This is a materially different relationship from a multinational simply opening a Maltese office: Paytently's principal regulatory relationship, its registered office, and its licensed operating entity are all Maltese. Its MFSA licence is also what allows it to expand from pure orchestration (routing payments to other licensed institutions) into directly providing regulated payment services in its own right.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <div class="panel grey">
+        <h3>No disclosed relationship identified</h3>
+        <p style="margin-bottom:0;">The public sources reviewed for this profile — Paytently's own website, its press coverage, and third-party company-data platforms — do not mention Deloitte in connection with Paytently, whether as auditor, advisor, or partner. Paytently's disclosed partnerships are with organisations such as Mastercard (Open Banking), BVNK (stablecoin/crypto payments) and SEON (fraud and AML). If Deloitte does act for Paytently in some capacity — for example on the audit of Paytently PI Limited's MFSA-regulated accounts — that engagement is not disclosed in any public source found here, and would need to be confirmed directly with the company or via a Malta Business Registry filing.</p>
+      </div>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li>Paytently official website — homepage, "About us" page, and blog post "Paytently Secures Payment Institution (PI) Licence from the Malta Financial Services Authority" (28 Oct 2025).</li>
+        <li>FF News / Fintech Finance, "Paytently Secures Payment Institution (PI) Licence from the Malta Financial Services Authority" and "Paytently: Experienced industry leaders launch exciting new payment platform."</li>
+        <li>FinancialIT.net, "Paytently Secures Payment Institution (PI) Licence From the Malta Financial Services Authority" (28 Oct 2025).</li>
+        <li>MaltaCEOs.mt profile of Samuel Barrett, CEO of Paytently.</li>
+        <li>Crunchbase company profile for "paytently." (Paytently Ltd).</li>
+        <li>LeadIQ company overview for Paytently (funding, revenue estimate, employee count).</li>
+        <li>LinkedIn company page for Paytently (locations, founding team, funding update posts).</li>
+        <li>TheOrg.com organisational chart for Paytently.</li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes. Paytently is a small, early-stage private company; financial and auditor details in particular are not comprehensively disclosed in public sources and are flagged as such above rather than estimated. Figures and appointments reflect the most recent public information found at the time of research and may have changed since. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

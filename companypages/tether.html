@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tether — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.kpmg{background:var(--teal-soft); color:var(--teal);}
+  .auditor.bdo{background:var(--amber-soft); color:var(--amber);}
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Tether</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Tether</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from Tether's own transparency page, public filings, press coverage and company-data registries. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Digital Assets &amp; Stablecoins</div>
+      <h1>Tether</h1>
+      <p class="tagline">The issuer of USDT, the world's largest stablecoin, backing each token with a reserve of mostly short-term US Treasury bills and generating profit from the interest those reserves earn.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2014 (as Realcoin)</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">San Salvador, El Salvador</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Privately held — Tether Holdings / iFinex</div></div>
+        <div class="fact"><div class="label">USDT in circulation</div><div class="value">≈ $184bn (mid-2026)</div></div>
+        <div class="fact"><div class="label">2024 reported profit</div><div class="value">≈ $13bn</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Tether does</h2>
+      <p class="lede">Tether issues USDT, a digital token designed to always be worth one US dollar. Users deposit dollars with Tether and receive USDT in return; Tether invests those dollars — overwhelmingly in short-term US Treasury bills — and keeps the interest. Because it does not pay yield to USDT holders, and operates with a comparatively small headcount, the business has become one of the most profitable in the world relative to its size.</p>
+      <p>The company began in 2014 as Realcoin, founded by Brock Pierce, Reeve Collins and Craig Sellars, and was quickly rebranded Tether. It has long been affiliated with the Bitfinex cryptocurrency exchange through a shared parent, <strong>iFinex Inc.</strong>; the wider corporate group now sits under <strong>Tether Holdings Limited</strong>, with operating entities including Tether Limited, Tether Operations Limited and Tether International, S.A. de C.V. In 2025 the group relocated its base from the British Virgin Islands to El Salvador, obtaining a licence under that country's Digital Asset Service Provider regime and establishing its first formal head office there.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">$184bn</div><div class="l">USDT in circulation</div></div>
+        <div class="stat"><div class="n">2/3</div><div class="l">of global stablecoin value</div></div>
+        <div class="stat"><div class="n">$6.8bn</div><div class="l">audited reserve surplus, FY2025</div></div>
+        <div class="stat"><div class="n">c. 200</div><div class="l">employees (2025)</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Tether's core product is USDT itself, but the group has diversified into other tokens, a tokenisation platform, and adjacent technology and commodity investments.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>USDT (Tether)</h4>
+          <p>The flagship US dollar–pegged stablecoin, issued across more than a dozen blockchains including Tron, Ethereum and Solana; the primary source of liquidity across crypto trading and, increasingly, cross-border payments.</p>
+        </div>
+        <div class="cell">
+          <h4>USAT</h4>
+          <p>A newly launched, US-domiciled dollar token for American businesses and institutions, issued via Anchorage Digital Bank with Cantor Fitzgerald as reserve custodian, built to operate under the US GENIUS Act framework — led by Tether U.S. CEO Bo Hines.</p>
+        </div>
+        <div class="cell">
+          <h4>Tether Gold (XAU₮)</h4>
+          <p>A token representing ownership of physical gold bullion held in vaults; Tether has continued to add to its own gold holdings alongside this product.</p>
+        </div>
+        <div class="cell">
+          <h4>Hadron by Tether</h4>
+          <p>A proprietary tokenisation platform used to issue other digital assets — including USAT — and integrated with third-party compliance tools such as Chainalysis.</p>
+        </div>
+        <div class="cell">
+          <h4>Other currency-pegged tokens</h4>
+          <p>MXN₮ (Mexican peso) launched 2022; euro (EUR₮) and offshore yuan (CNH₮) tokens issued in earlier years, with EUR₮ retired in November 2024 rather than adapted for EU rules.</p>
+        </div>
+        <div class="cell">
+          <h4>Adjacent ventures</h4>
+          <p>Bitcoin mining and infrastructure investment, an artificial-intelligence push (Tether.ai, the QVAC platform), and a large equity stake in Bitcoin miner Northern Data (rebranded as an AI infrastructure play).</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Tether's business model is simple relative to its scale: it earns from what its dollar reserves generate, not from fees paid by everyday USDT users.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Core streams</h4>
+          <ul>
+            <li>Interest income on US Treasury bill holdings backing USDT — the dominant source of profit</li>
+            <li>Returns on other reserve assets: secured loans to institutional borrowers, gold, Bitcoin and corporate bonds</li>
+            <li>Fees associated with token issuance and redemption for institutional counterparties</li>
+            <li>Gains from equity investments (e.g. Northern Data, Rumble, Anchorage Digital, Bitdeer)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>What it does not do</h4>
+          <ul>
+            <li>Tether pays no yield or interest to ordinary USDT holders — the spread between reserve income and zero payout is the core margin</li>
+            <li>Direct retail redemption is not typical; redemptions are generally handled through verified institutional counterparties, with everyday users trading USDT on exchanges instead</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">Tether reported roughly $13 billion in net profit for 2024, and its KPMG-audited FY2025 financial statements showed reserves exceeding liabilities by $6.814 billion at year-end — though that surplus fell to about $4.1 billion by the Q2 2026 quarterly attestation as gold and Bitcoin valuations moved.</p>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">USDT is used worldwide, with particularly heavy adoption in emerging markets — but Tether's regulatory footprint has narrowed sharply in the European Union.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Where USDT is strongest</h4>
+          <ul>
+            <li>Global crypto trading — USDT is the most-transacted cryptocurrency and dominant trading-pair currency on exchanges</li>
+            <li>Latin America, Africa and parts of Asia, where it is used for remittances, savings and trade in economies facing currency volatility or dollar scarcity</li>
+            <li>El Salvador — Tether's regulatory home under the Digital Asset Service Provider regime</li>
+            <li>United States — indirectly, through the new USAT token issued under the GENIUS Act framework (USDT itself is not marketed to US retail users)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Where access has narrowed</h4>
+          <ul>
+            <li>European Union — Tether did not seek the e-money-token authorisation required under MiCA; MiCA-licensed EU exchanges (Coinbase, Binance, Kraken, Crypto.com, Revolut) delisted USDT trading through 2025–2026</li>
+            <li>Individuals can still legally hold and self-custody USDT in the EU — ESMA has clarified the restriction applies to regulated trading venues, not private possession</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">crypto trading</span>
+        <span class="tag">remittances</span>
+        <span class="tag">emerging-market savings</span>
+        <span class="tag">DeFi collateral</span>
+        <span class="tag">institutional treasury</span>
+      </div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <p class="lede">Tether does not publish a conventional annual report; its financial position is disclosed through a mix of a first full independent audit and ongoing quarterly reserve attestations.</p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th class="num">Figure</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Reported net profit, FY2024</td><td class="num">≈ $13 billion</td></tr>
+          <tr><td>Audited reserve surplus, FY2025 (KPMG)</td><td class="num">$6.814 billion</td></tr>
+          <tr><td>Total assets, Q2 2026 attestation (BDO)</td><td class="num">$187.75 billion</td></tr>
+          <tr><td>Total liabilities (USDT issued), Q2 2026</td><td class="num">$183.64 billion</td></tr>
+          <tr><td>Reserve surplus, Q2 2026 attestation</td><td class="num">$4.11 billion</td></tr>
+          <tr><td>Q2 2026 net operating profit</td><td class="num">≈ $1.5 billion</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">The Q2 2026 decline in the reserve buffer (from $8.23bn at Q1 2026 to $4.11bn) was attributed to falling gold and Bitcoin valuations rather than a change in USDT issuance. Reserve composition as of mid-2026 was roughly 80–85% cash, cash equivalents and short-term US Treasury bills, with the balance in secured loans, Bitcoin, gold and other assets.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">Tether's assurance history has moved in 2026 from attestation-only to a hybrid model combining a first full financial-statement audit with ongoing quarterly attestations.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Tether International, S.A. de C.V. <span class="sub">El Salvador — USDT-issuing entity</span></span>
+          <span class="auditor kpmg">KPMG US (annual audit, FY2025)</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Tether Group <span class="sub">Recurring reserve disclosure</span></span>
+          <span class="auditor bdo">BDO Italia (quarterly attestation)</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Prior auditor relationship <span class="sub">2017–2018</span></span>
+          <span class="auditor none">Friedman LLP (relationship dissolved, no audit completed)</span>
+        </div>
+      </div>
+      <p class="note">In August 2026, KPMG US completed Tether's first full independent financial-statement audit, covering fiscal year 2025 under US GAAP and AICPA standards, and issued an unqualified ("clean") opinion — including a physical count of Tether's gold bar holdings. PwC assisted with internal-systems preparation ahead of the engagement. Tether continues to publish quarterly reserve attestations — agreed-upon-procedures reports under ISAE 3000 (Revised) — prepared by BDO Italia, a practice in place since 2021 as part of the company's settlements with US regulators. Tether has not published the full KPMG-audited financial statements themselves, only headline figures.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">Tether's leadership overlaps significantly with that of its affiliate, the Bitfinex exchange, reflecting the two companies' shared corporate origins.</p>
+      <div class="people-grid">
+        <div class="person">
+          <div class="name">Paolo Ardoino</div>
+          <div class="role">Chief Executive Officer</div>
+          <p>Joined as CTO in 2017 and was promoted to CEO in October 2023, succeeding Jean-Louis van der Velde; the public face of the company's technology, AI and Bitcoin strategy.</p>
+        </div>
+        <div class="person">
+          <div class="name">Giancarlo Devasini</div>
+          <div class="role">Chairman</div>
+          <p>Tether's co-founder and long-time CFO, elevated to Chairman in March 2025; reported to be the company's single largest shareholder.</p>
+        </div>
+        <div class="person">
+          <div class="name">Simon McWilliams</div>
+          <div class="role">Chief Financial Officer</div>
+          <p>Appointed CFO in March 2025 as Devasini moved to the Chairman role; oversaw the engagement that led to Tether's first full KPMG audit.</p>
+        </div>
+        <div class="person">
+          <div class="name">Claudia Lagorio</div>
+          <div class="role">Chief Operating Officer</div>
+          <p>Leads day-to-day operations across the group.</p>
+        </div>
+        <div class="person">
+          <div class="name">Stuart Hoegner</div>
+          <div class="role">General Counsel</div>
+          <p>Long-serving legal chief; has represented the company through its major regulatory settlements.</p>
+        </div>
+        <div class="person">
+          <div class="name">Bo Hines</div>
+          <div class="role">Chief Executive Officer, Tether U.S.</div>
+          <p>Former head of the White House's Presidential Council of Advisers for Digital Assets, appointed in September 2025 to lead Tether's new US business, headquartered in Charlotte, North Carolina.</p>
+        </div>
+        <div class="person">
+          <div class="name">Jean-Louis van der Velde</div>
+          <div class="role">Former Group CEO; CEO of Bitfinex</div>
+          <p>Led Tether until October 2023; continues to lead affiliate exchange Bitfinex under parent company iFinex.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">Tether has no corporate presence in Malta — no local subsidiary, licence or office has been identified in the sources reviewed. Its relationship with Malta today is regulatory and indirect, running through the EU's MiCA framework, for which Malta's MFSA is a supervisor of crypto-asset service providers.</p>
+      <div class="panel">
+        <h3>An indirect, regulation-driven relationship</h3>
+        <ul>
+          <li>Tether has never sought registration, an e-money-token authorisation, or any other licence from the Malta Financial Services Authority.</li>
+          <li>Because MiCA applies uniformly across the EU, MFSA-supervised crypto-asset service providers — Malta has licensed globally significant names such as OKX, Crypto.com and Bitpanda — are bound by the same July 2026 MiCA deadline that saw USDT delisted from other EU exchanges, since Tether never obtained the required e-money-token authorisation.</li>
+          <li>Malta's long-standing online gaming sector (MGA-licensed operators) has historically been among the more active users of USDT for crypto-denominated deposits and payouts; the EU-wide MiCA delisting from regulated exchanges narrows, though does not eliminate, that channel, since self-custodied USDT remains legal to hold and transfer.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">In short, Malta's relevance to Tether is as one of 27 EU jurisdictions enforcing the same stablecoin rulebook, rather than as a place where Tether itself is established, licensed, or headquartered. Any Malta-specific impact would be felt primarily through MFSA-regulated exchanges and Malta-based gaming or fintech businesses that have used USDT, rather than through a direct relationship between Tether and the Maltese regulator.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <div class="panel grey">
+        <h3>No disclosed relationship identified — but a notable industry contrast</h3>
+        <p>The public sources reviewed for this profile do not show Deloitte acting as Tether's auditor, attestor or disclosed advisor at any point in the company's history. Tether's assurance work has instead been carried out by BDO Italia (quarterly attestations since 2021) and, since August 2026, KPMG US (its first full financial-statement audit).</p>
+        <ul>
+          <li>Deloitte's most visible role in the stablecoin sector is as monthly attestor for Circle, the issuer of USDC — Tether's principal competitor — rather than for Tether itself.</li>
+          <li>Tether's own auditor history includes Friedman LLP, whose relationship with the company dissolved in 2018 without a completed audit — again, not a Deloitte engagement.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">For a reader tracking the Big Four's exposure to stablecoin issuers, the more relevant Deloitte relationship in this market sits with Circle/USDC, not with Tether. If Deloitte has any non-public advisory relationship with Tether, it is not disclosed in any source reviewed here.</p>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li>Tether transparency page (reserve composition and quarterly attestation reports, BDO Italia).</li>
+        <li>Wikipedia, "Tether Limited" (corporate history, ownership, leadership, headquarters relocation).</li>
+        <li>CNBC, "Tether reveals new stablecoin, appoints Bo Hines to lead U.S. business" (12 Sep 2025).</li>
+        <li>BigGo Finance / Cryptonomist reporting, "Tether Lands First Full Audit as KPMG Gives 2025 Financials a Clean Bill of Health" (Aug 2026).</li>
+        <li>Shattered.io, "Tether KPMG Audit: $6.8B Confirmed, Buffer Halves 2026" (Sep 2026).</li>
+        <li>News.Bitcoin.com, "Tether Engages Big Four for First Full Audit" (24 Mar 2026).</li>
+        <li>CoinLaw / BeInCrypto / LeoDex reporting on the July 2026 MiCA deadline and USDT's delisting from EU exchanges (Coinbase, Binance, Kraken, Crypto.com, Revolut).</li>
+        <li>Investopedia, "What Is Tether (USDT)?" and IQ.wiki, "Tether (USDT)" (company structure, revenue sources, executive team).</li>
+        <li>Malta Financial Services Authority public materials on MiCA CASP authorisation and licensed entities.</li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes. Tether's reserve figures move quarter to quarter and its regulatory position (particularly in the EU and US) has been changing rapidly through 2026; figures and appointments reflect the most recent public disclosures found at the time of research and may have changed since. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

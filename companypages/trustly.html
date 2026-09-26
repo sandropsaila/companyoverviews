@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trustly — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  /* ---------- Sidebar ---------- */
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  /* Mobile top bar: hidden on desktop, replaces the sidebar on narrow screens */
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  /* ---------- Main ---------- */
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  /* card grid for services */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  /* tables */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  /* org / auditor structure */
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.ey{background:var(--teal-soft); color:var(--teal);}
+  .auditor.deloitte{background:var(--amber-soft); color:var(--amber);}
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .depth-1{padding-left:2.6rem;}
+  .depth-2{padding-left:4rem;}
+  /* people */
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  /* markets */
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  /* highlight callout panels for Malta / Deloitte */
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  /* ---------- Responsive ---------- */
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Trustly</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Trustly</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from public filings, investor releases and company registries. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Payments &amp; Fintech</div>
+      <h1>Trustly</h1>
+      <p class="tagline">A Stockholm-based open banking payments group operating a global "Pay by Bank" (account-to-account) platform, connecting merchants directly to consumers' online bank accounts.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2008</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">Stockholm, Sweden</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Privately held — Nordic Capital-led</div></div>
+        <div class="fact"><div class="label">Employees</div><div class="value">c. 900–1,000</div></div>
+        <div class="fact"><div class="label">Ultimate parent</div><div class="value">Trustly AB (publ)</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Trustly does</h2>
+      <p class="lede">Trustly builds account-to-account ("A2A") payment infrastructure that lets a consumer pay a merchant directly from their online bank account — no card, app download or account creation required. The group has grown through organic expansion and acquisition (PayWithMyBank in the US, Ecospend in the UK, SlimPay in continental Europe) into a platform spanning deposits, payouts, recurring billing and data-driven consumer recognition.</p>
+      <p>The corporate group is structured beneath <strong>Trustly AB (publ)</strong>, the Swedish top holding company, which owns <strong>Trustly Holding AB (publ)</strong> (the entity that issues public debt and consolidated financial statements) and, beneath it, the principal regulated operating company, <strong>Trustly Group AB</strong> — an authorised Swedish payment institution supervised by the Swedish Financial Supervisory Authority (Finansinspektionen). Nordic Capital has been the group's controlling investor since 2018, alongside institutional co-investors including BlackRock and Neuberger Berman.</p>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Trustly's product suite covers the full payment lifecycle for merchants, from taking a payment to recognising the same consumer on a repeat visit.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Pay by Bank (deposits)</h4>
+          <p>Instant account-to-account payment initiation at checkout, authenticated through the consumer's own online bank login.</p>
+        </div>
+        <div class="cell">
+          <h4>Payouts &amp; refunds</h4>
+          <p>Real-time disbursement of winnings, refunds and payroll-style payouts back to a consumer's bank account.</p>
+        </div>
+        <div class="cell">
+          <h4>Recurring payments</h4>
+          <p>Subscription and direct-debit style billing, built out through the 2023 combination with SlimPay, for utilities, insurance and subscription merchants.</p>
+        </div>
+        <div class="cell">
+          <h4>Trustly ID</h4>
+          <p>A biometric, bank-grade identity and login solution, launched to speed up onboarding for gaming and financial-services partners.</p>
+        </div>
+        <div class="cell">
+          <h4>Trustly Insights / Azura</h4>
+          <p>A proprietary data engine that recognises consumers across merchants and banks, used by merchants to lift conversion and lifetime value.</p>
+        </div>
+        <div class="cell">
+          <h4>Pay N Play &amp; Scan &amp; Pay</h4>
+          <p>Instant-onboarding deposit/withdrawal flows built for online casino operators, plus a cashless, QR-based funding flow for physical gaming machines in the US.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Trustly is a transaction-fee business: it earns primarily by taking a fee each time it moves money on a merchant's behalf, rather than through subscription software licences.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Core streams</h4>
+          <ul>
+            <li>Transaction fees on pay-ins (consumer deposits to merchants)</li>
+            <li>Transaction fees on payouts and refunds</li>
+            <li>Recurring-payment / subscription-billing fees (via the SlimPay platform)</li>
+            <li>Data and insight services sold to merchants (Trustly Insights)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Reporting basis</h4>
+          <ul>
+            <li>Revenue is recognised per completed transaction — each pay-in or pay-out is treated as a separate performance obligation</li>
+            <li>Reported externally by two operating segments: <strong>Europe</strong> and <strong>Americas</strong></li>
+            <li>Volume is tracked via Total Payment Value ("TPV") — the value of transactions processed, which drives fee revenue</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">In FY2025, Trustly Holding Group revenue split was roughly SEK 1,357.9m from the Americas segment and SEK 1,069.8m from Europe.</p>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Trustly reports its business across two operating segments — Europe and the Americas — connecting merchants to consumers through roughly 12,000 partner banks in more than 30 countries.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Europe</h4>
+          <ul>
+            <li>Sweden (home market, licensed by Finansinspektionen)</li>
+            <li>United Kingdom (via Trustly UK Ltd. and the Ecospend acquisition; FCA-regulated)</li>
+            <li>France (via SlimPay; ACPR-regulated)</li>
+            <li>Germany, Netherlands, Spain, Poland, Denmark, Norway, Finland</li>
+            <li>Malta (regional office and licensing entity — see dedicated section)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Americas &amp; other</h4>
+          <ul>
+            <li>United States (entered 2019 via the PayWithMyBank acquisition; state-regulated; roughly half of group revenue)</li>
+            <li>Canada</li>
+            <li>Brazil (software/technology entity)</li>
+            <li>Australia (Trustly Australia Pty Ltd.)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">e-commerce</span>
+        <span class="tag">iGaming / online gambling</span>
+        <span class="tag">financial services</span>
+        <span class="tag">travel</span>
+        <span class="tag">subscriptions &amp; utilities</span>
+        <span class="tag">public sector (UK HMRC)</span>
+      </div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <p class="lede">Figures below are the audited/reported consolidated results of <strong>Trustly Holding AB (publ)</strong>, the group's consolidating and bond-issuing entity, as published on Trustly's investor relations site.</p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>SEK million</th>
+            <th class="num">FY2024</th>
+            <th class="num">FY2025</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Revenue</td><td class="num">2,916.9</td><td class="num">2,427.7</td></tr>
+          <tr><td>Adjusted EBITDA</td><td class="num">650.2</td><td class="num">387.2</td></tr>
+          <tr><td>Adjusted EBITDA margin</td><td class="num">22.3%</td><td class="num">16.0%</td></tr>
+          <tr><td>Loss for the period</td><td class="num">(401.0)</td><td class="num">(534.3)</td></tr>
+          <tr><td>Total Payment Value (TPV)</td><td class="num">900,578</td><td class="num">1,058,966</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">FY2025 was the first year the group surpassed SEK 1 trillion (c. US$100bn) in Total Payment Value. The year-on-year revenue decline was attributed by management to protracted renegotiations with two large merchants late in 2024, both since re-engaged. In October 2025 the group issued a EUR 375 million corporate bond, refinancing its prior bank facility. In earlier periods, Trustly's own releases reported growth in USD terms — e.g. FY2023 net revenue of roughly US$265 million and FY2024 net revenue of roughly US$239 million — figures which are not directly comparable to the SEK, IFRS-consolidated numbers above due to differing currency and revenue-recognition bases.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">Trustly's corporate group does not use a single audit firm throughout its structure. Public filings with the Swedish Companies Registration Office (Bolagsverket) show two Big Four firms appointed at different tiers of the group.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Cidron MaaS S.à r.l. <span class="sub">Luxembourg — highest controlling parent (Nordic Capital vehicle, c. 61% holding)</span></span>
+          <span class="auditor none">n/a</span>
+        </div>
+        <div class="org-row depth-1">
+          <span class="indent">└─</span>
+          <span class="entity">Trustly AB (publ) <span class="sub">Sweden — ultimate Swedish holding company</span></span>
+          <span class="auditor deloitte">Deloitte AB</span>
+        </div>
+        <div class="org-row depth-2">
+          <span class="indent">└─</span>
+          <span class="entity">Trustly Holding AB (publ) <span class="sub">Sweden — consolidating &amp; bond-issuing entity</span></span>
+          <span class="auditor ey">Ernst &amp; Young Aktiebolag</span>
+        </div>
+        <div class="org-row depth-2">
+          <span class="indent">└─</span>
+          <span class="entity">Trustly Group AB <span class="sub">Sweden — licensed payment institution, main operating company</span></span>
+          <span class="auditor ey">Ernst &amp; Young Aktiebolag</span>
+        </div>
+      </div>
+      <p class="note">Auditor of record for Trustly AB (publ): Deloitte AB, with Patrick Olof Honeth as signing (huvudansvarig) auditor. Auditor of record for Trustly Holding AB (publ) and Trustly Group AB: Ernst &amp; Young Aktiebolag, with Daniel Eriksson as signing auditor. National subsidiaries have historically used local firms — for example, Trustly Denmark ApS's 2021 accounts were compiled by PricewaterhouseCoopers under a Danish compilation (non-audit) engagement. Source: Bolagsverket data as reproduced by allabolag.se, bolagsfakta.se and ratsit.se.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">Trustly's executive team was substantially refreshed through 2024–2026 as the group unified its European and American businesses into a single global operating model.</p>
+      <div class="people-grid">
+        <div class="person">
+          <div class="name">Johan Tjärnberg</div>
+          <div class="role">Group Chief Executive Officer</div>
+          <p>Leads the group; also sits on the boards of Trustly AB (publ) and Trustly Holding AB (publ).</p>
+        </div>
+        <div class="person">
+          <div class="name">Adam Miller</div>
+          <div class="role">Group Chief Financial Officer</div>
+          <p>Appointed to drive the group's financing and growth strategy, including its 2025 bond issuance.</p>
+        </div>
+        <div class="person">
+          <div class="name">Randy Kern</div>
+          <div class="role">Group Chief Technology Officer</div>
+          <p>Joined April 2026 from Marqeta; previously CTO at Salesforce and an advisor to Microsoft's Windows Azure leadership.</p>
+        </div>
+        <div class="person">
+          <div class="name">Chantelle Zemba</div>
+          <div class="role">Group Chief Legal Officer</div>
+          <p>Joined April 2026; previously led the legal team at Deliveroo through its Series A–H fundraising and 2021 IPO.</p>
+        </div>
+        <div class="person">
+          <div class="name">Oscar Berglund</div>
+          <div class="role">Chief Business Development Officer &amp; Board Director</div>
+          <p>Former Trustly CEO; a director of Trustly Holding AB (publ) and related group entities.</p>
+        </div>
+        <div class="person">
+          <div class="name">Morten Hübbe</div>
+          <div class="role">Chairman of the Board</div>
+          <p>Chairs the boards of Trustly AB (publ) and Trustly Holding AB (publ); also chief executive of insurer Tryg A/S.</p>
+        </div>
+        <div class="person">
+          <div class="name">Georg Kaltenbrunner</div>
+          <div class="role">Group Chief Risk &amp; Compliance Officer</div>
+          <p>Joined 2024 from Luminor Group; previously group chief risk officer roles at Nordea and a partner at McKinsey &amp; Company.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">Malta is one of Trustly's established European operating locations, anchored by two locally registered subsidiaries and a long-standing office in Sliema.</p>
+      <div class="panel">
+        <h3>Corporate presence</h3>
+        <ul>
+          <li><strong>Trustly Malta Holding Limited</strong> (registration no. C 49649), incorporated in 2010, held by Trustly Group AB.</li>
+          <li><strong>Trustly Malta Ltd.</strong> (registration no. C 49689), a related Malta-registered operating entity.</li>
+          <li>Office historically located at the Tagliaferro Business Centre, Sliema — one of Trustly's listed international locations alongside its London office.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">Malta's significance to Trustly is closely tied to the island's position as a global hub for online gaming: the Malta Gaming Authority (MGA) licenses a large share of the world's online casino and betting operators, and Trustly's iGaming-focused products — including Pay N Play instant deposit/withdrawal and Trustly ID — are widely used by MGA-licensed operators to fund play and verify players. Trustly itself is not an MGA licensee; its payment institution licences are held in Sweden (Finansinspektionen), the UK (FCA) and France (ACPR), with its Maltese entities providing local corporate presence for the group's business with Malta-based gaming operators rather than an independent gaming licence.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <div class="panel amber">
+        <h3>Statutory auditor of the ultimate parent</h3>
+        <ul>
+          <li><strong>Deloitte AB</strong> is registered with Bolagsverket (the Swedish Companies Registration Office) as the statutory auditor of <strong>Trustly AB (publ)</strong>, the group's top Swedish holding company.</li>
+          <li>The signing (huvudansvarig) auditor on that engagement is <strong>Patrick Olof Honeth</strong>.</li>
+          <li>This sits alongside — rather than replaces — Ernst &amp; Young's role auditing the group's main reporting and operating subsidiaries (see Auditors section).</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">Beyond this statutory audit appointment at the parent-company level, the public sources reviewed for this profile did not identify a distinct Deloitte Malta engagement with Trustly's Maltese entities, nor any other disclosed advisory relationship between Deloitte and Trustly. Any such engagement, if it exists, would sit outside the scope of what is publicly disclosed in company registries and investor materials.</p>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li>Trustly Holding AB (publ), <em>Unaudited Condensed Consolidated Financial Statements for the quarter ended 31 December 2025</em>, published via Nasdaq/MFN, 26 Feb 2026.</li>
+        <li>Trustly press releases: "Trustly Reports Strong 2024 Financial Results" (30 Jun 2025); "Trustly's 2022 financial results…" (28 Jun 2023); "Trustly appoints Group CTO and CLO…" (15 Apr 2026).</li>
+        <li>Bolagsverket company data as reproduced by allabolag.se, bolagsfakta.se and ratsit.se for Trustly AB (publ), Trustly Holding AB (publ) and Trustly Group AB (auditors, directors, financial summaries).</li>
+        <li>Companies House (UK) filing for Trustly Group AB, overseas company FC038845.</li>
+        <li>Malta company records (databasesets.com, northdata.com) for Trustly Malta Holding Limited (C 49649) and Trustly Malta Ltd. (C 49689).</li>
+        <li>Nordic Capital, "Trustly" portfolio page.</li>
+        <li>LinkedIn company page and Bloomberg company profile for Trustly Group AB.</li>
+        <li>FinTech Futures, "Trustly expands leadership team in preparation for European expansion" (15 Feb 2024).</li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes; figures and appointments reflect the most recent public disclosures found at the time of research and may have changed since. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

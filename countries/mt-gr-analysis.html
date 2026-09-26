@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MT-GR analysis — Malta &amp; Greece crypto and payments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.deloitte{background:var(--amber-soft); color:var(--amber);}
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .table-wrap table{min-width:560px;}
+
+  @media (max-width: 640px){
+    section, header.hero{scroll-margin-top:64px;}
+    .table-wrap tr:last-child td{border-bottom:none;}
+    .table-wrap{overflow:visible;}
+    .table-wrap table{min-width:0;}
+    .table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap td{display:block;width:100%;}
+    .table-wrap tr:first-child{display:none;}
+    .table-wrap tr{background:var(--panel);border:1px solid var(--line);margin-bottom:.7rem;padding:.35rem 0;}
+    .table-wrap td{white-space:normal;border-bottom:none;padding:.35rem .9rem;display:grid;grid-template-columns:7.5rem 1fr;gap:.6rem;}
+    .table-wrap td::before{content:attr(data-label);font-size:.74rem;font-weight:600;color:var(--ink-soft);}
+    .table-wrap td:empty{display:none;}
+    .org-row .entity .sub{font-size:.8rem;}
+    .panel ul, .market-cols ul{padding-left:1rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">MT-GR analysis</div>
+    <div><a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button></div>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#regulation">Regulatory landscape</a>
+    <a href="#mt-crypto">Malta — crypto</a>
+    <a href="#mt-payments">Malta — payments</a>
+    <a href="#gr-crypto">Greece — crypto</a>
+    <a href="#gr-payments">Greece — payments</a>
+    <a href="#common">Common companies</a>
+    <a href="#deloitte">Relevance to Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">MT-GR analysis</div>
+    <div class="brand-sub">Country analysis</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#regulation">Regulatory landscape</a>
+    <a href="#mt-crypto">Malta — crypto</a>
+    <a href="#mt-payments">Malta — payments</a>
+    <a href="#gr-crypto">Greece — crypto</a>
+    <a href="#gr-payments">Greece — payments</a>
+    <a href="#common">Common companies</a>
+    <a href="#deloitte">Relevance to Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Position as at 26 September 2026. Compiled from HCMC-related announcements, practice guides, EMI registers, DIAS participant list and press coverage.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Country analysis — Crypto &amp; Payments</div>
+      <h1>Malta &amp; Greece</h1>
+      <p class="tagline">Crypto-asset service providers and payment / e-money institutions based in Malta and Greece, the groups present in both, and where Deloitte fits.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Malta MiCA CASPs</div><div class="value">22</div></div>
+        <div class="fact"><div class="label">Greece MiCA CASPs</div><div class="value">2 (Jul 2026)</div></div>
+        <div class="fact"><div class="label">Malta EMIs operating</div><div class="value">37</div></div>
+        <div class="fact"><div class="label">Greece EMIs operating</div><div class="value">5</div></div>
+        <div class="fact"><div class="label">Common groups identified</div><div class="value">3</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>A late MiCA starter next to an established hub</h2>
+      <p class="lede">Greece granted its first MiCA crypto licences only in July 2026 — to two small domestic firms — while Malta already hosts 22 CASPs including several of the world's largest exchanges.</p>
+      <p>On 22 July 2026 the Hellenic Capital Market Commission (HCMC) authorised Xenios Blockchain Group and Capital Wallet Greece. The Greek process drew international attention when Binance withdrew its Greek MiCA application on 24 June 2026; the Wall Street Journal later reported, citing unnamed sources, that ECB President Christine Lagarde had pressed the Greek government against approval. On payments, Greece is dominated by Viva Payment Services, the Bank of Greece's first licensed EMI.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">22 / 2</div><div class="l">MiCA CASPs, MT / GR</div></div>
+        <div class="stat"><div class="n">22 Jul 2026</div><div class="l">First Greek CASP licences</div></div>
+        <div class="stat"><div class="n">37 / 5</div><div class="l">EMIs operating, MT / GR</div></div>
+        <div class="stat"><div class="n">€527m</div><div class="l">Viva Payment Services total assets (2023)</div></div>
+      </div>
+    </section>
+
+    <section id="regulation">
+      <div class="section-label">Regulatory landscape</div>
+      <h2>Who supervises what</h2>
+      <div class="market-cols">
+        <div>
+          <h4>Malta</h4>
+          <ul>
+            <li>MFSA licenses CASPs, EMIs and PIs; FIAU supervises AML.</li>
+            <li>VFA Act (2018) replaced by MiCA; transitional period ran to 1 July 2026.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Greece</h4>
+          <ul>
+            <li>HCMC authorises and supervises CASPs; the Bank of Greece supervises ART/EMT issuers, EMIs and PIs.</li>
+            <li>Law 5193/2025 (11 April 2025) implements MiCA and adds civil and criminal sanctions for unlicensed activity.</li>
+            <li>Pre-MiCA: VASPs registered with the HCMC under AML Law 4557/2018 (Decision 5/898/2020). The HCMC reported only a handful of registrations (five in 2023).</li>
+            <li>Transition end: sources differ — some cite 30 December 2025, others the EU-wide 1 July 2026 backstop.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="mt-crypto">
+      <div class="section-label">Malta — crypto</div>
+      <h2>MFSA-authorised CASPs (MiCA)</h2>
+      <p class="lede">Key Malta entries; full list on the <a href="mt-it-analysis.html#mt-crypto">MT-IT page</a>.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Legal entity</th><th>Brand / group</th><th>Authorised</th></tr>
+        <tr><td data-label="Legal entity">OKX Europe Limited</td><td data-label="Brand / group"><a href="../companypages/okx.html">OKX</a></td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">Foris DAX MT Limited</td><td data-label="Brand / group"><a href="../companypages/crypto-com.html">Crypto.com</a></td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">BP23 CA Limited</td><td data-label="Brand / group">Bitpanda</td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">Gemini Intergalactic EU Ltd</td><td data-label="Brand / group">Gemini</td><td data-label="Authorised">21 Aug 2025</td></tr>
+        <tr><td data-label="Legal entity">Socios Europe Services Limited</td><td data-label="Brand / group">Socios.com</td><td data-label="Authorised">10 Sep 2025</td></tr>
+        <tr><td data-label="Legal entity">Gate Technology Limited</td><td data-label="Brand / group"><a href="../companypages/gate.html">Gate</a></td><td data-label="Authorised">29 Sep 2025</td></tr>
+        <tr><td data-label="Legal entity">Blockchain.com Operations (Malta) Limited</td><td data-label="Brand / group">Blockchain.com</td><td data-label="Authorised">22 Oct 2025</td></tr>
+        <tr><td data-label="Legal entity">OP Digital Services Limited</td><td data-label="Brand / group">OpenPayd</td><td data-label="Authorised">23 Jun 2026</td></tr>
+        <tr><td data-label="Legal entity">System Pay Services (Malta) Limited</td><td data-label="Brand / group">BVNK</td><td data-label="Authorised">n/a</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section id="mt-payments">
+      <div class="section-label">Malta — payments</div>
+      <h2>MFSA-licensed EMIs and payment institutions</h2>
+      <div class="grid">
+        <div class="cell"><h4>OpenPayd FS Malta</h4><p>EMI since May 2019; passported to all 30 EEA states.</p></div>
+        <div class="cell"><h4><a href="../companypages/paytently.html">Paytently</a></h4><p>MFSA Payment Institution (Oct 2025).</p></div>
+        <div class="cell"><h4>Crypto-exchange PIs</h4><p><a href="../companypages/okx.html">OKX Europe</a> and <a href="../companypages/gate.html">Gate Technology</a> (PIs, Feb 2026).</p></div>
+        <div class="cell"><h4>Group EU e-money hubs</h4><p>Foris MT (Crypto.com), BP23 PAY (Bitpanda), eToro Money Malta, Nium FS Malta, DLocal.</p></div>
+      </div>
+    </section>
+
+    <section id="gr-crypto">
+      <div class="section-label">Greece — crypto</div>
+      <h2>HCMC-authorised CASPs (MiCA)</h2>
+      <p class="lede">The two authorisations published as of the latest available reporting.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Legal entity</th><th>Authorised</th><th>Services / notes</th></tr>
+        <tr><td data-label="Legal entity">Capital Wallet Greece Single-Member S.A.</td><td data-label="Authorised">22 Jul 2026</td><td data-label="Services / notes">Custody, crypto–fiat and crypto–crypto exchange, execution, reception &amp; transmission of orders, transfers. CEO Evangelos Tanampasidis; plans phased EU passporting from Athens.</td></tr>
+        <tr><td data-label="Legal entity">Xenios Blockchain Group A.E.</td><td data-label="Authorised">22 Jul 2026</td><td data-label="Services / notes">Reception and transmission of orders only.</td></tr>
+      </table>
+      </div>
+      <div class="panel grey">
+        <h3>Binance's withdrawn application</h3>
+        <ul>
+          <li>Binance applied to the HCMC for MiCA authorisation and said it believed the review was complete; it withdrew the application on 24 June 2026 and said it would seek authorisation in another EU state.</li>
+          <li>The WSJ (18 Sep 2026) reported that ECB President Lagarde pressed Prime Minister Mitsotakis against approval, citing Binance's 2023 US guilty plea and dollar-stablecoin risks. Not confirmed by the ECB or HCMC; under MiCA the licensing decision rests with the HCMC.</li>
+        </ul>
+      </div>
+      <p class="note">Other exchanges previously served Greece through HCMC VASP registrations — notably Crypto.com and Gemini (see Common companies).</p>
+    </section>
+
+    <section id="gr-payments">
+      <div class="section-label">Greece — payments</div>
+      <h2>Bank of Greece-licensed payment players</h2>
+      <p class="lede">Five EMIs operate in Greece; one, Viva, dominates and passports across Europe.</p>
+      <div class="grid">
+        <div class="cell"><h4>Viva Payment Services S.A.</h4><p>EMI licence no. 1 (23 Jul 2018). Card processing, merchant IBAN accounts and terminals; branches across the EU per the DIAS participant list. 2023: total assets €527m, net loss €24.5m.</p></div>
+        <div class="cell"><h4>Cosmote Payments</h4><p>EMI of the Cosmote / OTE telecoms group; largest domestic EMI by assets among the smaller four (≈ €57m).</p></div>
+        <div class="cell"><h4>Everypay</h4><p>Payment services; ≈ €38m total assets.</p></div>
+        <div class="cell"><h4>Tora Wallet</h4><p>E-wallet EMI; ≈ €26m total assets.</p></div>
+        <div class="cell"><h4>Otro Pay</h4><p>Bill-payment EMI authorised 21 Mar 2024; passported to 6 EEA states.</p></div>
+        <div class="cell"><h4>Others in DIAS</h4><p>Snappi (neobank), Vivabank, Worldbridge Payment Institution (Western Union agent).</p></div>
+      </div>
+    </section>
+
+    <section id="common">
+      <div class="section-label">Common companies</div>
+      <h2>Groups present in both countries</h2>
+      <p class="lede">Three groups have a licensed or registered presence in both Malta and Greece.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Group</th><th>Malta</th><th>Greece</th></tr>
+        <tr><td data-label="Group"><strong><a href="../companypages/crypto-com.html">Crypto.com</a></strong></td><td data-label="Malta">Foris DAX MT Ltd (CASP) + Foris MT Ltd (EMI)</td><td data-label="Greece">HCMC registration (2022); Greece also in its MiCA passport list</td></tr>
+        <tr><td data-label="Group"><strong>Gemini</strong></td><td data-label="Malta">Gemini Intergalactic EU Ltd (CASP, Aug 2025)</td><td data-label="Greece">HCMC registration (late 2022), entering Greece and Bulgaria</td></tr>
+        <tr><td data-label="Group"><strong>Viva</strong></td><td data-label="Malta">"Viva Payment Services Malta" listed among DIAS payment participants</td><td data-label="Greece">Viva Payment Services S.A. — Bank of Greece EMI no. 1</td></tr>
+      </table>
+      </div>
+      <div class="panel grey">
+        <h3>Passport-only overlap</h3>
+        <ul>
+          <li><strong><a href="../companypages/okx.html">OKX</a>, <a href="../companypages/gate.html">Gate</a></strong> and other Malta CASPs can serve Greece by MiCA passport; no Greek entity identified.</li>
+          <li><strong>Greek CASPs into Malta:</strong> Capital Wallet Greece has announced a phased EU expansion; no Malta passport confirmed yet.</li>
+        </ul>
+      </div>
+      <div class="panel amber">
+        <h3>What this tells us</h3>
+        <ul>
+          <li>This is the first country pair where the overlap runs <em>from</em> the other country <em>into</em> Malta: Viva, a Greek EMI, appears with a Malta presence.</li>
+          <li>For crypto, overlap mirrors Italy and the Netherlands — Malta-licensed exchanges that had also registered locally before MiCA.</li>
+          <li>Viva's Malta listing comes from a payment-system participant list; confirm the branch or passport status on the MFSA register.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Relevance to Deloitte</div>
+      <h2>Where Deloitte fits</h2>
+      <p class="lede">No Deloitte audit or assurance relationship with the Greek CASPs or EMIs listed was found in public sources; auditors are not asserted.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0"><span class="indent">GR</span><span class="entity">Capital Wallet Greece, Xenios, Viva, Cosmote Payments, Everypay, Tora Wallet, Otro Pay<span class="sub">Auditor not verified — available from GEMI (Greek business registry) filings</span></span><span class="auditor none">Not verified</span></div>
+        <div class="org-row depth-0"><span class="indent">EU</span><span class="entity"><a href="../companypages/circle.html">Circle (USDC / EURC)</a><span class="sub">Deloitte-audited; relevant to the ECB's reported dollar-stablecoin concerns raised in the Binance case</span></span><span class="auditor deloitte">Deloitte</span></div>
+        <div class="org-row depth-0"><span class="indent">MT</span><span class="entity">Crypto.com, Gemini, OKX, Gate<span class="sub">No Deloitte relationship identified — see company profiles</span></span><span class="auditor none">None found</span></div>
+      </div>
+      <div class="panel amber">
+        <h3>Opportunity lens (analysis, not sourced fact)</h3>
+        <ul>
+          <li><strong>First-year Greek CASPs:</strong> Capital Wallet Greece and Xenios face their first MiCA statutory audits, safeguarding reviews and DORA ICT assessments.</li>
+          <li><strong>Pipeline:</strong> with only two Greek authorisations, further applicants — and firms relocating from Greece after the Binance episode — are likely to need readiness and gap-assessment support.</li>
+          <li><strong>Viva:</strong> a large, pan-European EMI with a Malta presence suits coordinated Deloitte Greece – Deloitte Malta work on safeguarding, SOC reporting and PSD3 readiness, subject to independence checks.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-label">Sources</div>
+      <h2>Sources</h2>
+      <ul style="color:var(--ink-soft);font-size:.9rem;padding-left:1.2rem;">
+        <li>Athens Times (22 Jul 2026) — HCMC grants first two crypto licences</li>
+        <li>FXStreet / Investing.com — Capital Wallet Greece CASP authorisation release (27 Jul 2026)</li>
+        <li>The Cryptonomist (18 Sep 2026), citing WSJ — Binance Greek MiCA application and withdrawal</li>
+        <li>Copla; Scorechain — MiCA in Greece and Law 5193/2025</li>
+        <li>Legal 500 — Greece: Blockchain (HCMC VASP register, 2023 registrations)</li>
+        <li>BestBrokers — HCMC-registered exchanges (Crypto.com, Gemini)</li>
+        <li>Crypto.com company news (19 Jul 2022) — Greek HCMC registration</li>
+        <li>TheBanks.eu — List of EMIs in Greece; Viva Payment Services and Otro Pay profiles</li>
+        <li>DIAS — Payment Service Providers participant list (Jul 2025)</li>
+        <li>Malta data as cited on the MT-IT and MT-NL pages</li>
+      </ul>
+      <p class="note">Counts and entity lists move weekly. The ESMA interim MiCA register, HCMC, Bank of Greece and MFSA registers are the authoritative references.</p>
+    </section>
+  </main>
+</div>
+<script>
+  const links = document.querySelectorAll('nav.toc a[href^="#"]');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

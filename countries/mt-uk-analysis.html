@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MT-UK analysis — Malta &amp; United Kingdom crypto and payments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.deloitte{background:var(--amber-soft); color:var(--amber);}
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .table-wrap table{min-width:560px;}
+
+  @media (max-width: 640px){
+    section, header.hero{scroll-margin-top:64px;}
+    .table-wrap tr:last-child td{border-bottom:none;}
+    .table-wrap{overflow:visible;}
+    .table-wrap table{min-width:0;}
+    .table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap td{display:block;width:100%;}
+    .table-wrap tr:first-child{display:none;}
+    .table-wrap tr{background:var(--panel);border:1px solid var(--line);margin-bottom:.7rem;padding:.35rem 0;}
+    .table-wrap td{white-space:normal;border-bottom:none;padding:.35rem .9rem;display:grid;grid-template-columns:7.5rem 1fr;gap:.6rem;}
+    .table-wrap td::before{content:attr(data-label);font-size:.74rem;font-weight:600;color:var(--ink-soft);}
+    .table-wrap td:empty{display:none;}
+    .org-row .entity .sub{font-size:.8rem;}
+    .panel ul, .market-cols ul{padding-left:1rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">MT-UK analysis</div>
+    <div><a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button></div>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#regulation">Regulatory landscape</a>
+    <a href="#mt-crypto">Malta — crypto</a>
+    <a href="#mt-payments">Malta — payments</a>
+    <a href="#uk-crypto">UK — crypto</a>
+    <a href="#uk-payments">UK — payments</a>
+    <a href="#common">Common companies</a>
+    <a href="#deloitte">Relevance to Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">MT-UK analysis</div>
+    <div class="brand-sub">Country analysis</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#regulation">Regulatory landscape</a>
+    <a href="#mt-crypto">Malta — crypto</a>
+    <a href="#mt-payments">Malta — payments</a>
+    <a href="#uk-crypto">UK — crypto</a>
+    <a href="#uk-payments">UK — payments</a>
+    <a href="#common">Common companies</a>
+    <a href="#deloitte">Relevance to Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Position as at 26 September 2026. Compiled from the FCA register (EMI extract), FCA-register trackers, company legal pages and press coverage.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Country analysis — Crypto &amp; Payments</div>
+      <h1>Malta &amp; the United Kingdom</h1>
+      <p class="tagline">Crypto and payment firms based in Malta and the UK, the groups that run licensed entities in both, and where Deloitte fits — on the eve of the UK's new crypto authorisation regime.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Malta MiCA CASPs</div><div class="value">22</div></div>
+        <div class="fact"><div class="label">UK FCA crypto register</div><div class="value">≈ 45+ firms</div></div>
+        <div class="fact"><div class="label">UK crypto gateway opens</div><div class="value">30 Sep 2026</div></div>
+        <div class="fact"><div class="label">UK regime live</div><div class="value">25 Oct 2027</div></div>
+        <div class="fact"><div class="label">Common groups (own entity in both)</div><div class="value">7 + 1 to confirm</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>Two regimes, no passport</h2>
+      <p class="lede">The UK sits outside MiCA, so a Malta licence gives no access to UK clients and vice versa. Groups that want both markets must hold separate licensed entities — which makes the overlap here unusually concrete.</p>
+      <p>UK crypto firms are today only <em>registered</em> with the FCA for anti-money-laundering purposes; the FCA has approved only a small minority of applicants since 2020. That changes now: the FCA's authorisation gateway opens on 30 September 2026 and closes on 28 February 2027, and the new FSMA regime starts on 25 October 2027. Existing registrations do not carry over. On payments, London remains a hub for EMIs, and several Malta-licensed groups — OpenPayd, BVNK, Nium — run their UK and EU businesses side by side from the two jurisdictions.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">368 / 50</div><div class="l">FCA crypto applications / approvals, 2020–Mar 2025</div></div>
+        <div class="stat"><div class="n">236 days</div><div class="l">median FCA crypto registration time, Q4 2025/26</div></div>
+        <div class="stat"><div class="n">7</div><div class="l">groups with licensed entities in both</div></div>
+        <div class="stat"><div class="n">3</div><div class="l">Malta exchanges without UK registration (OKX, Gate, Gemini after exit)</div></div>
+      </div>
+    </section>
+
+    <section id="regulation">
+      <div class="section-label">Regulatory landscape</div>
+      <h2>Who supervises what</h2>
+      <div class="market-cols">
+        <div>
+          <h4>Malta</h4>
+          <ul>
+            <li>MFSA licenses CASPs (MiCA), EMIs and PIs; FIAU supervises AML.</li>
+            <li>MiCA licence passports across the EEA — but not into the UK.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>United Kingdom</h4>
+          <ul>
+            <li>FCA: crypto registration under the Money Laundering Regulations 2017 (AML only); EMIs under the EMRs 2011; PIs under the PSRs 2017.</li>
+            <li>SI 2026/102 (made 4 Feb 2026) brings cryptoassets into the FSMA perimeter; FCA final rules published 30 Jun 2026.</li>
+            <li>Gateway: 30 Sep 2026 – 28 Feb 2027. New regime in force 25 Oct 2027.</li>
+            <li>Retail ban on crypto derivatives remains; the crypto ETN ban was lifted in late 2025.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="mt-crypto">
+      <div class="section-label">Malta — crypto</div>
+      <h2>MFSA-authorised CASPs (MiCA)</h2>
+      <p class="lede">Key Malta entries; full list on the <a href="mt-it-analysis.html#mt-crypto">MT-IT page</a>.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Legal entity</th><th>Brand / group</th><th>Authorised</th></tr>
+        <tr><td data-label="Legal entity">OKX Europe Limited</td><td data-label="Brand / group"><a href="../companypages/okx.html">OKX</a></td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">Foris DAX MT Limited</td><td data-label="Brand / group"><a href="../companypages/crypto-com.html">Crypto.com</a></td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">BP23 CA Limited</td><td data-label="Brand / group">Bitpanda</td><td data-label="Authorised">27 Jan 2025</td></tr>
+        <tr><td data-label="Legal entity">Gemini Intergalactic EU Ltd</td><td data-label="Brand / group">Gemini</td><td data-label="Authorised">21 Aug 2025</td></tr>
+        <tr><td data-label="Legal entity">Gate Technology Limited</td><td data-label="Brand / group"><a href="../companypages/gate.html">Gate</a></td><td data-label="Authorised">29 Sep 2025</td></tr>
+        <tr><td data-label="Legal entity">Blockchain.com Operations (Malta) Limited</td><td data-label="Brand / group">Blockchain.com</td><td data-label="Authorised">22 Oct 2025</td></tr>
+        <tr><td data-label="Legal entity">OP Digital Services Limited</td><td data-label="Brand / group">OpenPayd</td><td data-label="Authorised">23 Jun 2026</td></tr>
+        <tr><td data-label="Legal entity">System Pay Services (Malta) Limited</td><td data-label="Brand / group">BVNK</td><td data-label="Authorised">n/a</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section id="mt-payments">
+      <div class="section-label">Malta — payments</div>
+      <h2>MFSA-licensed EMIs and payment institutions</h2>
+      <div class="grid">
+        <div class="cell"><h4>OpenPayd FS Malta</h4><p>EMI since May 2019; passported to all 30 EEA states.</p></div>
+        <div class="cell"><h4><a href="../companypages/paytently.html">Paytently</a></h4><p>MFSA Payment Institution (Oct 2025).</p></div>
+        <div class="cell"><h4>Crypto-exchange PIs</h4><p><a href="../companypages/okx.html">OKX Europe</a> and <a href="../companypages/gate.html">Gate Technology</a> (PIs, Feb 2026).</p></div>
+        <div class="cell"><h4>Group EU e-money hubs</h4><p>Foris MT (Crypto.com), BP23 PAY (Bitpanda), eToro Money Malta, Nium FS Malta, BVNK (System Pay Services Malta), DLocal.</p></div>
+      </div>
+    </section>
+
+    <section id="uk-crypto">
+      <div class="section-label">UK — crypto</div>
+      <h2>FCA-registered cryptoasset firms (selected)</h2>
+      <p class="lede">The register holds around 45+ firms. Selected entries relevant to this analysis:</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Legal entity</th><th>Brand</th><th>Notes</th></tr>
+        <tr><td data-label="Legal entity">Foris DAX UK Ltd</td><td data-label="Brand"><a href="../companypages/crypto-com.html">Crypto.com</a></td><td data-label="Notes">Registered Aug 2022 (FRN 988571); also UK EMI</td></tr>
+        <tr><td data-label="Legal entity">Bitpanda Broker UK Ltd</td><td data-label="Brand">Bitpanda</td><td data-label="Notes">FRN 925234</td></tr>
+        <tr><td data-label="Legal entity">BC Operations</td><td data-label="Brand">Blockchain.com</td><td data-label="Notes">Registered Feb 2026, four years after withdrawing its first application</td></tr>
+        <tr><td data-label="Legal entity">CB Payments Ltd</td><td data-label="Brand">Coinbase</td><td data-label="Notes">Registered</td></tr>
+        <tr><td data-label="Legal entity">Payward Ltd</td><td data-label="Brand">Kraken</td><td data-label="Notes">Registered; EMI since Mar 2025</td></tr>
+        <tr><td data-label="Legal entity">eToro (UK) Ltd</td><td data-label="Brand">eToro</td><td data-label="Notes">Fully authorised investment firm (FRN 583263)</td></tr>
+        <tr><td data-label="Legal entity">PayPal UK Ltd</td><td data-label="Brand">PayPal</td><td data-label="Notes">EMI (Oct 2023) and crypto registration</td></tr>
+        <tr><td data-label="Legal entity">Bitstamp / Uphold / CoinJar / Komainu / BNXA</td><td data-label="Brand">various</td><td data-label="Notes">Registered firms</td></tr>
+      </table>
+      </div>
+      <div class="panel grey">
+        <h3>Malta exchanges not on the UK register</h3>
+        <ul>
+          <li><strong><a href="../companypages/okx.html">OKX</a></strong> and <strong><a href="../companypages/gate.html">Gate</a></strong> — not FCA-registered.</li>
+          <li><strong>Gemini</strong> — was registered (Gemini Europe Services Ltd) but ceased UK operations and closed accounts in April 2026.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="uk-payments">
+      <div class="section-label">UK — payments</div>
+      <h2>FCA-authorised EMIs (selected)</h2>
+      <p class="lede">From the FCA's authorised EMI register extract.</p>
+      <div class="grid">
+        <div class="cell"><h4>Global platforms</h4><p>PayPal UK (Oct 2023), Klarna Financial Services UK (Jul 2025), Worldpay (UK) (Nov 2025), Remitly U.K. (Jun 2026), Square.</p></div>
+        <div class="cell"><h4>Cross-border / FX</h4><p>The Currency Cloud, Caxton Payments, Currencies Direct, IFX (UK), Cambridge Mercantile.</p></div>
+        <div class="cell"><h4>Malta-linked EMIs</h4><p>SettleGo Solutions (OpenPayd), System Pay Services (BVNK, Nov 2020), NIUM Payments UK (Mar 2018), Viva Wallet.com (Oct 2023).</p></div>
+        <div class="cell"><h4>Churn</h4><p>OpenPayd Financial Services Malta's own UK EMI permission shows as cancelled — its UK business runs through SettleGo.</p></div>
+      </div>
+    </section>
+
+    <section id="common">
+      <div class="section-label">Common companies</div>
+      <h2>Groups with licensed entities in both</h2>
+      <p class="lede">With no passport between the two, every group below runs a separate regulated entity in each country.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Group</th><th>Malta</th><th>United Kingdom</th></tr>
+        <tr><td data-label="Group"><strong><a href="../companypages/crypto-com.html">Crypto.com</a></strong></td><td data-label="Malta">Foris DAX MT (CASP) + Foris MT (EMI)</td><td data-label="United Kingdom">Foris DAX UK Ltd — crypto registration + EMI</td></tr>
+        <tr><td data-label="Group"><strong>Bitpanda</strong></td><td data-label="Malta">BP23 CA (CASP) + BP23 PAY (EMI)</td><td data-label="United Kingdom">Bitpanda Broker UK Ltd — crypto registration</td></tr>
+        <tr><td data-label="Group"><strong>Blockchain.com</strong></td><td data-label="Malta">Blockchain.com Operations (Malta) (CASP)</td><td data-label="United Kingdom">BC Operations — crypto registration (Feb 2026)</td></tr>
+        <tr><td data-label="Group"><strong>OpenPayd</strong></td><td data-label="Malta">OpenPayd FS Malta (EMI) + OP Digital Services (CASP)</td><td data-label="United Kingdom">SettleGo Solutions Ltd — EMI (FRN 900483); group HQ London</td></tr>
+        <tr><td data-label="Group"><strong>BVNK</strong></td><td data-label="Malta">System Pay Services (Malta) — EMI + CASP</td><td data-label="United Kingdom">System Pay Services Ltd — EMI (FRN 901057)</td></tr>
+        <tr><td data-label="Group"><strong>Nium</strong></td><td data-label="Malta">Nium Financial Services Malta — EMI</td><td data-label="United Kingdom">NIUM Payments UK Ltd — EMI</td></tr>
+        <tr><td data-label="Group"><strong>eToro</strong></td><td data-label="Malta">eToro Money Malta — EMI</td><td data-label="United Kingdom">eToro (UK) Ltd — authorised investment firm</td></tr>
+        <tr><td data-label="Group"><strong>Viva</strong> (to confirm)</td><td data-label="Malta">"Viva Payment Services Malta" in DIAS participant list</td><td data-label="United Kingdom">Viva Wallet.com Ltd — EMI (Oct 2023)</td></tr>
+      </table>
+      </div>
+      <div class="panel amber">
+        <h3>What this tells us</h3>
+        <ul>
+          <li>The strongest overlap of any country pair: without passporting, firms that serve both markets must build two regulated entities.</li>
+          <li>London hosts the group base of OpenPayd and Blockchain.com while Malta is the EU licensing base — the post-Brexit "UK + EU hub" model.</li>
+          <li>Every UK crypto registration above must be re-applied for under the new regime by 28 February 2027.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Relevance to Deloitte</div>
+      <h2>Where Deloitte fits</h2>
+      <p class="lede">No Deloitte audit relationship with the common groups was found in public sources; auditors are not asserted.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0"><span class="indent">UK</span><span class="entity">UK entities of Crypto.com, Bitpanda, Blockchain.com, OpenPayd, BVNK, Nium, eToro, Viva<span class="sub">Auditor not verified — available free from Companies House filings</span></span><span class="auditor none">Not verified</span></div>
+        <div class="org-row depth-0"><span class="indent">EU</span><span class="entity"><a href="../companypages/circle.html">Circle (USDC / EURC)</a><span class="sub">Deloitte-audited; relevant to stablecoin payment firms such as BVNK and OpenPayd</span></span><span class="auditor deloitte">Deloitte</span></div>
+      </div>
+      <div class="panel amber">
+        <h3>Opportunity lens (analysis, not sourced fact)</h3>
+        <ul>
+          <li><strong>UK gateway (30 Sep 2026 – 28 Feb 2027):</strong> every UK crypto firm needs FSMA authorisation readiness — gap assessments, governance, client-asset and operational-resilience frameworks.</li>
+          <li><strong>Twin-entity groups:</strong> seven groups run parallel Malta and UK entities — natural scope for coordinated Deloitte Malta – Deloitte UK safeguarding, SOC 1/2 and ISAE 3402 work across both.</li>
+          <li><strong>Quick win:</strong> UK auditors can be confirmed at Companies House at no cost — worth doing before any pursuit, alongside independence checks.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-label">Sources</div>
+      <h2>Sources</h2>
+      <ul style="color:var(--ink-soft);font-size:.9rem;padding-left:1.2rem;">
+        <li>FCA — Financial Services Register, authorised EMI extract (register.fca.org.uk)</li>
+        <li>Protegra — FCA licensing overview (SI 2026/102, gateway dates, determination times)</li>
+        <li>Licentium — UK FCA crypto register (checked 15 Jul 2026)</li>
+        <li>CoinDesk (28 Mar 2025) — 368 applications / 50 approvals; CoinDesk (10 Feb 2026) — Blockchain.com UK registration</li>
+        <li>CryptoReview; InvestingHaven; Koinly (Sep 2026) — exchange FCA status, Gemini UK exit, OKX/Gate not registered</li>
+        <li>CCN — Crypto.com and Gemini FCA registration dates</li>
+        <li>OpenPayd — Group overview and licence FAQ</li>
+        <li>BVNK — licences FAQ</li>
+        <li>DIAS — Payment Service Providers participant list (Viva Malta)</li>
+        <li>Malta data as cited on the MT-IT and MT-NL pages</li>
+      </ul>
+      <p class="note">Counts and entity lists move weekly. The FCA Financial Services Register and MFSA Financial Services Register are the authoritative references.</p>
+    </section>
+  </main>
+</div>
+<script>
+  const links = document.querySelectorAll('nav.toc a[href^="#"]');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

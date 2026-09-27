@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viva.com — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .depth-1{padding-left:2.6rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Viva.com</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Viva.com</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from Viva.com's own releases and financial statements, press coverage and company registries. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Payments &amp; Fintech</div>
+      <h1>Viva.com</h1>
+      <p class="tagline">A Greek "tech bank" for businesses — formerly Viva Wallet — offering card acceptance, business banking and payment infrastructure across nearly 30 European countries, 48.5% owned by JPMorgan.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2000 (as Realize SA)</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">Athens, Greece</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Karonis/founders (~51.5%); JPMorgan Chase (48.5%)</div></div>
+        <div class="fact"><div class="label">Reach</div><div class="value">24–29 European countries</div></div>
+        <div class="fact"><div class="label">Regulatory status</div><div class="value">Greek EMI + banking licence (Vivabank)</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Viva.com does</h2>
+      <p class="lede">Viva.com — known for most of its history as Viva Wallet — is a European "neobank for businesses," offering card acceptance, business accounts and payment infrastructure built entirely on cloud technology (Microsoft Azure). Founded in 2000 in Athens by Haris Karonis as software house Realize SA, the company pivoted into payments with Viva Payments in 2011, obtained an Electronic Money Institution licence in 2014, and acquired Greek lender Praxia Bank in 2020 to create its own banking subsidiary, Vivabank.</p>
+      <p>In January 2022, <strong>JPMorgan Chase</strong> agreed to acquire a 48.5% stake in Viva Wallet Holdings Software Development S.A. for a reported $800 million-plus, making Viva the first Greek fintech "unicorn." The relationship later soured: JPMorgan and founder Haris Karonis filed competing legal claims in 2024 over valuation and investor rights, a dispute a London High Court ruling resolved in mid-2024 — reportedly clearing the way for a potential future sale of the company. The group's principal operating entities are <strong>Viva Wallet Holdings SA</strong> (parent), <strong>Viva Payment Services SA</strong> (the EMI and Principal Member of Visa and Mastercard), and <strong>Vivabank SA</strong> (the licensed Greek credit institution).</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">24-29</div><div class="l">European countries served</div></div>
+        <div class="stat"><div class="n">$2bn+</div><div class="l">valuation implied by JPMorgan's 2022 stake</div></div>
+        <div class="stat"><div class="n">0%</div><div class="l">commission model for combined card + Viva debit card use</div></div>
+        <div class="stat"><div class="n">700-1,000</div><div class="l">employees (estimates vary by source)</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Viva.com's offering spans in-person and online card acceptance, business banking, and increasingly fiscalisation and back-office tools for merchants across Europe.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Card acceptance (POS)</h4>
+          <p>Smart Android terminals, "Tap on Phone" (turns any NFC-enabled phone into a card reader) and "Tap to Pay on iPhone," accepting more than 30 international and local payment methods.</p>
+        </div>
+        <div class="cell">
+          <h4>Online payments</h4>
+          <p>Payment gateways and "Smart Checkout" for e-commerce, supporting cards, digital wallets (Apple Pay, Google Pay) and local payment methods across its European footprint.</p>
+        </div>
+        <div class="cell">
+          <h4>Business accounts &amp; cards</h4>
+          <p>Business current accounts with local IBANs and a Viva business Mastercard debit card, enabled by Vivabank's Greek banking licence.</p>
+        </div>
+        <div class="cell">
+          <h4>Merchant finance</h4>
+          <p>Merchant cash advances and lending products, leveraging the group's own banking licence rather than routing through a third-party lender.</p>
+        </div>
+        <div class="cell">
+          <h4>Fiscalisation &amp; compliance tools</h4>
+          <p>Country-specific e-invoicing and fiscal-receipt integration (e.g. for Greece, Austria, France, Germany, Italy, Portugal, Spain), addressing local tax-reporting requirements for merchants.</p>
+        </div>
+        <div class="cell">
+          <h4>Viva.com Wallet</h4>
+          <p>A consumer digital wallet enabling online payments in Greece, Malta and Cyprus using a personal Viva account, alongside e-banking and account-management tools for business customers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Viva.com is fundamentally a payments acquirer: it earns from the transaction volume it processes for merchants, supplemented by banking-style lending income.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Core streams</h4>
+          <ul>
+            <li>Card acceptance and acquiring fees on merchant transaction volume</li>
+            <li>Interchange and scheme-related fees as a Principal Member of Visa and Mastercard</li>
+            <li>Interest income on merchant cash advances and lending, enabled by Vivabank's banking licence</li>
+            <li>Fees for value-added services such as fiscalisation, expense management and gift-card/loyalty tools</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Pricing model</h4>
+          <ul>
+            <li>Viva markets a 0% commission proposition for merchants who combine its card-acceptance service with use of the Viva business debit card for expenses</li>
+            <li>Standard acquiring fees apply outside that bundled model, positioned to compete with acquirers such as SumUp, Dojo, Flatpay and myPOS</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">Reported figures vary significantly by source and year: Viva Wallet Group's own 2021 annual report showed group revenues of €82 million (more than double 2020), while a UK subsidiary's 2023 accounts reportedly showed a £46 million operating loss on £57 million revenue — a reminder that country-level and group-level figures are not the same measure. No single, up-to-date, audited consolidated revenue figure for the full Viva.com Group was identified in the sources reviewed for this profile.</p>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Viva.com's stated strategy is deliberately "local": rather than relying purely on EU passporting from Greece, it has built physical, regulatory branches in most of the countries it serves.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Corporate &amp; regulatory footprint</h4>
+          <ul>
+            <li>Greece (Athens HQ) — home market; Vivabank is a Bank of Greece-supervised credit institution</li>
+            <li>Physical branches or offices across 23-29 European countries, including Malta, Cyprus, the UK, Belgium, Romania, Slovenia, Slovakia and Latvia</li>
+            <li>A UK subsidiary, Viva Wallet.com Ltd, files its own annual accounts</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Focus &amp; positioning</h4>
+          <ul>
+            <li>Primarily small and medium-sized businesses, alongside larger retail chains and enterprise merchants</li>
+            <li>Competes in the fast-growing European "tap-to-pay" acquirer segment alongside SumUp, Dojo, Flatpay and myPOS</li>
+            <li>Non-Greek European volume has exceeded 50% of total processed volume since as early as 2021, reflecting the depth of its pan-European push</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">card acquiring</span>
+        <span class="tag">SME banking</span>
+        <span class="tag">merchant finance</span>
+        <span class="tag">e-commerce payments</span>
+      </div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <p class="lede">Viva.com is privately held and publishes entity-level financial statements (Viva Wallet, Viva Payments, Vivabank, and its UK subsidiary) rather than a single, clearly labelled consolidated group report in the sources reviewed.</p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th class="num">Figure</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Group revenue, FY2021 (company annual report)</td><td class="num">€82m</td></tr>
+          <tr><td>Group EBITDA, FY2021</td><td class="num">€(1.2)m</td></tr>
+          <tr><td>JPMorgan stake value, Jan 2022 (48.5%)</td><td class="num">$800m+</td></tr>
+          <tr><td>Implied company valuation, Dec 2022</td><td class="num">≈ $2.06bn</td></tr>
+          <tr><td>UK subsidiary revenue / operating loss, FY2023</td><td class="num">£57m rev. / £(46)m loss</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">Viva.com publishes annual financial statements for its key entities (Viva Wallet, Viva Payments, Vivabank, and Viva Wallet.com Ltd in the UK) on its own investor-relations page, but the sources reviewed here did not surface an up-to-date, single consolidated FY2024 or FY2025 group revenue figure. The 2024 valuation dispute between JPMorgan and founder Haris Karonis specifically concerned how the company should be valued going forward, which may explain the relative scarcity of a clean, agreed headline figure in public reporting.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">Viva.com publishes audited entity-level financial statements for its main subsidiaries, but the sources reviewed for this profile could not confirm the name of its current statutory audit firm.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Vivabank SA <span class="sub">Athens — Bank of Greece-supervised credit institution</span></span>
+          <span class="auditor none">Not confirmed in sources reviewed</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Viva Payment Services SA <span class="sub">Athens — Electronic Money Institution</span></span>
+          <span class="auditor none">Not confirmed in sources reviewed</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Viva Wallet.com Ltd <span class="sub">United Kingdom subsidiary</span></span>
+          <span class="auditor none">Not confirmed in sources reviewed</span>
+        </div>
+      </div>
+      <p class="note">Vivabank's published annual reports include an "Independent Auditor's Report" prepared in accordance with Greek Law 4449/2017 and EU Regulation 537/2014, and the group maintains an independent Audit Committee under the same law — but the specific named audit firm was not identified in the sources reviewed here. Separately, a 2024 corporate filing connected to an internal Viva Payments/Viva Wallet Holdings merger referenced an expert valuation report prepared by BDO — a one-off valuation engagement for that transaction, not necessarily evidence of BDO as the group's ongoing statutory auditor. Confirming the current audit firm with certainty would require reviewing Vivabank's full published financial statements directly.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">Viva.com's leadership remains centred on its founders, more than two decades after the company's start as a Greek software house.</p>
+      <div class="people-grid">
+        <div class="person">
+          <div class="name">Haris Karonis</div>
+          <div class="role">Founder &amp; Chief Executive Officer</div>
+          <p>Founded the company in 2000 as Realize SA; has led it through its pivot to payments, its JPMorgan investment, and the 2024 legal dispute over valuation and governance.</p>
+        </div>
+        <div class="person">
+          <div class="name">Makis Antypas</div>
+          <div class="role">Co-Founder &amp; Chief Information Officer; CEO of Vivabank</div>
+          <p>Co-founded Viva Payments alongside Karonis in 2011 and leads the group's banking subsidiary.</p>
+        </div>
+        <div class="person">
+          <div class="name">Dimitris Kontoulis</div>
+          <div class="role">Group Chief Financial Officer</div>
+          <p>Oversees group finance across Viva.com's banking, payments and holding entities.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">Malta is one of a small number of markets Viva.com treats as a core, named territory for its consumer wallet product — not simply one of many countries reached through passporting.</p>
+      <div class="panel">
+        <h3>A named core market with a local office</h3>
+        <ul>
+          <li>Viva.com maintains a registered office in Malta (Gzira), with a dedicated local support telephone line — a level of physical presence beyond simple cross-border service provision.</li>
+          <li><strong>Viva.com Wallet</strong>, the company's consumer-facing digital wallet product, is explicitly scoped to "merchants in Greece, Malta, and Cyprus" — placing Malta alongside Viva's home market of Greece as one of only three countries where this specific product operates.</li>
+          <li>Malta account holders go through Viva's standard KYC/business-establishment verification process, consistent with its treatment as a fully served, compliance-covered market rather than a passporting afterthought.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">This is a narrower but more concentrated relationship than some other companies in this index: rather than holding an MFSA licence of its own, Viva.com appears to serve Malta through its Greek EMI/banking licence passported under PSD2 — but the operational commitment (a local office, a support line, and Malta's inclusion as a named market for a specific consumer product) suggests Malta is treated as a priority market rather than an incidental one.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <div class="panel grey">
+        <h3>No disclosed relationship identified</h3>
+        <p style="margin-bottom:0;">The public sources reviewed for this profile — Viva.com's own published financial statements pages, press coverage of its JPMorgan investment and subsequent dispute, and company-data platforms — do not name Deloitte as Viva.com's auditor, attestor or disclosed advisor. The one professional-services name that surfaced in relation to a 2024 corporate transaction was BDO, in connection with a merger-related expert valuation report — not Deloitte, and not an audit engagement. If Deloitte has any relationship with Viva.com, Vivabank, or Viva Payment Services not captured in the sources reviewed here, it is not publicly disclosed.</p>
+      </div>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li>JPMorgan, "J.P. Morgan Acquires 49 Percent Stake in Viva Wallet" (press release, 2022).</li>
+        <li>PYMNTS, "UK Court Resolves Legal Dispute Between JPMorgan, Viva Wallet Founder" (13 Jun 2024).</li>
+        <li>Wikipedia / Wikiwand, "Viva Wallet Group" (corporate structure, founders, history, ownership).</li>
+        <li>Viva.com, Financial Statements pages (viva.com/en-eu/financial-statements and viva.com/en-gb/financial-statements) — Viva Wallet, Viva Payments, Vivabank and Viva Wallet.com Ltd annual reports.</li>
+        <li>Viva Wallet Group 2021 Annual Report (Board of Directors report, revenue and EBITDA figures, corporate governance and Audit Committee disclosures).</li>
+        <li>Business of Payments newsletter, coverage of Viva.com's UK subsidiary 2023 accounts and competitive positioning against SumUp, Dojo, Flatpay and myPOS.</li>
+        <li>CB Insights and Crunchbase company profiles for Viva Wallet (funding, valuation, leadership).</li>
+        <li>DECA Investments portfolio page for Viva Wallet (2021 revenue and headcount).</li>
+        <li>Viva.com, "Contact us" and "What proofs should I upload for my viva.com account in Malta" help-centre pages (Malta office address and onboarding requirements).</li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes; figures and appointments reflect the most recent public disclosures found at the time of research and may have changed since, particularly given the company's ongoing valuation dispute and potential sale process. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

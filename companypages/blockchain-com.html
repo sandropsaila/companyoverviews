@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blockchain.com — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Blockchain.com</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Blockchain.com</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from Blockchain.com's own releases, UK Companies House filings, press coverage and company registries. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Digital Assets &amp; Fintech</div>
+      <h1>Blockchain.com</h1>
+      <p class="tagline">One of the oldest names in crypto — a Bitcoin block explorer turned global wallet and exchange operator — now formally MiCA-licensed in the EU via a new Malta entity, even as its UK filings have drawn regulatory scrutiny.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2011 (as Blockchain.info)</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">London, England</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Privately held — founder &amp; VC-backed</div></div>
+        <div class="fact"><div class="label">Wallets created</div><div class="value">94 million+</div></div>
+        <div class="fact"><div class="label">Regulatory status</div><div class="value">EU MiCA licence via Malta (Dec 2025)</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Blockchain.com does</h2>
+      <p class="lede">Blockchain.com began life in 2011 as Blockchain.info, one of the first Bitcoin block explorers, built by Ben Reeves in York, England. Nicolas Cary and Peter Smith joined shortly after, and the trio grew the project from a transaction-lookup tool into a hybrid custodial/non-custodial wallet, then a full trading exchange, rebranding to Blockchain.com in December 2019. The platform has facilitated over $1 trillion in cumulative crypto transactions and has created more than 94 million wallets across over 200 countries.</p>
+      <p>The group's holding structure is commonly cited as <strong>Blockchain Luxembourg S.A.</strong>, with operating entities in the UK, US, Singapore, Cayman Islands, Lithuania and, since late 2025, Malta. Blockchain.com has raised roughly $600-720 million in venture funding to date (Series E, led by Kingsway Capital) and was valued at approximately £5 billion in 2020, though it remains private with no audited consolidated financials publicly available.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">94M+</div><div class="l">wallets created</div></div>
+        <div class="stat"><div class="n">$1T+</div><div class="l">cumulative transactions facilitated</div></div>
+        <div class="stat"><div class="n">$8bn+</div><div class="l">institutional credit extended</div></div>
+        <div class="stat"><div class="n">~1/3</div><div class="l">of global Bitcoin network activity historically routed through it</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Blockchain.com's product line spans its original block explorer, retail wallet and exchange products, and an institutional trading and custody business.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Blockchain Explorer</h4>
+          <p>The company's founding product — a free, public tool for browsing Bitcoin (and later other chains') transactions, blocks and network statistics.</p>
+        </div>
+        <div class="cell">
+          <h4>Blockchain.com Wallet (DeFi Wallet)</h4>
+          <p>A non-custodial wallet giving users sole control of their private keys and a recovery phrase; supports direct peer-to-peer trading via an integrated DEX aggregator across Ethereum, Polygon, Arbitrum and Optimism.</p>
+        </div>
+        <div class="cell">
+          <h4>Blockchain.com Account</h4>
+          <p>A custodial account offering fiat on/off-ramps, Swap, and Rewards — a passive-yield product — alongside simplified buying, selling and holding of crypto.</p>
+        </div>
+        <div class="cell">
+          <h4>Blockchain.com Exchange</h4>
+          <p>Launched in 2019, an institutional-grade trading venue with a low-latency matching engine, spot and margin trading, and 70+ trading pairs in USD, EUR and GBP.</p>
+        </div>
+        <div class="cell">
+          <h4>Institutional services</h4>
+          <p>OTC trading, custody, and credit facilities for protocols, funds and high-volume investors — over $8 billion in credit extended to date.</p>
+        </div>
+        <div class="cell">
+          <h4>Market data &amp; analytics</h4>
+          <p>APIs and dashboards built on the Explorer's underlying data, used by institutional clients for on-chain analysis and pricing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Blockchain.com monetises across its retail and institutional product lines, though — unlike listed peers — it does not publish an audited, itemised revenue breakdown.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Core streams</h4>
+          <ul>
+            <li>Exchange trading fees on spot and margin transactions</li>
+            <li>Premium/subscription wallet services</li>
+            <li>Spreads and interest on institutional OTC trading, custody and credit facilities</li>
+            <li>Institutional data and analytics products built on the Explorer's infrastructure</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Disclosure basis</h4>
+          <ul>
+            <li>As a private company with a documented history of delayed UK statutory filings, Blockchain.com does not publish a current, audited consolidated revenue figure</li>
+            <li>Third-party estimates vary widely and are not verified against filed accounts; a commonly cited figure (~$23 million) appears to reflect only a small subsidiary rather than group-wide revenue</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">Because Blockchain.com's core wallet is explicitly non-custodial, the company structurally separates a large share of its user base (wallet-only users) from its revenue-generating custodial and institutional products — a business-model distinction worth noting alongside any revenue estimate.</p>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Blockchain.com has assembled a patchwork of licences across major markets, most recently consolidating its EU presence under a single MiCA authorisation.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Regulatory footprint</h4>
+          <ul>
+            <li>European Economic Area — MiCA licence via Malta entity Blue Cube (Malta) Ltd, effective 4 December 2025, covering all 30 EEA states</li>
+            <li>Singapore — Major Payment Institution licence from the Monetary Authority of Singapore (Aug 2023)</li>
+            <li>Cayman Islands — registered Virtual Asset Service Provider (VASP) with CIMA</li>
+            <li>Italy — registered with OAM as a crypto service provider (Aug 2022); Lithuania — registered VASP</li>
+            <li>United States — state-level money transmitter licences (no New York BitLicense); relies on a Bakkt partnership to reach all 50 states</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Recent expansion &amp; retrenchment</h4>
+          <ul>
+            <li>Physical office opened in Nigeria (May 2025), with service extended to Ghana, targeting African crypto adoption</li>
+            <li>Monitoring regulatory developments in Kenya and South Africa for further expansion</li>
+            <li>Paused services in Canada in 2023 following restrictive custody and exchange rules</li>
+            <li>Withdrew its direct UK FCA registration application in 2022, prioritising the EU MiCA route instead; UK users are served via FCA-regulated partner Englebert Ltd.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">crypto wallet</span>
+        <span class="tag">crypto exchange</span>
+        <span class="tag">institutional custody</span>
+        <span class="tag">OTC trading</span>
+      </div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <div class="panel grey">
+        <h3>No current audited consolidated financial statements identified</h3>
+        <p style="margin-bottom:0;">Blockchain.com is a privately held company, and its UK filing record has itself become a matter of public record: as of 2024, the last full statutory accounts filed at UK Companies House were made up to 31 December 2020, with 2021 accounts filed roughly two years late. In October 2024, Companies House issued a summons against co-founder and President Nicolas Cary and operations executive Al Turnbull over the delayed filings, under powers strengthened by the UK's Economic Crime and Corporate Transparency Act 2023. The company has attributed the delay to workforce reductions that took time to stabilise, and stated it was taking steps to remediate its statutory filing compliance.</p>
+      </div>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th class="num">Figure</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Total funding raised to date</td><td class="num">$600m – $720m</td></tr>
+          <tr><td>Reported valuation, 2020</td><td class="num">≈ £5bn</td></tr>
+          <tr><td>Reported valuation, 2021 peak (unconfirmed)</td><td class="num">≈ $14bn (widely cited, unverified)</td></tr>
+          <tr><td>Last full UK statutory accounts filed</td><td class="num">FY2020 (filed years late)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">Given the gap in current statutory filings, any revenue or profitability figure circulating for Blockchain.com should be treated as an estimate rather than an audited number.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">No named statutory auditor for Blockchain.com's group or UK entities was identified in the sources reviewed for this profile — a gap that is itself consistent with the company's documented delay in filing UK statutory accounts.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Blockchain Luxembourg S.A. <span class="sub">Commonly cited group holding entity</span></span>
+          <span class="auditor none">Not confirmed in sources reviewed</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="entity">UK operating entities <span class="sub">Subject to 2024 Companies House prosecution over late filings</span></span>
+          <span class="auditor none">Not confirmed in sources reviewed</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="entity">Blue Cube (Malta) Ltd <span class="sub">Malta — new MiCA-licensed entity (effective Dec 2025)</span></span>
+          <span class="auditor none">Not confirmed in sources reviewed</span>
+        </div>
+      </div>
+      <p class="note">MiCA licensing under the MFSA requires an appointed auditor to report on matters affecting the licensee's ability to continue operating, so Blue Cube (Malta) Ltd will have an assigned auditor as a condition of its licence — but that firm's name was not identified in the public sources reviewed here. For context, the wider industry pattern (per Blockworks/Bloomberg reporting) shows Deloitte as the annual auditor for Coinbase, Circle and Ripple, and Mazars Group (before suspending crypto clients) for firms like Crypto.com and Binance — but no source connects Blockchain.com itself to any of these names.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">Blockchain.com's leadership blends its three original founders with a board expanded in 2025 to include senior finance and policy figures.</p>
+      <div class="people-grid">
+        <div class="person">
+          <div class="name">Peter Smith</div>
+          <div class="role">Co-Founder &amp; Chief Executive Officer</div>
+          <p>Took over as CEO in 2014, securing a then-record $40 million crypto funding round; has led the company through its exchange launch and 2025 EU licensing push.</p>
+        </div>
+        <div class="person">
+          <div class="name">Nicolas Cary</div>
+          <div class="role">Co-Founder, Vice Chairman &amp; President</div>
+          <p>Co-founded the company in 2013; named alongside operations executive Al Turnbull in a 2024 UK Companies House summons over delayed statutory filings.</p>
+        </div>
+        <div class="person">
+          <div class="name">Benjamin Reeves</div>
+          <div class="role">Founder</div>
+          <p>Built the original Blockchain.info Bitcoin explorer and wallet in 2011, later famously splitting from Coinbase co-founder Brian Armstrong over custody philosophy.</p>
+        </div>
+        <div class="person">
+          <div class="name">Lane Kasselman</div>
+          <div class="role">Co-CEO &amp; President</div>
+          <p>Joined in 2021, bringing public affairs and communications expertise to a shared leadership role alongside Peter Smith.</p>
+        </div>
+        <div class="person">
+          <div class="name">Macrina Kgil</div>
+          <div class="role">Chief Financial Officer</div>
+          <p>Oversees group finance for the privately held company.</p>
+        </div>
+        <div class="person">
+          <div class="name">Matt Tuzzolo</div>
+          <div class="role">Chief Technology Officer</div>
+          <p>With the company since 2014; promoted to CTO in November 2015.</p>
+        </div>
+        <div class="person">
+          <div class="name">Fiorentina D'Amore</div>
+          <div class="role">Senior Director, EU Business Operations &amp; CEO, Blockchain.com Malta</div>
+          <p>A 25-year financial-services veteran and former Chair of the Financial Institutions Malta Association (FIMA), hired in 2025 to lead the company's EU MiCA expansion from Malta.</p>
+        </div>
+        <div class="person">
+          <div class="name">Tom Horton</div>
+          <div class="role">Lead Independent Director</div>
+          <p>Former CEO of American Airlines and a current director at Walmart and GE; joined an expanded nine-member board in August 2025.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">Malta became the seat of Blockchain.com's entire EU regulatory relationship in October 2025, when the company secured a MiCA licence through a newly formed Maltese entity.</p>
+      <div class="panel">
+        <h3>Malta as the new EU regulatory hub</h3>
+        <ul>
+          <li>In October 2025, the Malta Financial Services Authority (MFSA) approved Blockchain.com's application under the EU's Markets in Crypto-Assets Regulation (MiCA), via its Maltese entity <strong>Blue Cube (Malta) Ltd</strong>.</li>
+          <li>The licence became effective for existing EEA customers on 4 December 2025, migrating their accounts to be serviced by the Malta entity, with a mandatory account-update process required by 4 February 2026.</li>
+          <li>The single Malta-issued MiCA licence lets Blockchain.com serve all 30 European Economic Area member states under one regulatory regime, replacing a previously fragmented, country-by-country compliance approach.</li>
+          <li>CEO Peter Smith cited Malta's "regulatory clarity" as the reason for the choice, and the company hired Maltese financial-services veteran Fiorentina D'Amore — former chair of the Financial Institutions Malta Association — to lead the Malta entity and the wider EU rollout.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">This makes Blockchain.com's Malta relationship one of direct licensing and operational presence, similar in kind to Bitpanda's and OKX's MFSA authorisations — though it is worth noting Malta's MiCA supervisory approach has itself drawn scrutiny from ESMA over its authorisation procedures, a live regulatory debate the MFSA has pushed back on as premature.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <div class="panel grey">
+        <h3>No disclosed relationship identified</h3>
+        <p style="margin-bottom:0;">The public sources reviewed for this profile — Blockchain.com's own releases, Companies House filings and press coverage of its regulatory history — do not name Deloitte as an auditor, attestor or disclosed advisor to Blockchain.com or any of its subsidiaries, including the new Malta entity. Industry reporting places Deloitte as the annual auditor for other major crypto platforms (Coinbase, Circle, Ripple), which makes the absence of any Blockchain.com connection notable by contrast rather than a gap in this research alone — the company's own delayed UK filings mean it is not clearly disclosing a current group auditor of any name, Deloitte included.</p>
+      </div>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li>Grokipedia, "Blockchain.com" (corporate history, leadership, licensing, controversies).</li>
+        <li>Contrary Research, "Report: Blockchain.com Business Breakdown &amp; Founding Story."</li>
+        <li>Crunchbase company profile for Blockchain.com / Blockchain.info (funding, leadership, board).</li>
+        <li>Blockchain.com Support Centre, "MiCA transition: what's changing, how to get ready" (Blue Cube (Malta) Ltd details, effective dates).</li>
+        <li>Invezz, "Blockchain.com secures MiCA license from Malta to expand across 30 EEA States" (23 Oct 2025).</li>
+        <li>Crowdfund Insider, "Blockchain.com Gains MiCA License, Targets Growth In Europe" (Oct 2025).</li>
+        <li>Genfinity, "Blockchain.com Secures MiCA License in Malta, Set to Expand Crypto Services Across 30 European Countries" (24 Oct 2025).</li>
+        <li>Stewarts Law, "Companies House targeting of crypto executives is a warning to the industry at large" (UK filing delinquency and 2024 prosecution detail).</li>
+        <li>UK Companies House, filing history for Blockchain.com Asset Management (UK) Limited and related entities.</li>
+        <li>Blockworks, "Bitcoin Miner Riot Dumps Auditor for 'Big Four' Accounting Firm" (industry context on crypto-sector Big Four audit relationships).</li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes; figures and appointments reflect the most recent public disclosures found at the time of research and may have changed since. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

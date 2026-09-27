@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BVNK — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.deloitte{background:var(--amber-soft); color:var(--amber);}
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+
+  @media (max-width: 640px){
+    section, header.hero{scroll-margin-top:64px;}
+    .table-wrap{overflow:visible;}
+    .table-wrap table{min-width:0;}
+    .table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap td{display:block;width:100%;}
+    .table-wrap thead{display:none;}
+    .table-wrap tr{background:var(--panel);border:1px solid var(--line);margin-bottom:.7rem;padding:.35rem 0;}
+    .table-wrap td{white-space:normal;border-bottom:none !important;padding:.35rem .9rem;display:grid;grid-template-columns:7.5rem 1fr;gap:.6rem;text-align:left !important;}
+    .table-wrap td::before{content:attr(data-label);font-size:.74rem;font-weight:600;color:var(--ink-soft);}
+    .org-row .entity .sub{font-size:.8rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">BVNK</div>
+    <div><a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button></div>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">BVNK</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from BVNK and Mastercard announcements, the FCA register, funding databases and press coverage. Position as at 26 September 2026.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Stablecoin Payments Infrastructure</div>
+      <h1>BVNK</h1>
+      <p class="tagline">London-founded stablecoin payments infrastructure provider, acquired by Mastercard in August 2026, with its EU licences held in Malta.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2021</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">London</div></div>
+        <div class="fact"><div class="label">Owner</div><div class="value">Mastercard (since 3 Aug 2026)</div></div>
+        <div class="fact"><div class="label">Deal value</div><div class="value">Up to $1.8bn</div></div>
+        <div class="fact"><div class="label">Annualised volume</div><div class="value">≈ $30bn</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What BVNK does</h2>
+      <p class="lede">BVNK gives businesses a single API to hold, move and convert value across fiat currencies and stablecoins — payouts, pay-ins, treasury and cross-border settlement.</p>
+      <p>Founded in 2021 by Jesse Hemson-Struthers, Chris Harmse and Donald Jackson, BVNK grew from a $340m valuation (Series A, 2022) to $750m (Series B, 2024), then drew strategic stakes from Visa Ventures (May 2025) and Citi Ventures (October 2025). After acquisition talks with Coinbase collapsed in November 2025, Mastercard agreed on 17 March 2026 to buy BVNK for up to $1.8bn — $1.5bn upfront plus $300m in earn-outs — and closed on 3 August 2026, ahead of its year-end guidance.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">$1.8bn</div><div class="l">Mastercard acquisition (incl. $300m earn-out)</div></div>
+        <div class="stat"><div class="n">$30bn</div><div class="l">annualised processing volume (company, Jan 2026)</div></div>
+        <div class="stat"><div class="n">130+</div><div class="l">countries supported</div></div>
+        <div class="stat"><div class="n">≈ 450</div><div class="l">employees (mid-2026)</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">Services</div>
+      <h2>Product lines</h2>
+      <div class="grid">
+        <div class="cell"><h4>Send</h4><p>Global payouts in fiat or stablecoins — e.g. Deel workers in 100+ countries opting to be paid in stablecoins.</p></div>
+        <div class="cell"><h4>Receive</h4><p>Stablecoin payment acceptance for merchants and marketplaces.</p></div>
+        <div class="cell"><h4>Store</h4><p>Unified fiat and stablecoin accounts and wallets.</p></div>
+        <div class="cell"><h4>Convert</h4><p>Real-time FX between fiat and stablecoins.</p></div>
+        <div class="cell"><h4>Spend</h4><p>Card issuing against stablecoin balances.</p></div>
+        <div class="cell"><h4>Earn</h4><p>Rewards on idle balances.</p></div>
+        <div class="cell"><h4>Network partnerships</h4><p>Powers stablecoin pre-funding for Visa Direct (Jan 2026); partner in Mastercard's Agent Pay for Machines (Jun 2026).</p></div>
+        <div class="cell"><h4>Enterprise clients</h4><p>Worldpay, Deel, Corpay, dLocal; minimum of $500k monthly volume for new clients.</p></div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">Revenue streams</div>
+      <h2>How it makes money</h2>
+      <p class="lede">BVNK publishes no revenue split. The streams below follow from its product set.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Transaction-based</h4>
+          <ul>
+            <li>Payout and pay-in processing fees.</li>
+            <li>FX and fiat–stablecoin conversion spreads.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Balance- and platform-based</h4>
+          <ul>
+            <li>Income on held balances (net of client rewards).</li>
+            <li>Card programme and platform / API fees.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Markets</div>
+      <h2>Where it operates</h2>
+      <div class="market-cols">
+        <div>
+          <h4>Licences (40+ claimed)</h4>
+          <ul>
+            <li><strong>UK:</strong> System Pay Services Ltd — FCA-authorised EMI (FRN 901057, Nov 2020), for fiat only.</li>
+            <li><strong>EU:</strong> System Pay Services (Malta) Ltd — MFSA EMI and MiCA CASP (Feb 2026), passported across the EEA; direct SEPA access via the Bank of Lithuania's CENTROlink.</li>
+            <li><strong>US:</strong> money transmitter licences.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Footprint</h4>
+          <ul>
+            <li>Offices in London and San Francisco.</li>
+            <li>130+ countries supported for payments.</li>
+            <li>See <a href="../countries/mt-uk-analysis.html#common">MT-UK analysis</a> — BVNK runs licensed entities in both Malta and the UK.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <p class="lede">BVNK was private and is now a Mastercard subsidiary; no consolidated accounts are published. Revenue estimates from data providers conflict.</p>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metric</th><th class="num">Figure</th><th>Basis</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Metric">Revenue 2024</td><td class="num" data-label="Figure">≈ $40m</td><td data-label="Basis">CB Insights estimate</td></tr>
+          <tr><td data-label="Metric">Revenue 2024 (alternative)</td><td class="num" data-label="Figure">£1–10m</td><td data-label="Basis">Tracxn range — likely a single UK entity's filing, not the group</td></tr>
+          <tr><td data-label="Metric">Acquisition price</td><td class="num" data-label="Figure">$1.5bn + $300m earn-out</td><td data-label="Basis">Mastercard agreement (17 Mar 2026), closed 3 Aug 2026</td></tr>
+          <tr><td data-label="Metric">Series B (Dec 2024)</td><td class="num" data-label="Figure">$50m at ≈ $750m</td><td data-label="Basis">Led by Haun Ventures; valuation per Fortune</td></tr>
+          <tr><td data-label="Metric">Total venture funding</td><td class="num" data-label="Figure">≈ $92–100m</td><td data-label="Basis">Funding databases</td></tr>
+          <tr><td data-label="Metric">Processing volume</td><td class="num" data-label="Figure">≈ $30bn annualised</td><td data-label="Basis">Company statement (Jan–Feb 2026)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">From FY2026, BVNK's results will be consolidated into Mastercard's financial statements.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Auditors</div>
+      <h2>Audit and assurance</h2>
+      <div class="org-tree">
+        <div class="org-row depth-0"><span class="indent">UK</span><span class="entity">BVNK Holdings Ltd / System Pay Services Ltd<span class="sub">Statutory auditor not identified in the sources reviewed — available free from Companies House filings</span></span><span class="auditor none">Not verified</span></div>
+        <div class="org-row depth-0"><span class="indent">MT</span><span class="entity">System Pay Services (Malta) Ltd (EMI + CASP)<span class="sub">Statutory auditor not identified — obtainable from Malta Business Registry filings</span></span><span class="auditor none">Not verified</span></div>
+        <div class="org-row depth-0"><span class="indent">CERT</span><span class="entity">Controls certifications<span class="sub">ISO 27001 and SOC 2 Type II, per BVNK; the SOC 2 service auditor is not named</span></span><span class="auditor none">Not named</span></div>
+      </div>
+      <p class="note">Post-acquisition, BVNK entities fall within Mastercard's group audit; whether local statutory auditors change should be checked in the next filings.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">Leadership</div>
+      <h2>Key people</h2>
+      <div class="people-grid">
+        <div class="person"><div class="name">Jesse Hemson-Struthers</div><div class="role">Co-Founder &amp; CEO</div><p>Previously founded Coindirect and Balfour Group; remains CEO under Mastercard ownership.</p></div>
+        <div class="person"><div class="name">Chris Harmse</div><div class="role">Co-Founder &amp; Chief Business Officer</div><p>Named as co-founder in Series B coverage.</p></div>
+        <div class="person"><div class="name">Donald Jackson</div><div class="role">Co-Founder &amp; CTO</div><p>Leads technology.</p></div>
+        <div class="person"><div class="name">Tina Meschino</div><div class="role">General Counsel</div><p>Led the Malta MiCA authorisation.</p></div>
+      </div>
+      <p class="note">Mastercard sponsor: Chief Product Officer Jorn Lambert.</p>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Relationship with Malta</div>
+      <h2>EU licensing base in Malta</h2>
+      <p class="lede">All of BVNK's EU regulated activity runs through a single Maltese company.</p>
+      <div class="panel">
+        <h3>System Pay Services (Malta) Limited</h3>
+        <ul>
+          <li><strong>EMI licence</strong> from the MFSA — euro payments and e-money.</li>
+          <li><strong>MiCA CASP authorisation</strong> from the MFSA (announced 15–16 Feb 2026) covering exchange of crypto-assets for funds or other crypto-assets, custody and administration, and transfer services; passported across the EEA.</li>
+          <li>Combined with direct SEPA access, BVNK describes this as a fully regulated bridge between EUR payments and stablecoin settlement.</li>
+          <li>General Counsel Tina Meschino cited a long-standing positive relationship with the MFSA.</li>
+        </ul>
+      </div>
+      <p class="note">Context: coverage of the licence also notes ESMA's July 2025 peer review, which found the MFSA only partially met expectations in CASP authorisation — a review that pre-dates and does not concern BVNK specifically.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Relationship with Deloitte</div>
+      <h2>Deloitte</h2>
+      <div class="panel grey">
+        <h3>No direct relationship identified</h3>
+        <ul>
+          <li>No public source links Deloitte to BVNK as auditor, SOC 2 service auditor or adviser.</li>
+          <li>Indirect link: BVNK's rails move USDC, issued by Deloitte-audited <a href="circle.html">Circle</a>.</li>
+        </ul>
+      </div>
+      <div class="panel amber">
+        <h3>Opportunity lens (analysis, not sourced fact)</h3>
+        <ul>
+          <li><strong>Post-merger integration:</strong> Mastercard must bring BVNK's Malta EMI + CASP and UK EMI into group control frameworks — SOX alignment, ITGC and safeguarding reviews are typical first-year needs.</li>
+          <li><strong>Assurance reporting:</strong> enterprise clients (Worldpay, Visa Direct, Deel) rely on BVNK's SOC 2; a SOC 1 / ISAE 3402 over payment processing is a natural extension.</li>
+          <li><strong>Independence:</strong> check Deloitte's relationships with Mastercard group entities before any pursuit.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-label">Sources</div>
+      <h2>Sources</h2>
+      <ul style="color:var(--ink-soft);font-size:.9rem;padding-left:1.2rem;">
+        <li>Stablecoin Insider — Jesse Hemson-Struthers profile (deal terms, close date, Series B)</li>
+        <li>Cryip (4 Aug 2026) — Mastercard completion, funding timeline, Coinbase talks, Visa Direct</li>
+        <li>Silicon Republic, citing Fortune (10 Oct 2025) — co-founders, offices, bidding</li>
+        <li>The Paypers; FinanceFeeds; Tokenizer.Estate; The Business Picture; Coinpaprika (Feb 2026) — Malta MiCA licence</li>
+        <li>BVNK — website and licences FAQ</li>
+        <li>FCA — authorised EMI register extract (System Pay Services Ltd, FRN 901057)</li>
+        <li>Tracxn; PitchBook; CB Insights — funding, employees, revenue estimates</li>
+        <li>Weex — Malta CASP context</li>
+      </ul>
+    </section>
+  </main>
+</div>
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

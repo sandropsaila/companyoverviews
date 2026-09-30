@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trumia — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Trumia</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Trumia</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from Trumia's own website, the MFSA and Bank of Lithuania registers, FIMA and press coverage. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Payments &amp; Fintech</div>
+      <h1>Trumia</h1>
+      <p class="tagline">A young, Malta-headquartered electronic money institution offering multi-currency business and consumer accounts, built specifically for clients that struggle to access mainstream payment rails.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded / licensed</div><div class="value">2023</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">Birkirkara, Malta</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Privately held — shareholders not publicly disclosed</div></div>
+        <div class="fact"><div class="label">Reach</div><div class="value">Passported across all 30 EEA states</div></div>
+        <div class="fact"><div class="label">Regulatory status</div><div class="value">MFSA-licensed Electronic Money Institution</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Trumia does</h2>
+      <p class="lede">Trumia Limited is a fully licensed Electronic Money Institution based in Malta, positioning itself as a "new-generation" payment services provider for businesses and individuals in sectors that often struggle with mainstream banking access — explicitly naming e-commerce, travel and online gaming as beneficiaries of its multi-currency account and cross-border payment offering. The company describes itself as built around identifying each client's specific financial needs and delivering tailored, secure technology solutions with an emphasis on customer service.</p>
+      <p>Trumia Limited (company number C96757, LEI 984500BD9ACB39C97131) was authorised by the Malta Financial Services Authority as an e-money institution on 29 May 2023, under reference TRUM. It soft-launched publicly in May 2024. The company's ownership structure is not publicly disclosed, and — reflecting its recent founding — it does not yet have a lengthy public financial or regulatory track record.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">30</div><div class="l">EEA states covered via passporting</div></div>
+        <div class="stat"><div class="n">4.03</div><div class="l">TheBanks.eu rating ("Very Good"), #10 in Malta</div></div>
+        <div class="stat"><div class="n">2023</div><div class="l">year of MFSA authorisation</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Trumia's product range centres on multi-currency accounts and cross-border payment rails for both corporate and individual clients.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Multi-currency accounts</h4>
+          <p>Single- and multi-currency operational and settlement accounts for corporate clients, with local IBANs across supported currencies.</p>
+        </div>
+        <div class="cell">
+          <h4>Foreign exchange</h4>
+          <p>Automated currency exchange for both natural persons and companies, marketed as fast and low-friction.</p>
+        </div>
+        <div class="cell">
+          <h4>SEPA &amp; SWIFT payments</h4>
+          <p>Participation in SEPA (Credit Transfer, Instant Credit Transfer, Direct Debit and Direct Debit B2B) and the SWIFT network (BIC: TRUMMTM2XXX), including readiness for Verification of Payee.</p>
+        </div>
+        <div class="cell">
+          <h4>Internet &amp; mobile banking</h4>
+          <p>Digital-first account management for corporate clients across the EU and EEA, without a traditional bank-branch model.</p>
+        </div>
+        <div class="cell">
+          <h4>Consumer wallets</h4>
+          <p>Personal e-money accounts for individuals, alongside the corporate account offering.</p>
+        </div>
+        <div class="cell">
+          <h4>Trumia Ecosystem (P2P)</h4>
+          <p>Peer-to-peer payments between Trumia account holders, marketed as fast and cost-effective compared with external transfers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Trumia has not publicly disclosed a revenue breakdown; its likely revenue model follows the standard pattern for a small EMI of its kind.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Likely core streams</h4>
+          <ul>
+            <li>Account fees and transaction charges on payments and transfers</li>
+            <li>Spreads on foreign exchange conversions</li>
+            <li>Fees tied to premium services such as a dedicated account manager for business clients</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Disclosure basis</h4>
+          <ul>
+            <li>As a small, recently licensed private company, Trumia does not publish a product-level or consolidated revenue breakdown</li>
+            <li>No third-party financial-data provider estimate was identified in the sources reviewed for this profile</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Trumia is a Malta-domiciled institution using EU passporting to reach the wider EEA, with at least one additional national registration on record.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Regulatory footprint</h4>
+          <ul>
+            <li>Malta (Birkirkara) — home market and MFSA licence</li>
+            <li>Passported across all 30 EEA member states under standard EMI passporting rules</li>
+            <li>Registered with the Bank of Lithuania to provide services there without a branch</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Target client sectors</h4>
+          <ul>
+            <li>E-commerce</li>
+            <li>Travel</li>
+            <li>Online gaming (iGaming)</li>
+            <li>Other businesses and individuals facing barriers to mainstream banking access</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">multi-currency accounts</span>
+        <span class="tag">FX</span>
+        <span class="tag">iGaming payments</span>
+        <span class="tag">e-commerce</span>
+      </div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <div class="panel grey">
+        <h3>No public consolidated financial statements identified</h3>
+        <p style="margin-bottom:0;">Trumia is a small, privately held company that only received its MFSA licence in May 2023 and soft-launched in May 2024. No audited consolidated financial statements, revenue figures, or funding disclosures were identified in the sources reviewed for this profile. As a Malta-registered company, Trumia is required to file annual accounts with the Malta Business Registry, but such filings were not reviewed as part of this research and would be the appropriate source for confirming turnover, assets and profitability.</p>
+      </div>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">No named external auditor for Trumia Limited was identified in the sources reviewed for this profile.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Trumia Limited <span class="sub">Malta, Company No. C96757 — MFSA-licensed Electronic Money Institution</span></span>
+          <span class="auditor none">Not publicly disclosed</span>
+        </div>
+      </div>
+      <p class="note">As an MFSA-regulated e-money institution, Trumia is subject to prudential and audit requirements under Maltese financial-services law, and would be expected to have an appointed statutory auditor for its Malta Business Registry filings. That firm's name was not identified in the public sources reviewed here. Notably, Trumia's CEO, Mark Curmi, previously worked as a Director at KPMG Malta, heading its Banking and Fintech Advisory practice and participating in KPMG's Global DLT Working Group — a Big Four connection through personal career history, distinct from any current audit engagement, and involving KPMG rather than Deloitte.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">Trumia's public leadership profile centres on its CEO, a former KPMG Malta advisory director with two decades of banking and fintech experience.</p>
+      <div class="people-grid">
+        <div class="person">
+          <div class="name">Mark Curmi</div>
+          <div class="role">Chief Executive Officer &amp; Executive Director</div>
+          <p>Joined Trumia in 2023 as Chief Strategy Officer before being promoted to CEO; previously a Director at KPMG Malta leading Banking and Fintech Advisory, with earlier career roles in Commercial and Corporate Banking at HSBC in Malta, Spain and the UK. Also a Board Member of the Financial Institutions Malta Association (FIMA).</p>
+        </div>
+      </div>
+      <p class="note">Public sources reviewed for this profile named only the CEO; no further named executives (CFO, COO, CTO, or similar) were identified for Trumia at the time of research.</p>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">Trumia is not a foreign company with a Maltese branch — it is a Maltese company through and through, licensed, headquartered and embedded in the island's fintech community.</p>
+      <div class="panel">
+        <h3>A genuinely Malta-native institution</h3>
+        <ul>
+          <li>Trumia Limited is incorporated in Malta (company no. C96757) with its registered office at Quad Central, Birkirkara — the address it uses for all regulatory and public-facing purposes.</li>
+          <li>Its sole regulatory authorisation — as an Electronic Money Institution — comes directly from the Malta Financial Services Authority, granted in May 2023.</li>
+          <li>Trumia is a listed member of the Financial Institutions Malta Association (FIMA), named alongside other Malta-based fintechs profiled in this index, including Bitpanda and Trust Payments, as part of what FIMA describes as Malta's fintech community "shaping Malta's future as a global hub for financial services."</li>
+          <li>CEO Mark Curmi sits on FIMA's board, giving Trumia a direct voice in Malta's fintech-industry association alongside his executive role.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">Of all the companies in this index, Trumia's relationship with Malta is among the most complete: unlike multinational groups that merely hold a Maltese licence or office, Trumia's entire regulatory identity, leadership network and industry association membership are Maltese by origin — closer in kind to Paytently's home-grown Malta presence than to a foreign entrant's local branch.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <div class="panel grey">
+        <h3>No disclosed relationship identified</h3>
+        <p style="margin-bottom:0;">The public sources reviewed for this profile — Trumia's own website, MFSA and Bank of Lithuania registrations, FIMA's member listing, and press coverage of its launch — do not mention Deloitte in connection with Trumia in any capacity, whether as auditor, advisor or partner. The one Big Four name that does surface is <strong>KPMG</strong>, through CEO Mark Curmi's prior career as a Director in KPMG Malta's Banking and Fintech Advisory practice — a personal professional background, not a disclosed corporate engagement between Trumia and any audit firm. If Deloitte has any relationship with Trumia not captured in these sources, it is not publicly disclosed.</p>
+      </div>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li>TheBanks.eu, "Trumia Ltd (Malta) - Company Profile and Review" (licensing detail, rating, LEI, BIC, payment scheme participation).</li>
+        <li>Trumia.com, "Trumia: Redefining Digital Financial Services" (23 May 2024) and "Get to Know Mark Curmi: The CEO Transforming Financial Services with Trumia."</li>
+        <li>Trumia.com, "Business" and "About Us" pages (services detail, licensing reference, registered address).</li>
+        <li>WhosWho.mt, "Company Profiles in Malta: Trumia – innovating payments" (9 Oct 2024).</li>
+        <li>MaltaCEOs.mt, "Mark Curmi named CEO at upcoming fintech provider Trumia."</li>
+        <li>Financial Institutions Malta Association (FIMA), member listing for Trumia Limited.</li>
+        <li>Bank of Lithuania, register entry for Trumia Limited (cross-border service provision without a branch).</li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes. Trumia is a small, recently licensed private company; financial and auditor details in particular are not comprehensively disclosed in public sources and are flagged as such above rather than estimated. Figures and appointments reflect the most recent public information found at the time of research and may have changed since. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

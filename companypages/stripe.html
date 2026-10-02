@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stripe — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .depth-1{padding-left:2.6rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Stripe</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Stripe</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from Stripe's own disclosures, its public SOC reports, press coverage and company-data platforms. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Payments &amp; Financial Infrastructure</div>
+      <h1>Stripe</h1>
+      <p class="tagline">The largest privately held fintech company in the world — payment infrastructure for millions of internet businesses, from early-stage startups to Amazon, Shopify and OpenAI.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2010</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">South San Francisco, CA &amp; Dublin, Ireland</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Privately held — Collison founders retain voting control</div></div>
+        <div class="fact"><div class="label">Latest valuation</div><div class="value">$159bn (Feb 2026 tender offer)</div></div>
+        <div class="fact"><div class="label">2025 total payment volume</div><div class="value">$1.9 trillion</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Stripe does</h2>
+      <p class="lede">Stripe builds the software and APIs that let internet businesses accept payments and run the financial side of their operations — from a single developer integrating a checkout page to enterprises processing billions in volume. Founded in 2010 by Irish brothers Patrick and John Collison, the company grew from a simple "accept a credit card online" tool into a broad financial-infrastructure platform spanning billing, fraud prevention, card issuing, business financing, tax automation, and — more recently — stablecoin payments.</p>
+      <p>Stripe is dual-headquartered in South San Francisco and Dublin, with the Irish entity structure (commonly cited as Stripe Technology Company Limited, with operating subsidiaries including Stripe Payments Europe, Limited and Stripe Technology Europe, Limited) serving as its hub for European and EEA-wide regulation. The company remains private: rather than pursue an IPO, it has used a series of employee tender offers — most recently valuing it at $159 billion in February 2026 — to provide liquidity while the Collison brothers retain majority voting control through a multi-class share structure.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">5M+</div><div class="l">businesses powered</div></div>
+        <div class="stat"><div class="n">135+</div><div class="l">currencies supported</div></div>
+        <div class="stat"><div class="n">46+</div><div class="l">countries with local acquiring</div></div>
+        <div class="stat"><div class="n">1.6%</div><div class="l">of global GDP processed through Stripe (2025)</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Stripe's product suite spans core payment processing and a growing set of adjacent financial-infrastructure tools.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Stripe Payments</h4>
+          <p>Core payment-processing APIs supporting 135+ currencies and 100+ payment methods, used for online, in-app and in-person transactions.</p>
+        </div>
+        <div class="cell">
+          <h4>Billing &amp; Connect</h4>
+          <p>Subscription and recurring-revenue management (Billing), and infrastructure for marketplaces and platforms to route payments between multiple parties (Connect).</p>
+        </div>
+        <div class="cell">
+          <h4>Radar &amp; Issuing</h4>
+          <p>Machine-learning fraud prevention (Radar) and an end-to-end platform for issuing physical and virtual cards, certified with Visa and Mastercard (Issuing).</p>
+        </div>
+        <div class="cell">
+          <h4>Capital &amp; Treasury</h4>
+          <p>Merchant cash advances and term loans via bank partners (Capital), and embedded banking-as-a-service functionality for platforms (Treasury).</p>
+        </div>
+        <div class="cell">
+          <h4>Tax, Sigma &amp; Atlas</h4>
+          <p>Automated sales-tax calculation (Tax), a SQL-based analytics environment over a business's own Stripe data (Sigma), and a service for remotely incorporating a US company (Atlas).</p>
+        </div>
+        <div class="cell">
+          <h4>Stablecoins &amp; Tempo</h4>
+          <p>Stablecoin pay-ins (re-enabled 2024), the $1.1 billion acquisition of stablecoin platform Bridge (closed Feb 2025), crypto wallet provider Privy (acquired June 2025), and the Tempo blockchain built with Paradigm for stablecoin settlement.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Stripe's core model is a usage-linked transaction fee, supplemented by a growing suite of software products sold on top of the payments layer.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Core streams</h4>
+          <ul>
+            <li>Per-transaction processing fees — typically around 2.9% + $0.30 for US card payments, varying by country, card type and negotiated volume discounts</li>
+            <li>Custom, interchange-plus pricing for large enterprise customers</li>
+            <li>Fees for value-added products: Billing, Issuing, Capital, Tax, Treasury and Connect</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Scale and mix</h4>
+          <ul>
+            <li>Stripe's combined "revenue suite" (Billing, Invoicing and Tax) was on track for a $1 billion annual run rate in 2026, per the company's own 2025 annual letter</li>
+            <li>Stablecoin payment volume on the platform roughly doubled to approximately $400 billion in 2025</li>
+            <li>The company has described itself as "robustly profitable" since 2024, with free cash flow reported at approximately $2.2 billion in 2024</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">As a private company, Stripe does not publish a line-item revenue breakdown; the transaction-fee and software-fee split above is inferred from its own product disclosures and press coverage rather than a filed financial statement.</p>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Stripe serves businesses across dozens of countries, regulated in the EU through its Irish entity and in the US through money-transmission and banking-partner arrangements.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Regulatory footprint</h4>
+          <ul>
+            <li>European Union / EEA — regulated via <strong>Stripe Technology Europe, Limited</strong>, authorised as an Electronic Money Institution by the Central Bank of Ireland, passporting across all EEA states under PSD2</li>
+            <li>Ireland also hosts <strong>Stripe Payments Europe, Limited</strong> and other group entities as part of its EU operating base</li>
+            <li>United States — operates under state-level money-transmission frameworks and banking partnerships (e.g. for Capital's term loans)</li>
+            <li>Local acquiring and currency support across 46+ countries, including Australia, Brazil, Singapore, Japan and India</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Key customers &amp; verticals</h4>
+          <ul>
+            <li>Powers checkout and billing for Amazon, Shopify, OpenAI, Anthropic, Airbnb, Meta and BMW, among others</li>
+            <li>Reported to process payments for 90% of the Dow Jones Industrial Average and 80% of the Nasdaq 100 by customer count or volume</li>
+            <li>Positioned itself as infrastructure for "agentic commerce," partnering with OpenAI on Instant Checkout inside ChatGPT</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">e-commerce</span>
+        <span class="tag">SaaS billing</span>
+        <span class="tag">marketplaces</span>
+        <span class="tag">stablecoins</span>
+        <span class="tag">AI commerce</span>
+      </div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <p class="lede">Stripe has never filed an S-1 and does not publish audited consolidated financial statements; the figures below come from the company's own annual letters and from press reporting on its private valuations.</p>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th class="num">FY2024</th><th class="num">FY2025</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Net revenue (reported/estimated)</td><td class="num">≈ $5.1bn</td><td class="num">≈ $5.8bn–$6.9bn (estimates vary)</td></tr>
+          <tr><td>Total payment volume</td><td class="num">$1.4tn</td><td class="num">$1.9tn (+34% YoY)</td></tr>
+          <tr><td>Free cash flow</td><td class="num">≈ $2.2bn</td><td class="num">Not disclosed</td></tr>
+          <tr><td>Valuation (period-end tender offer)</td><td class="num">$65bn (Apr 2024)</td><td class="num">$106.7bn (Sep 2025) → $159bn (Feb 2026)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">Stripe has described itself as "robustly profitable" since 2024 but has not disclosed audited net income. Its valuation has moved sharply in recent years: from a $95 billion peak in 2021, down to a $50 billion "down round" in March 2023, then back up through a series of tender offers to $159 billion by February 2026 — a trajectory reflecting broader fintech sentiment shifts rather than any single disclosed financial statement.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">Stripe has not disclosed a named auditor for GAAP financial statements, since it is private and has not filed an S-1 — but it does publish regular third-party security attestations.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Stripe, Inc. (consolidated group) <span class="sub">Private company — no filed GAAP audit opinion publicly available</span></span>
+          <span class="auditor none">Not publicly disclosed</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="entity">Stripe Global Payments &amp; Revenue/Finance Automation system <span class="sub">SOC 2 / SOC 3 Type II examination, period to 30 Sep 2025</span></span>
+          <span class="auditor none">Linford &amp; Company LLP</span>
+        </div>
+      </div>
+      <p class="note">Stripe's published SOC 3 report for the year to 30 September 2025 was issued by <strong>Linford &amp; Company LLP</strong>, a Denver/Louisville, Colorado-based CPA firm specialising in SOC, HIPAA and FedRAMP examinations — founded by former Big Four auditors but not itself one of the Big Four. Stripe also holds PCI DSS Level 1 certification, the highest tier of payment-card-industry compliance, audited by a separate PCI-certified Qualified Security Assessor. No publicly disclosed GAAP financial-statement auditor was identified; that would typically only become public with an S-1 filing, which Stripe has not made.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">Stripe's leadership remains centred on its two founding brothers, who have run the company jointly since 2010.</p>
+      <div class="people-grid">
+        <div class="person">
+          <div class="name">Patrick Collison</div>
+          <div class="role">Co-Founder &amp; Chief Executive Officer</div>
+          <p>Co-founded Stripe in 2010 and has served as CEO ever since; retains majority voting control alongside his brother through Stripe's multi-class share structure.</p>
+        </div>
+        <div class="person">
+          <div class="name">John Collison</div>
+          <div class="role">Co-Founder &amp; President</div>
+          <p>Shares strategic control with Patrick and oversees operational functions; has publicly said the company is "in no rush" to pursue an IPO.</p>
+        </div>
+        <div class="person">
+          <div class="name">Steffan Tomlinson</div>
+          <div class="role">Chief Financial Officer</div>
+          <p>Joined Stripe as CFO in 2023; previously CFO at Confluent and Palo Alto Networks, bringing public-company financial discipline to a still-private firm.</p>
+        </div>
+      </div>
+      <p class="note">Stripe does not publish a full public executive roster to the same extent as a listed company; the names above are those most consistently and recently confirmed in public sources at the time of this research.</p>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">Stripe serves Malta as one of its European markets, reached through its Irish regulatory base rather than through a dedicated Maltese licence or entity.</p>
+      <div class="panel">
+        <h3>Malta as a served market, not a licensed one</h3>
+        <ul>
+          <li>Stripe expanded into Malta in 2020, alongside four other new European markets — the Czech Republic, Romania, Bulgaria and Cyprus.</li>
+          <li>Stripe's EU/EEA regulatory status runs through its Irish entity, <strong>Stripe Technology Europe, Limited</strong>, an Electronic Money Institution authorised by the Central Bank of Ireland and passported across all EEA states, Malta included, under PSD2 "freedom of services" rules.</li>
+          <li>No evidence was found of a separate Malta-registered Stripe entity or an MFSA licence — unlike several other companies in this index (Bitpanda, OKX, Blockchain.com, Trumia), Stripe has not sought a dedicated Maltese authorisation.</li>
+        </ul>
+      </div>
+      <p style="margin-top:1.4rem;">Stripe's own public FAQ on Connect and PSD2 explicitly addresses this model: businesses in any EEA country, including Malta, are told that Stripe's Irish licence gives it "equivalent regulatory status as a firm authorised in your country" — a passporting-based relationship rather than a direct one. This makes Stripe's Malta relationship lighter in form than the dedicated MFSA-licensed entities several crypto and payments firms in this index have established, even though Maltese merchants and consumers can use Stripe's products without restriction.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <div class="panel grey">
+        <h3>No disclosed relationship identified</h3>
+        <p style="margin-bottom:0;">The public sources reviewed for this profile — Stripe's own disclosures, its published SOC 3 report, and extensive press and company-data coverage of its valuation and IPO prospects — do not mention Deloitte as an auditor, attestor or disclosed advisor to Stripe. Stripe's one publicly visible assurance relationship is with Linford &amp; Company LLP for its SOC 2/SOC 3 security examinations; no GAAP financial-statement auditor, Deloitte or otherwise, has been publicly named, consistent with Stripe's private, pre-IPO status. If Deloitte has any advisory relationship with Stripe not captured in these sources — for example around eventual IPO preparation — it is not publicly disclosed.</p>
+      </div>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li>Wikipedia, "Stripe, Inc." (corporate history, headquarters, 2020 European market expansion including Malta).</li>
+        <li>Silicon Valley Investclub, "Stripe — Company profile" (valuation history, revenue estimates, leadership, headcount).</li>
+        <li>RevenueMemo, "Who owns Stripe? Ownership structure explained (2026)" (ownership, tender offer timeline, governance).</li>
+        <li>CorpDigest, "Stripe: Founded 2010, $6.8B Revenue (FY2025)" (revenue estimates, CEO history).</li>
+        <li>Allocations.com, "Stripe IPO 2026: What Investors Need to Know" (financial highlights, free cash flow, IPO status).</li>
+        <li>Stripe, "Report on Stripe, Inc.'s Stripe Global Payments and Revenue and Finance Automation (RFA) System" — SOC 3 report, Linford &amp; Company LLP (period ended 30 Sep 2025).</li>
+        <li>Stripe, "Frequently asked questions about Stripe Connect and PSD2" (Stripe Technology Europe Limited regulatory status, EEA passporting).</li>
+        <li>SoloCheck.ie, company filing summary for Stripe Payments Europe, Limited.</li>
+        <li>ThirdProof.ai, "Stripe SOC 2, PCI DSS & Security Status (2026)" (PCI DSS Level 1 certification, compliance posture).</li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes. Stripe is a large private company that does not publish audited consolidated financial statements; revenue and valuation figures above should be treated as estimates or company-disclosed metrics rather than audited numbers, and may have changed since this research was conducted. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

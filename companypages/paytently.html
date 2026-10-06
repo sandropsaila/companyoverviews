@@ -388,6 +388,19 @@
     .stat-row{gap:1.1rem 1.5rem;}
     .panel, .grid .cell{padding:1.1rem 1.2rem;}
   }
+  /* mobile overflow guard */
+  main{min-width:0;}
+  img,svg,video{max-width:100%;height:auto;}
+  @media (max-width: 900px){
+    .layout{grid-template-columns:minmax(0,1fr);}
+    h1,h2,h3,h4,p,li,td,th,.entity,.sub,.value,.name,.role{overflow-wrap:anywhere;}
+    pre,code{white-space:pre-wrap;word-break:break-word;}
+  }
+  @media (max-width: 900px){
+    .org-row{grid-template-columns:minmax(0,1fr);row-gap:.4rem;}
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;white-space:normal;}
+  }
 </style>
 </head>
 <body>

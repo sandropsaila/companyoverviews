@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ant Group — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+  /* mobile overflow guard */
+  main{min-width:0;}
+  img,svg,video{max-width:100%;height:auto;}
+  @media (max-width: 900px){
+    .layout{grid-template-columns:minmax(0,1fr);}
+    h1,h2,h3,h4,p,li,td,th,.entity,.sub,.value,.name,.role{overflow-wrap:anywhere;}
+    pre,code{white-space:pre-wrap;word-break:break-word;}
+  }
+  @media (max-width: 900px){
+    .org-row{grid-template-columns:minmax(0,1fr);row-gap:.4rem;}
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;white-space:normal;}
+  }
+</style>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Ant Group</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Ant Group</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from the company's own filings and website plus public registers and press. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Digital payments &amp; finance</div>
+      <h1>Ant Group</h1>
+      <p class="tagline">The Hangzhou-based operator of Alipay and an affiliate of Alibaba, with payments, digital finance, technology and international (Ant International) businesses. Private and unlisted, with no consolidated revenue published since its suspended 2020 IPO.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">Alipay 2004; Ant Financial 2014</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">Hangzhou, China</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Private; Alibaba holds about 33%</div></div>
+        <div class="fact"><div class="label">Alipay users</div><div class="value">1bn+ users, 80M merchants</div></div>
+        <div class="fact"><div class="label">Valuation</div><div class="value">~US$79bn (2023 buyback)</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Ant Group does</h2>
+      <p class="lede">Ant Group runs Alipay and a platform that supports more than 2,000 financial institutions in China. Its pillars are digital payment, digital finance (Huabei, Jiebei, insurance and wealth platforms), technologies (AntChain, OceanBase, Zoloz) and globalisation through Ant International (Alipay+, Antom, WorldFirst).</p>
+      <p>In September 2026 Ant merged its payment, Alipay and Zhima Credit units into a single Alipay Business Group, cutting its tier-one business groups from five to four. The planned October 2020 dual listing (about US$34.5bn raise) was suspended by regulators and has not been revived.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">RMB 120.6bn</div><div class="l">FY2019 revenue, last audited disclosure</div></div>
+        <div class="stat"><div class="n">RMB 38.3bn</div><div class="l">2024 group profit (Bloomberg)</div></div>
+        <div class="stat"><div class="n">~US$3bn</div><div class="l">Ant International revenue, 2024</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Five pillars per Ant's own profile.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Digital payment (Alipay)</h4>
+          <p>China's leading digital payment platform with 1bn+ users and 80M merchants.</p>
+        </div>
+        <div class="cell">
+          <h4>Digital finance</h4>
+          <p>Tech services to 2,000+ financial institutions; Ant Insurance, Ant Fortune, Huabei and Jiebei; associate MYbank has served 50M+ SMEs.</p>
+        </div>
+        <div class="cell">
+          <h4>Digital technologies</h4>
+          <p>AntChain blockchain, OceanBase database, Zoloz biometrics, SOFAStack and mPaaS.</p>
+        </div>
+        <div class="cell">
+          <h4>Ant International</h4>
+          <p>Alipay+ (36 wallets, 1.7bn accounts), Antom, WorldFirst and embedded finance; ANEXT Bank in Singapore.</p>
+        </div>
+        <div class="cell">
+          <h4>Digital connectivity</h4>
+          <p>Open platform for 12,000+ ISVs built on Alipay mini-programs and AI agents.</p>
+        </div>
+        <div class="cell">
+          <h4>Digital health</h4>
+          <p>Medical insurance codes and the AQ AI health app reaching nearly 900M users.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Technology-service and platform fees rather than balance-sheet lending. No post-2020 segment split has been published.</p>
+      <div class="market-cols">
+        <div>
+          <h4>FY2019 split (listing document)</h4>
+          <ul><li>Digital payment and merchant services: RMB 51,905M (43.0%)</li><li>CreditTech: RMB 41,885M (34.7%)</li><li>InvestmentTech: RMB 16,952M (14.1%)</li><li>InsureTech: RMB 8,947M (7.4%)</li><li>Innovation and other: RMB 930M (0.8%)</li></ul>
+        </div>
+        <div>
+          <h4>How fees arise</h4>
+          <ul><li>CreditTech: fees from partner banks on credit balances originated (about 98% underwritten by partners or securitised)</li><li>InvestmentTech: fees on volume of products distributed for partner asset managers</li><li>InsureTech: a percentage of premiums generated for partner insurers</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Online payment services in 200+ countries and regions at the time of the 2020 listing document.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Offices (official list)</h4>
+          <ul><li>China: Hangzhou (HQ), Beijing, Shanghai, Shenzhen, Chengdu, Hong Kong; Taipei</li><li>Asia and Middle East: Singapore, Tokyo, Bangkok, Seoul, Riyadh, Abu Dhabi</li><li>Europe: London, Luxembourg, Amsterdam, Milan, Paris, Munich</li><li>Americas and Oceania: Sunnyvale and Sydney</li></ul>
+        </div>
+        <div>
+          <h4>Ant International</h4>
+          <ul><li>Asia, Europe, the Middle East and Latin America</li><li>Alipay+ links wallets such as GCash across Asia-Pacific and beyond</li></ul>
+        </div>
+      </div>
+      <div class="tag-row"><span class="tag">Alipay</span><span class="tag">digital payments</span><span class="tag">cross-border</span><span class="tag">Alibaba affiliate</span></div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <div class="panel grey">
+        <h3>No consolidated revenue disclosed since 2020</h3>
+        <p style="margin-bottom:0;">Ant has not publicly disclosed consolidated revenue since its suspended 2020 IPO. The last audited figures come from the Hong Kong listing document; later figures are press estimates.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Figure</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td>Revenue FY2017</td><td>RMB 65,396M</td><td>Listing document</td></tr>
+            <tr><td>Revenue FY2018</td><td>RMB 85,722M</td><td>Listing document</td></tr>
+            <tr><td>Revenue FY2019</td><td>RMB 120,618M (~US$17.5bn)</td><td>Listing document</td></tr>
+            <tr><td>Revenue 9M to Sep 2020</td><td>RMB 118,191M (+43%), unaudited</td><td>Listing document</td></tr>
+            <tr><td>Group profit 2024</td><td>RMB 38.3bn (+61%)</td><td>Bloomberg, from Alibaba filings</td></tr>
+            <tr><td>Ant International revenue 2024</td><td>~US$3bn</td><td>Fintech News Singapore</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Valuation: about US$78.5–79bn in the 2023 buyback, down from a ~US$280bn peak; a Sacra estimate implies ~US$103bn from 2025 secondary trades.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">Ernst &amp; Young audited the group at the 2020 listing; the current auditor is not public.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Ant Group (group) <span class="sub">Per 2020 listing document</span></span>
+          <span class="auditor">Ernst &amp; Young (Hong Kong)</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">PRC entities <span class="sub">Statutory audits</span></span>
+          <span class="auditor">Ernst &amp; Young Hua Ming LLP</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">One subsidiary <span class="sub">Statutory audit</span></span>
+          <span class="auditor">PricewaterhouseCoopers Zhong Tian LLP</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Current group auditor <span class="sub">Unlisted; no annual report</span></span>
+          <span class="auditor none">Not found in sources</span>
+        </div>
+      </div>
+      <p class="note">The 2020 document also names Da Hua CPAs for one entity. Ant publishes no audited accounts today, so its current auditor is not found in sources.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">Per Ant Group's official management page. No COO is listed.</p>
+      <div class="people-grid">
+        <div class="person"><div class="name">Eric Xiandong Jing</div><div class="role">Chairman</div></div>
+        <div class="person"><div class="name">Cyril Xinyi Han</div><div class="role">Chief Executive Officer</div><p>Executive Director.</p></div>
+        <div class="person"><div class="name">Zheng Liu</div><div class="role">Chief Financial Officer</div><p>Vice President.</p></div>
+        <div class="person"><div class="name">Zhengyu He</div><div class="role">Chief Technology Officer</div><p>Vice President.</p></div>
+        <div class="person"><div class="name">Xiaofeng Shao</div><div class="role">Executive Vice President</div></div>
+        <div class="person"><div class="name">Zhifeng Zhou</div><div class="role">SVP, General Counsel &amp; Board Secretary</div></div>
+        <div class="person"><div class="name">Peng Yang</div><div class="role">CEO, Ant International</div><p>President: Douglas Feagin.</p></div>
+        <div class="person"><div class="name">Wenbiao Zhao</div><div class="role">CEO, Ant Digital Technologies</div></div>
+      </div>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">No Malta relationship was found.</p>
+      <div class="panel grey">
+        <h3>No Malta presence identified</h3>
+        <ul><li>Ant's official office list contains no Malta office.</li><li>No licence, entity, partnership or Maltese customer attributable to Ant, Alipay or Ant International was found.</li><li>The MFSA register application returned an error during research, so a definitive absence could not be confirmed.</li></ul>
+      </div>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <p class="lede">No Deloitte relationship found.</p>
+      <div class="panel grey">
+        <h3>No disclosed relationship identified</h3>
+        <p style="margin-bottom:0;">No Deloitte link as auditor, advisor, partner, alliance, investor or client was found. The disclosed auditor is Ernst &amp; Young, and Deloitte's alliance pages do not list Ant Group or Alipay.</p>
+      </div>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li><a href="https://antgroup.com/en" target="_blank" rel="noopener">Ant Group — Home</a></li>
+        <li><a href="https://antgroup.com/en/business-development" target="_blank" rel="noopener">Ant Group — Digital payment</a></li>
+        <li><a href="https://fintechnews.sg/111459/fintech/ant-group-international-revenue" target="_blank" rel="noopener">Fintech News SG — Ant International revenue</a></li>
+        <li><a href="https://ant-intl.com/en/about-us" target="_blank" rel="noopener">Ant International — About</a></li>
+        <li><a href="https://finance.yahoo.com/technology/ai/articles/ant-group-consolidates-alipay-single-102347240.html" target="_blank" rel="noopener">Yahoo Finance — Ant consolidates Alipay</a></li>
+        <li><a href="https://www1.hkexnews.hk/listedco/listconews/sehk/2020/1026/2020102600165.pdf" target="_blank" rel="noopener">HKEXnews — Ant listing document (2020)</a></li>
+        <li><a href="https://antgroup.com/en/about/our-offices" target="_blank" rel="noopener">Ant Group — Offices</a></li>
+        <li><a href="https://sacra.com/c/ant-group" target="_blank" rel="noopener">Sacra — Ant Group</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Ant_Group" target="_blank" rel="noopener">Wikipedia — Ant Group</a></li>
+        <li><a href="https://antgroup.com/en/about/leadership" target="_blank" rel="noopener">Ant Group — Management</a></li>
+        <li><a href="https://mfsa.mt/financial-services-register/result" target="_blank" rel="noopener">MFSA Financial Services Register</a></li>
+        <li><a href="https://deloitte.com/global/en/alliances.html" target="_blank" rel="noopener">Deloitte Global — Alliances</a></li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes. Items not publicly disclosed or not found in the sources reviewed are flagged rather than estimated. Information reflects the latest public sources found (October 2026) and may have changed. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

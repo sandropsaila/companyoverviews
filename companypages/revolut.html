@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revolut — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+  /* mobile overflow guard */
+  main{min-width:0;}
+  img,svg,video{max-width:100%;height:auto;}
+  @media (max-width: 900px){
+    .layout{grid-template-columns:minmax(0,1fr);}
+    h1,h2,h3,h4,p,li,td,th,.entity,.sub,.value,.name,.role{overflow-wrap:anywhere;}
+    pre,code{white-space:pre-wrap;word-break:break-word;}
+  }
+  @media (max-width: 900px){
+    .org-row{grid-template-columns:minmax(0,1fr);row-gap:.4rem;}
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;white-space:normal;}
+  }
+</style>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Revolut</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Revolut</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from the company's own filings and website plus public registers and press. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Digital banking</div>
+      <h1>Revolut</h1>
+      <p class="tagline">A London-headquartered digital bank and financial super-app with 40 markets, a European banking licence in Lithuania, and audited 2025 revenue of £4.5bn.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2015</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">London, UK</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Private; CEO Storonsky ~29%</div></div>
+        <div class="fact"><div class="label">Customers</div><div class="value">68.3M retail, 767k business (Mar 2026)</div></div>
+        <div class="fact"><div class="label">Valuation</div><div class="value">$75bn (2025); ~$115bn press report (Jun 2026)</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Revolut does</h2>
+      <p class="lede">Revolut offers personal and business accounts, subscriptions, savings and credit, trading, crypto, insurance and travel services, mainly through its app. It is licensed as a bank in over 30 of its 40 markets and filed a US national bank charter application in March 2026.</p>
+      <p>FY2025 revenue was $6.0bn (£4.5bn), up 46%, with profit before tax of $2.3bn (£1.7bn), a 38% margin.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">£4.5bn</div><div class="l">FY2025 revenue (+46%)</div></div>
+        <div class="stat"><div class="n">£1.7bn</div><div class="l">FY2025 profit before tax</div></div>
+        <div class="stat"><div class="n">40</div><div class="l">markets, 30+ as a licensed bank</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Core products per Revolut's own materials.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Personal accounts</h4>
+          <p>Standard to Ultra subscription plans, cards, Kids &amp; Teens and RevPoints.</p>
+        </div>
+        <div class="cell">
+          <h4>Savings and credit</h4>
+          <p>Savings, Flexible Cash Funds and loans; customer loans reached £979M at end 2024.</p>
+        </div>
+        <div class="cell">
+          <h4>Investments and trading</h4>
+          <p>Stocks, ETFs, bonds and a robo-advisor; CFDs in 29 countries.</p>
+        </div>
+        <div class="cell">
+          <h4>Crypto</h4>
+          <p>Services via Revolut Ltd and Revolut Digital Assets Europe; MiCA licence in 2025.</p>
+        </div>
+        <div class="cell">
+          <h4>Revolut Business</h4>
+          <p>Multi-currency business accounts, 16% of group income in 2025.</p>
+        </div>
+        <div class="cell">
+          <h4>Insurance and travel</h4>
+          <p>Insurance via Revolut Insurance Europe UAB, lounges and stays.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Fees dominate, followed by interest income.</p>
+      <div class="market-cols">
+        <div>
+          <h4>FY2025 by income type (£000)</h4>
+          <ul><li>Fee income: 3,429,229 (75.9%)</li><li>Interest income: 974,159 (21.6%)</li><li>Other income: 112,382 (2.5%)</li><li>Total revenue: 4,515,770</li></ul>
+        </div>
+        <div>
+          <h4>By product line (FY2025)</h4>
+          <ul><li>Card payments: $1.3bn (+45%)</li><li>Subscriptions: $936m (+67%)</li><li>Wealth: $876m (+31%)</li><li>FX: $800m (+43%)</li><li>Eleven product lines each above c. $135m (£100m)</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">40 markets, the whole EEA under a Lithuanian bank licence, plus a UK bank, Mexico and Australia.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Footprint</h4>
+          <ul><li>EEA via Revolut Bank UAB (Lithuania)</li><li>UK bank (PRA approval), Mexico and Australia launched as first banks outside Europe</li><li>Transfers to 160+ countries and regions</li></ul>
+        </div>
+        <div>
+          <h4>Targets</h4>
+          <ul><li>Western Europe HQ in Paris; £3bn UK investment</li><li>US bank charter application filed March 2026</li><li>Goal of 100 markets</li></ul>
+        </div>
+      </div>
+      <div class="tag-row"><span class="tag">neobank</span><span class="tag">digital bank</span><span class="tag">crypto</span><span class="tag">payments</span></div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Group (£bn)</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
+          <tbody>
+            <tr><td>Revenue</td><td>1.8</td><td>3.1</td><td>4.5</td></tr>
+            <tr><td>Profit before tax</td><td>—</td><td>$1.4bn (US$)</td><td>£1.7bn</td></tr>
+            <tr><td>Revenue (US$bn)</td><td>2.2</td><td>4.0</td><td>6.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Source: audited annual reports and Revolut's results announcements. 2024 profit before tax is given in US$ in the 2024 results release.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">BDO LLP audited FY2025; EY takes over from FY2026 after an audit tender.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Revolut Group Holdings Ltd <span class="sub">Group</span></span>
+          <span class="auditor">BDO LLP (FY2025); EY from FY2026</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Revolut Ltd <span class="sub">Company 08804411, UK</span></span>
+          <span class="auditor">BDO LLP (accounts to Dec 2025)</span>
+        </div>
+      </div>
+      <p class="note">EY was appointed global auditor following an FRC-guided tender concluded in August 2025.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">From the 2025 Annual Report and press. A confirmed serving COO and the Chief Growth &amp; Marketing Officer are not found in sources.</p>
+      <div class="people-grid">
+        <div class="person"><div class="name">Nik Storonsky</div><div class="role">Group CEO &amp; Co-Founder</div></div>
+        <div class="person"><div class="name">Vlad Yatsenko</div><div class="role">Group CTO &amp; Co-Founder</div></div>
+        <div class="person"><div class="name">Victor Stinga</div><div class="role">Chief Financial Officer</div></div>
+        <div class="person"><div class="name">Pierre Decote</div><div class="role">Group Chief Risk &amp; Compliance Officer</div></div>
+        <div class="person"><div class="name">Sid Jajodia</div><div class="role">Chief Banking Officer</div><p>Joined the Group Board as Executive Director in 2026.</p></div>
+        <div class="person"><div class="name">Martin Gilbert</div><div class="role">Chair (non-executive)</div></div>
+      </div>
+      <p class="note">Press reports say former COO-office head Michal Laube left in February; no successor is confirmed.</p>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">Revolut serves Malta from Lithuania under its European licence, with no Maltese licence or entity.</p>
+      <div class="panel grey">
+        <h3>Served by passporting; no MFSA licence</h3>
+        <ul><li>Maltese customers are served by Revolut Bank UAB (Lithuania), licensed by the ECB and regulated by the Bank of Lithuania.</li><li>Revolut runs a dedicated Revolut Malta site and Malta business onboarding pages.</li><li>Malta was one of the first five countries for the RevPoints loyalty launch in 2023.</li><li>No MFSA registration or Maltese office was found.</li></ul>
+      </div>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <p class="lede">No corporate relationship found; only individual links.</p>
+      <div class="panel grey">
+        <h3>People links only</h3>
+        <p style="margin-bottom:0;">Deloitte is not Revolut's auditor (BDO, then EY). Audit Committee Chair Caroline Britton spent 30 years at Deloitte until 2018 and Chair Martin Gilbert qualified as a chartered accountant with Deloitte, but no advisory, alliance or investor relationship with the firm was found.</p>
+      </div>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li><a href="https://assets.revolut.com/pdf/annualreport2025.pdf" target="_blank" rel="noopener">Revolut Group Holdings Annual Report 2025</a></li>
+        <li><a href="https://assets.revolut.com/pdf/annualreport2024.pdf" target="_blank" rel="noopener">Revolut Group Holdings Annual Report 2024</a></li>
+        <li><a href="https://revolut.com/news/revolut_reports_record_profit_of_2_3bn_for_2025_as_revenue_surges_to_6bn" target="_blank" rel="noopener">Revolut — 2025 results announcement</a></li>
+        <li><a href="https://revolut.com/news/record_growth_and_diverse_product_offering_drive_revolut_to_1_4bn_profit_in_2024" target="_blank" rel="noopener">Revolut — 2024 results</a></li>
+        <li><a href="https://revolut.com/news/revolut_concludes_audit_tender_process_appointing_ey_as_global_audit_partner_for_2026" target="_blank" rel="noopener">Revolut — EY audit tender</a></li>
+        <li><a href="https://revolut.com/en-US/news/revolut_s_chief_banking_officer_sid_jajodia_joins_group_board_as_executive_director" target="_blank" rel="noopener">Revolut — Sid Jajodia joins board</a></li>
+        <li><a href="https://revolut.com/en-MT/about" target="_blank" rel="noopener">Revolut Malta — About</a></li>
+        <li><a href="https://help.revolut.com/en-MT/help/more/legal-topics/which-revolut-companies-provide-me-with-services" target="_blank" rel="noopener">Revolut help — which companies provide services</a></li>
+        <li><a href="https://find-and-update.company-information.service.gov.uk/company/08804411/filing-history" target="_blank" rel="noopener">Companies House — Revolut Ltd filings</a></li>
+        <li><a href="https://efinancialcareers.com/news/revolut-coo-office-citi" target="_blank" rel="noopener">eFinancialCareers — Revolut COO office</a></li>
+        <li><a href="https://revenuememo.com/p/who-owns-revolut" target="_blank" rel="noopener">Revenue Memo — Who owns Revolut</a></li>
+        <li><a href="https://mfsa.mt/financial-services-register" target="_blank" rel="noopener">MFSA Financial Services Register</a></li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes. Items not publicly disclosed or not found in the sources reviewed are flagged rather than estimated. Information reflects the latest public sources found (October 2026) and may have changed. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

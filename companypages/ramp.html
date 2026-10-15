@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramp — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+  /* mobile overflow guard */
+  main{min-width:0;}
+  img,svg,video{max-width:100%;height:auto;}
+  @media (max-width: 900px){
+    .layout{grid-template-columns:minmax(0,1fr);}
+    h1,h2,h3,h4,p,li,td,th,.entity,.sub,.value,.name,.role{overflow-wrap:anywhere;}
+    pre,code{white-space:pre-wrap;word-break:break-word;}
+  }
+  @media (max-width: 900px){
+    .org-row{grid-template-columns:minmax(0,1fr);row-gap:.4rem;}
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;white-space:normal;}
+  }
+</style>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Ramp</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Ramp</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from the company's own filings and website plus public registers and press. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Corporate cards &amp; spend management</div>
+      <h1>Ramp</h1>
+      <p class="tagline">New York-based private fintech offering corporate cards, expense management, bill pay, travel and business banking, valued at about $60bn in an October 2026 round.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2019 (Eric Glyman, Karim Atiyeh, Gene Lee)</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">New York City</div></div>
+        <div class="fact"><div class="label">Ownership</div><div class="value">Private, venture-backed</div></div>
+        <div class="fact"><div class="label">Valuation</div><div class="value">c. $60bn pre-money (reported 9 Oct 2026)</div></div>
+        <div class="fact"><div class="label">Customers</div><div class="value">70,000+ businesses</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Ramp does</h2>
+      <p class="lede">Ramp Business Corporation (Delaware) describes itself as an AI-native finance platform. Annualised revenue passed $1bn in October 2025 and $1.5bn in June 2026, per Bloomberg as reported; Ramp declined to comment on the October round.</p>
+      <p>In March 2026 it acquired Billhop (UK and Sweden payment licences) and opened offices in London and Stockholm. In June 2026 Karim Atiyeh became co-CEO alongside Eric Glyman.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">$1.5bn+</div><div class="l">annualised revenue, June 2026</div></div>
+        <div class="stat"><div class="n">~$60bn</div><div class="l">reported valuation, Oct 2026</div></div>
+        <div class="stat"><div class="n">n/a</div><div class="l">auditor not disclosed</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Product set per Ramp's own pages.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Corporate cards</h4>
+          <p>Visa charge cards with spend controls and 1.5% cash back.</p>
+        </div>
+        <div class="cell">
+          <h4>Expense management</h4>
+          <p>Automated expense reporting and reimbursements.</p>
+        </div>
+        <div class="cell">
+          <h4>Bill Pay / AP</h4>
+          <p>AI-driven invoice capture, approvals and payments via ACH, wire, cheque or international rails.</p>
+        </div>
+        <div class="cell">
+          <h4>Travel</h4>
+          <p>Policy-based booking with virtual cards.</p>
+        </div>
+        <div class="cell">
+          <h4>Banking &amp; treasury</h4>
+          <p>Unlimited international wires and yield on balances.</p>
+        </div>
+        <div class="cell">
+          <h4>AI and accounting tools</h4>
+          <p>AI spend visibility (April 2026) and Stack for accounting firms (June 2026).</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Per third-party analyses; Ramp does not publish a split.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Main streams</h4>
+          <ul><li>Card interchange: the core stream, partly returned as 1.5% cash back</li><li>Software subscriptions, notably Ramp Plus (c. $12–15 per user per month)</li><li>Travel booking and float/treasury yield</li><li>No percentage split was found in sources</li></ul>
+        </div>
+        <div>
+          <h4>Growth markers</h4>
+          <ul><li>Annualised revenue above $1.5bn (June 2026)</li><li>c. $200bn annualised purchase volume (June 2026)</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Mainly US small and mid-sized businesses, now expanding to Europe.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Geography</h4>
+          <ul><li>US primary market</li><li>Local-currency cards in Canada, Australia, Japan, Mexico, Singapore</li><li>UK and EU onboarding from summer 2026 via Billhop</li></ul>
+        </div>
+        <div>
+          <h4>Reach</h4>
+          <ul><li>Spend platform available in 190+ countries; payments to 185+</li></ul>
+        </div>
+      </div>
+      <div class="tag-row"><span class="tag">corporate cards</span><span class="tag">spend management</span><span class="tag">AI finance</span><span class="tag">private</span></div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <div class="panel grey">
+        <h3>No audited consolidated revenue published</h3>
+        <p style="margin-bottom:0;">Ramp is private. Figures below are annualised run-rates reported by Ramp and aggregators, not audited statements.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Indicator</th><th>Figure</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td>Annualised revenue</td><td>&gt; $1.5bn (June 2026)</td><td>Bloomberg via ainvest</td></tr>
+            <tr><td>Annual revenue estimate</td><td>$1.4bn, +40% YoY</td><td>GetLatka (aggregator)</td></tr>
+            <tr><td>Valuation</td><td>~$60bn (Oct 2026); $44bn (June 2026)</td><td>Bloomberg / Revenue Memo</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Total funding is reported as over $3bn by one source and $2.6bn by another; the trackers disagree.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">No external auditor is disclosed.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Ramp Business Corporation <span class="sub">Private, no public filings</span></span>
+          <span class="auditor none">Not found in sources</span>
+        </div>
+      </div>
+      <p class="note">The only SEC 10-K found for 'Ramp' belongs to LiveRamp, an unrelated company.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">From Banking Dive (June 2026) and aggregators.</p>
+      <div class="people-grid">
+        <div class="person"><div class="name">Eric Glyman</div><div class="role">Co-Chief Executive Officer</div><p>Co-founder.</p></div>
+        <div class="person"><div class="name">Karim Atiyeh</div><div class="role">Co-Chief Executive Officer</div><p>Co-founder; formerly CTO.</p></div>
+        <div class="person"><div class="name">Rahul Sengottuvelu</div><div class="role">Chief Technology Officer</div><p>Previously head of applied AI.</p></div>
+        <div class="person"><div class="name">William Petrie</div><div class="role">Chief Financial Officer</div><p>Per The Official Board, an aggregator; not confirmed by Ramp.</p></div>
+        <div class="person"><div class="name">Colin Kennedy</div><div class="role">Chief Business Officer</div><p>Per Craft.co; may predate the 2026 reshuffle.</p></div>
+      </div>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">No Malta presence found.</p>
+      <div class="panel grey">
+        <h3>No MFSA licence or Maltese entity found</h3>
+        <ul><li>The MFSA register shows no Ramp listing.</li><li>'Ramp Network' (a crypto on/off-ramp firm with Malta-facing compliance pages) is an unrelated company.</li><li>European expansion runs through Billhop's UK and Sweden licences, with no Malta element.</li></ul>
+      </div>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <p class="lede">No Deloitte relationship found.</p>
+      <div class="panel grey">
+        <h3>No disclosed relationship identified</h3>
+        <p style="margin-bottom:0;">Deloitte is not named as Ramp's auditor, advisor, alliance partner, client or investor in any source, and Ramp's partner pages and Deloitte's alliance pages do not name each other.</p>
+      </div>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li><a href="https://ramp.com/products" target="_blank" rel="noopener">Ramp products</a></li>
+        <li><a href="https://ramp.com/global" target="_blank" rel="noopener">Ramp global</a></li>
+        <li><a href="https://bankingdive.com/news/ramp-names-karim-atiyeh-co-ceo-glyman-cto-Rahul-Sengottuvelu/824229" target="_blank" rel="noopener">Banking Dive: Ramp co-CEO</a></li>
+        <li><a href="https://fintech.global/2026/03/16/ramp-acquires-billhop-to-expand-into-uk-and-europe" target="_blank" rel="noopener">Ramp acquires Billhop (Fintech Global)</a></li>
+        <li><a href="https://ainvest.com/news/ramp-60-billion-valuation-milestone-fair-price-2610" target="_blank" rel="noopener">Ramp $60bn valuation (ainvest)</a></li>
+        <li><a href="https://revenuememo.com/p/who-owns-ramp" target="_blank" rel="noopener">Who owns Ramp (Revenue Memo)</a></li>
+        <li><a href="https://getlatka.com/companies/ramp" target="_blank" rel="noopener">GetLatka: Ramp</a></li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes. Items not publicly disclosed or not found in the sources reviewed are flagged rather than estimated. Information reflects the latest public sources found (October 2026) and may have changed. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futu — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+  /* mobile overflow guard */
+  main{min-width:0;}
+  img,svg,video{max-width:100%;height:auto;}
+  @media (max-width: 900px){
+    .layout{grid-template-columns:minmax(0,1fr);}
+    h1,h2,h3,h4,p,li,td,th,.entity,.sub,.value,.name,.role{overflow-wrap:anywhere;}
+    pre,code{white-space:pre-wrap;word-break:break-word;}
+  }
+  @media (max-width: 900px){
+    .org-row{grid-template-columns:minmax(0,1fr);row-gap:.4rem;}
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;white-space:normal;}
+  }
+</style>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Futu</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Futu</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from the company's own filings and website plus public registers and press. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Online brokerage, Hong Kong</div>
+      <h1>Futu</h1>
+      <p class="tagline">Hong Kong and Shenzhen-based online broker behind the Futubull and moomoo apps, audited by PwC Zhong Tian, with no Malta or Deloitte link found.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2012, Hong Kong</div></div>
+        <div class="fact"><div class="label">Holding company</div><div class="value">Futu Holdings Ltd, Cayman Islands (April 2014)</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">34/F United Centre, Admiralty, Hong Kong; also Shenzhen</div></div>
+        <div class="fact"><div class="label">Listing</div><div class="value">Nasdaq: FUTU (8 March 2019)</div></div>
+        <div class="fact"><div class="label">Control</div><div class="value">Founder Leaf Hua Li holds over 50% of votes</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Futu does</h2>
+      <p class="lede">Futu operates Futubull (Hong Kong and China) and moomoo (international), with over 100 licences worldwide. At 31 March 2026 it had 30.17 million registered users, 3.59 million funded accounts and US$155.8bn of client assets.</p>
+      <p>China operations run through variable-interest-entity contracts (Shenzhen Futu and Haikou Futu). Class B shares are c. 31.7% of capital and c. 90.3% of voting power.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">US$2.94bn</div><div class="l">FY2025 revenue (+68%)</div></div>
+        <div class="stat"><div class="n">US$1.50bn</div><div class="l">FY2025 adjusted net income (+102%)</div></div>
+        <div class="stat"><div class="n">PwC</div><div class="l">group auditor</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">Service lines per the FY2025 Form 20-F.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Securities brokerage</h4>
+          <p>Trading and clearing across HK, US, Singapore, Australia, Japan, Canada, Malaysia and Korea markets, plus derivatives.</p>
+        </div>
+        <div class="cell">
+          <h4>Margin financing</h4>
+          <p>Margin lending and securities lending.</p>
+        </div>
+        <div class="cell">
+          <h4>Wealth management</h4>
+          <p>Funds, bonds and structured products; trust and private wealth (US$23.1bn AUM at end-2025).</p>
+        </div>
+        <div class="cell">
+          <h4>Corporate services</h4>
+          <p>ESOP solutions, IPO distribution and investor relations.</p>
+        </div>
+        <div class="cell">
+          <h4>Virtual assets</h4>
+          <p>Licensed Hong Kong platform from Q1 2026; crypto on moomoo US.</p>
+        </div>
+        <div class="cell">
+          <h4>Banking</h4>
+          <p>Airstar Bank, acquired in 2025.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">Brokerage commissions and interest income are almost equal (HK$ thousands in the 20-F).</p>
+      <div class="market-cols">
+        <div>
+          <h4>FY2025 (HK$M)</h4>
+          <ul><li>Brokerage commission and handling: 10,573 (46.3%)</li><li>Interest income: 10,442 (45.7%)</li><li>Other income: 1,833 (8.0%)</li><li>Total: 22,847 (US$2,935M)</li></ul>
+        </div>
+        <div>
+          <h4>Interest income detail</h4>
+          <ul><li>Margin financing and securities lending: HK$6,369M (27.9% of revenue)</li><li>Bank deposits: HK$3,759M (16.5%)</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Hong Kong plus a fast-growing set of overseas markets.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Footprint</h4>
+          <ul><li>Hong Kong, US, Singapore, Australia, Canada, Japan, Malaysia, New Zealand</li><li>Users from over 200 countries and regions</li></ul>
+        </div>
+        <div>
+          <h4>Growth</h4>
+          <ul><li>2025 net new funded accounts led by markets outside Hong Kong (+27% YoY)</li><li>Platform trading volume c. US$1.89tn in 2025 (+89%)</li></ul>
+        </div>
+      </div>
+      <div class="tag-row"><span class="tag">online brokerage</span><span class="tag">moomoo</span><span class="tag">Hong Kong</span><span class="tag">Nasdaq: FUTU</span></div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Total revenues (HK$M)</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+          <tbody>
+            <tr><td>Brokerage commission and handling</td><td>3,945</td><td>6,045</td><td>10,573</td></tr>
+            <tr><td>Interest income</td><td>5,536</td><td>6,667</td><td>10,442</td></tr>
+            <tr><td>Other income</td><td>527</td><td>879</td><td>1,833</td></tr>
+            <tr><td>Total revenues</td><td>10,008</td><td>13,590</td><td>22,847</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Source: FY2025 Form 20-F. USD equivalents: FY2025 US$2.94bn (+68.1%), FY2024 US$1.75bn. Q1 2026 revenue was US$746.9M (+25%, unaudited).</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">PricewaterhouseCoopers Zhong Tian LLP is the principal external auditor.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Futu Holdings Ltd <span class="sub">Group, PCAOB-registered</span></span>
+          <span class="auditor">PricewaterhouseCoopers Zhong Tian LLP</span>
+        </div>
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Futu Securities International (HK) Ltd <span class="sub">Main licensed subsidiary</span></span>
+          <span class="auditor none">Not found in sources</span>
+        </div>
+      </div>
+      <p class="note">FY2025 audit fees were US$1,367 thousand per Item 16C.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">From the FY2025 Form 20-F; no COO or CTO is named there.</p>
+      <div class="people-grid">
+        <div class="person"><div class="name">Leaf Hua Li</div><div class="role">Founder, Chairman and Chief Executive Officer</div><p>Formerly senior manager at Tencent.</p></div>
+        <div class="person"><div class="name">Arthur Yu Chen</div><div class="role">Chief Financial Officer</div><p>Since September 2017.</p></div>
+        <div class="person"><div class="name">Robin Li Xu</div><div class="role">Senior Vice President</div><p>Product, operations and marketing.</p></div>
+      </div>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">No Malta presence found.</p>
+      <div class="panel grey">
+        <h3>No MFSA licence or Maltese entity found</h3>
+        <ul><li>Futu's licensing disclosure lists regulators from Hong Kong, the US, Singapore, Australia, New Zealand, Japan, Canada and Malaysia; none is Maltese.</li><li>No Futu Malta entity, office or partner was found. The MFSA register page errored and could not be directly queried.</li></ul>
+      </div>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <p class="lede">No Deloitte relationship found.</p>
+      <div class="panel grey">
+        <h3>No disclosed relationship identified</h3>
+        <p style="margin-bottom:0;">Deloitte is not Futu's auditor (PwC Zhong Tian is). No advisory, alliance, client or investor relationship was found.</p>
+      </div>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li><a href="https://sec.gov/Archives/edgar/data/1754581/000110465926043451/futu-20251231x20f.htm" target="_blank" rel="noopener">Futu FY2025 Form 20-F (SEC)</a></li>
+        <li><a href="https://sec.gov/Archives/edgar/data/1754581/000141057825000706/futu-20241231x20f.htm" target="_blank" rel="noopener">Futu FY2024 Form 20-F (SEC)</a></li>
+        <li><a href="https://prnewswire.com/news-releases/moomoos-parent-company-futu-achieves-consecutive-growth-in-q4-and-full-year-2025-302712138.html" target="_blank" rel="noopener">Futu Q4 and FY2025 results (PR Newswire)</a></li>
+        <li><a href="https://prnewswire.com/news-releases/moomoos-parent-company-futu-releases-q1-2026-results-revenues-up-25-yoy-to-us746-9-million-302784286.html" target="_blank" rel="noopener">Futu Q1 2026 results (PR Newswire)</a></li>
+        <li><a href="https://futuholdings.com/en-us/profile" target="_blank" rel="noopener">About Futu</a></li>
+        <li><a href="https://fsr.mfsa.mt/" target="_blank" rel="noopener">MFSA register</a></li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes. Items not publicly disclosed or not found in the sources reviewed are flagged rather than estimated. Information reflects the latest public sources found (October 2026) and may have changed. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>

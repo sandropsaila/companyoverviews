@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var ok=false;try{ok=sessionStorage.getItem("co_access")==="1";}catch(e){}if(!ok){document.documentElement.style.display="none";location.replace("/gate.html?next="+encodeURIComponent(location.pathname+location.search+location.hash));}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wealthsimple — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F5;
+    --panel:#FFFFFF;
+    --ink:#14202B;
+    --ink-soft:#4B5A66;
+    --line:#D7DFE5;
+    --navy:#0F2438;
+    --navy-2:#16334D;
+    --teal:#0B6E5C;
+    --teal-soft:#E4F1EE;
+    --amber:#A9762F;
+    --amber-soft:#F5ECDD;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--navy);
+    margin:0 0 .5em;
+  }
+  a{color:var(--teal);}
+  p{margin:0 0 1em; max-width:70ch;}
+  .layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--navy);
+    color:#DCE6EC;
+    padding:2.2rem 1.6rem;
+  }
+  nav.toc .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:.15rem;
+  }
+  nav.toc .brand-sub{
+    font-size:.78rem;
+    color:#8FA6B8;
+    margin-bottom:2rem;
+    letter-spacing:.02em;
+  }
+  nav.toc a{
+    display:block;
+    color:#B9C9D4;
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem 0;
+    border-left:2px solid transparent;
+    padding-left:.85rem;
+    margin-left:-.85rem;
+    transition:color .15s, border-color .15s;
+  }
+  nav.toc a:hover, nav.toc a.active{
+    color:#fff;
+    border-left-color:var(--amber);
+  }
+  nav.toc .toc-foot{
+    margin-top:2rem;
+    padding-top:1rem;
+    border-top:1px solid #2A455C;
+    font-size:.74rem;
+    color:#7C93A5;
+  }
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--navy);
+    padding:.9rem 1.1rem;
+  }
+  .mobile-bar .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .mobile-bar button.nav-toggle{
+    background:transparent;
+    border:1px solid #3A5670;
+    color:#DCE6EC;
+    font-family:'Inter',sans-serif;
+    font-size:.82rem;
+    padding:.4rem .8rem;
+    border-radius:var(--radius);
+  }
+  .mobile-bar nav{
+    display:none;
+    margin-top:.9rem;
+    padding-top:.8rem;
+    border-top:1px solid #2A455C;
+  }
+  .mobile-bar nav.open{display:block;}
+  .mobile-bar nav a{
+    display:block;
+    color:#C7D6DE;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:.55rem 0;
+    border-bottom:1px solid #23384A;
+  }
+  .mobile-bar nav a:last-child{border-bottom:none;}
+  main{padding:0;}
+  header.hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#F2F6F8;
+    padding:4.2rem 4rem 3.2rem;
+  }
+  header.hero .eyebrow{
+    color:#8FC9BB;
+    font-size:.85rem;
+    font-weight:500;
+    margin-bottom:.8rem;
+  }
+  header.hero h1{
+    color:#fff;
+    font-size:3.4rem;
+    line-height:1.05;
+    margin-bottom:.6rem;
+  }
+  header.hero .tagline{
+    font-size:1.2rem;
+    color:#C7D6DE;
+    max-width:46ch;
+    margin-bottom:1.8rem;
+    font-weight:400;
+  }
+  .fact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid #2E4A61;
+    padding-top:1.4rem;
+  }
+  .fact-row .fact{
+    padding:0 1.6rem;
+    border-right:1px solid #2E4A61;
+  }
+  .fact-row .fact:first-child{padding-left:0;}
+  .fact-row .fact:last-child{border-right:none;}
+  .fact-row .fact .label{
+    font-size:.74rem;
+    color:#8FA6B8;
+    margin-bottom:.15rem;
+  }
+  .fact-row .fact .value{
+    font-size:1rem;
+    color:#fff;
+    font-weight:500;
+  }
+  section{
+    padding:3.4rem 4rem;
+    border-bottom:1px solid var(--line);
+    max-width:1080px;
+  }
+  section:last-of-type{border-bottom:none;}
+  section > .section-label{
+    font-size:.8rem;
+    color:var(--teal);
+    font-weight:600;
+    margin-bottom:.4rem;
+  }
+  section h2{
+    font-size:1.9rem;
+    margin-bottom:1.1rem;
+  }
+  .lede{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:66ch;
+    margin-bottom:1.8rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:1.5rem;
+  }
+  .grid .cell{
+    background:var(--panel);
+    padding:1.4rem 1.5rem;
+  }
+  .grid .cell h4{
+    font-size:1.02rem;
+    margin-bottom:.4rem;
+  }
+  .grid .cell p{
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.94rem;
+  }
+  th,td{
+    text-align:left;
+    padding:.7rem .9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-weight:600;
+    color:var(--navy);
+    background:#F5F7F8;
+    font-size:.8rem;
+  }
+  td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:1px solid var(--line);}
+  .note{
+    font-size:.84rem;
+    color:var(--ink-soft);
+    margin-top:.9rem;
+    border-left:2px solid var(--line);
+    padding-left:.9rem;
+  }
+  .org-tree{
+    margin-top:1.6rem;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .org-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    padding:.85rem 1.2rem;
+    border-bottom:1px solid var(--line);
+    gap:1rem;
+  }
+  .org-row:last-child{border-bottom:none;}
+  .org-row .indent{color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:.85rem;}
+  .org-row .entity{font-weight:600;}
+  .org-row .entity .sub{display:block; font-weight:400; font-size:.82rem; color:var(--ink-soft); margin-top:.1rem;}
+  .org-row .auditor{
+    font-size:.82rem;
+    padding:.28rem .7rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .auditor.none{background:#F0F2F3; color:var(--ink-soft);}
+  .depth-0{padding-left:1.2rem;}
+  .people-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.4rem;
+    margin-top:1.6rem;
+  }
+  .person{
+    border-left:2px solid var(--teal);
+    padding-left:1rem;
+  }
+  .person .name{font-weight:600; font-size:1.02rem;}
+  .person .role{font-size:.85rem; color:var(--teal); margin-bottom:.35rem;}
+  .person p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .market-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:1.6rem;
+  }
+  .market-cols h4{font-size:.95rem; margin-bottom:.6rem;}
+  .market-cols ul{margin:0; padding-left:1.1rem; color:var(--ink-soft); font-size:.92rem;}
+  .market-cols li{margin-bottom:.35rem;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem;}
+  .tag{
+    font-size:.78rem;
+    padding:.3rem .7rem;
+    background:#F0F2F3;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:1.8rem 2rem;
+    margin-top:1.4rem;
+  }
+  .panel.amber{border-top-color:var(--amber);}
+  .panel.grey{border-top-color:#9AA7AF;}
+  .panel h3{font-size:1.15rem; margin-bottom:.7rem;}
+  .panel ul{padding-left:1.2rem; color:var(--ink-soft); font-size:.94rem;}
+  .panel li{margin-bottom:.4rem;}
+  .stat-row{display:flex; flex-wrap:wrap; gap:2.2rem; margin-top:1.6rem;}
+  .stat{min-width:120px;}
+  .stat .n{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--navy); font-weight:600;}
+  .stat .l{font-size:.82rem; color:var(--ink-soft);}
+  footer{
+    padding:2.6rem 4rem 4rem;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  footer h3{font-size:1rem; color:var(--navy); margin-bottom:.8rem;}
+  footer ol{padding-left:1.2rem;}
+  footer li{margin-bottom:.4rem;}
+  footer .disclaimer{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:.78rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{display:none;}
+    .mobile-bar{display:block;}
+    header.hero{padding:2.2rem 1.4rem 1.8rem;}
+    section, footer{padding:2.2rem 1.4rem;}
+    header.hero h1{font-size:2.1rem;}
+    header.hero .tagline{font-size:1.02rem;}
+    section h2{font-size:1.5rem;}
+    .market-cols{grid-template-columns:1fr; gap:1.4rem;}
+    .fact-row{
+      flex-direction:column;
+      border-top:none;
+      padding-top:0;
+      gap:.9rem;
+    }
+    .fact-row .fact{
+      padding:.8rem 0 0;
+      border-right:none;
+      border-top:1px solid #2E4A61;
+    }
+    .fact-row .fact:first-child{border-top:none; padding-top:0;}
+    table{font-size:.86rem;}
+    th, td{padding:.55rem .6rem; white-space:nowrap;}
+    .org-row{
+      grid-template-columns:1fr;
+      row-gap:.4rem;
+    }
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;}
+    .stat-row{gap:1.4rem 1.8rem;}
+    .stat .n{font-size:1.7rem;}
+    .people-grid, .grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 480px){
+    body{font-size:15px;}
+    header.hero h1{font-size:1.8rem;}
+    header.hero{padding:1.8rem 1.1rem 1.5rem;}
+    section, footer{padding:1.8rem 1.1rem;}
+    section h2{font-size:1.32rem;}
+    .lede{font-size:1rem;}
+    .stat-row{gap:1.1rem 1.5rem;}
+    .panel, .grid .cell{padding:1.1rem 1.2rem;}
+  }
+  /* mobile overflow guard */
+  main{min-width:0;}
+  img,svg,video{max-width:100%;height:auto;}
+  @media (max-width: 900px){
+    .layout{grid-template-columns:minmax(0,1fr);}
+    h1,h2,h3,h4,p,li,td,th,.entity,.sub,.value,.name,.role{overflow-wrap:anywhere;}
+    pre,code{white-space:pre-wrap;word-break:break-word;}
+  }
+  @media (max-width: 900px){
+    .org-row{grid-template-columns:minmax(0,1fr);row-gap:.4rem;}
+    .org-row .indent{display:none;}
+    .org-row .auditor{justify-self:start;white-space:normal;}
+  }
+</style>
+<body>
+<div class="mobile-bar" id="mobileBar">
+  <div class="row">
+    <div class="brand">Wealthsimple</div>
+    <a href="../index.html" style="color:#B9C9D4;font-size:.82rem;text-decoration:none;margin-right:.8rem;">&larr; All</a><button class="nav-toggle" id="navToggle" aria-expanded="false">Sections ▾</button>
+  </div>
+  <nav id="mobileNav">
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">Wealthsimple</div>
+    <div class="brand-sub">Company profile</div>
+    <a href="../index.html" style="display:block;color:#8FA6B8;font-size:.82rem;margin-bottom:1.4rem;text-decoration:none;">&larr; All companies</a>
+    <a href="#overview">Overview</a>
+    <a href="#services">Services</a>
+    <a href="#revenue-streams">Revenue streams</a>
+    <a href="#markets">Markets</a>
+    <a href="#financials">Consolidated financials</a>
+    <a href="#auditors">Auditors</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#malta">Relationship with Malta</a>
+    <a href="#deloitte">Relationship with Deloitte</a>
+    <a href="#sources">Sources</a>
+    <div class="toc-foot">Compiled from the company's own filings and website plus public registers and press. See Sources for detail.</div>
+  </nav>
+
+  <main>
+    <header class="hero" id="overview">
+      <div class="eyebrow">Company profile — Canadian investing &amp; money app</div>
+      <h1>Wealthsimple</h1>
+      <p class="tagline">Toronto-based private fintech with C$100bn+ assets under administration, valued at C$10bn in October 2025.</p>
+      <div class="fact-row">
+        <div class="fact"><div class="label">Founded</div><div class="value">2014 by Michael Katchen, Brett Huneycutt and Rudy Adler</div></div>
+        <div class="fact"><div class="label">Headquarters</div><div class="value">Toronto, Canada</div></div>
+        <div class="fact"><div class="label">Main owner</div><div class="value">Power Corporation of Canada (52.4% undiluted)</div></div>
+        <div class="fact"><div class="label">Valuation</div><div class="value">C$10bn post-money (Series F, Oct 2025)</div></div>
+        <div class="fact"><div class="label">Clients</div><div class="value">3.2 million (Dec 2025)</div></div>
+      </div>
+    </header>
+
+    <section id="overview-body">
+      <div class="section-label">Overview</div>
+      <h2>What Wealthsimple does</h2>
+      <p class="lede">Wealthsimple offers managed investing, self-directed trading, crypto, tax filing, chequing and credit cards. It says it has been profitable since Q2 2023.</p>
+      <p>Assets under administration were C$111bn at 31 December 2025.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">C$129M</div><div class="l">Q2 2024 revenue, +88%</div></div>
+        <div class="stat"><div class="n">C$111bn</div><div class="l">AUA, Dec 2025</div></div>
+        <div class="stat"><div class="n">C$10bn</div><div class="l">valuation, Oct 2025</div></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label">What it sells</div>
+      <h2>Services</h2>
+      <p class="lede">From Wikipedia and The Globe and Mail.</p>
+      <div class="grid">
+        <div class="cell">
+          <h4>Wealthsimple Invest</h4>
+          <p>Automated ETF portfolios.</p>
+        </div>
+        <div class="cell">
+          <h4>Trade and Crypto</h4>
+          <p>Commission-free stocks, ETFs and crypto.</p>
+        </div>
+        <div class="cell">
+          <h4>Chequing and Save</h4>
+          <p>Spending account with high-interest savings.</p>
+        </div>
+        <div class="cell">
+          <h4>Credit cards</h4>
+          <p>Visa Infinite cards launched June 2025.</p>
+        </div>
+        <div class="cell">
+          <h4>Tax and mortgages</h4>
+          <p>Wealthsimple Tax (ex-SimpleTax) and mortgages.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="revenue-streams">
+      <div class="section-label">How it earns</div>
+      <h2>Revenue streams</h2>
+      <p class="lede">No revenue split is published.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Business lines</h4>
+          <ul><li>Wealth management</li><li>Trading and brokerage</li><li>Banking and spending</li></ul>
+        </div>
+        <div>
+          <h4>Management comment</h4>
+          <ul><li>Diversified revenues cited as more resilient</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="markets">
+      <div class="section-label">Where it operates</div>
+      <h2>Markets</h2>
+      <p class="lede">Canada.</p>
+      <div class="market-cols">
+        <div>
+          <h4>Footprint</h4>
+          <ul><li>Canadian clients; Bank of Canada settlement-account access since 2022</li></ul>
+        </div>
+        <div>
+          <h4>Ambition</h4>
+          <ul><li>CEO targets C$1 trillion AUA within 20 years of founding</li></ul>
+        </div>
+      </div>
+      <div class="tag-row"><span class="tag">Canada</span><span class="tag">wealth</span><span class="tag">private</span><span class="tag">Power Corp</span></div>
+    </section>
+
+    <section id="financials">
+      <div class="section-label">Numbers</div>
+      <h2>Consolidated financials</h2>
+      <div class="panel grey">
+        <h3>No full-year revenue found</h3>
+        <p style="margin-bottom:0;">Only the Q2 2024 quarter was retrieved; the company is private and does not publish full audited accounts.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Period</th><th>Figure</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td>Q2 2024 revenue</td><td>C$129M (+88%)</td><td>The Globe and Mail</td></tr>
+            <tr><td>AUA, Dec 2025</td><td>C$111bn</td><td>Wikipedia</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Power Corp's disclosures put the fair value of its stake at C$1.5bn in 2024, but are not a company valuation.</p>
+    </section>
+
+    <section id="auditors">
+      <div class="section-label">Assurance</div>
+      <h2>Auditors</h2>
+      <p class="lede">No auditor was named in the search results.</p>
+      <div class="org-tree">
+        <div class="org-row depth-0">
+          <span class="indent">—</span>
+          <span class="entity">Wealthsimple Inc. <span class="sub">Private Canadian company</span></span>
+          <span class="auditor none">Not found in sources</span>
+        </div>
+      </div>
+      <p class="note">Power Corporation of Canada discloses its equity interest in its own filings.</p>
+    </section>
+
+    <section id="leadership">
+      <div class="section-label">People</div>
+      <h2>Key leadership</h2>
+      <p class="lede">From Wikipedia and press.</p>
+      <div class="people-grid">
+        <div class="person"><div class="name">Michael Katchen</div><div class="role">Co-founder and CEO</div></div>
+        <div class="person"><div class="name">Brett Huneycutt</div><div class="role">Co-founder, Chief Product Officer</div></div>
+        <div class="person"><div class="name">Rudy Adler</div><div class="role">Co-founder, Chief Marketing Officer</div></div>
+      </div>
+      <p class="note">CFO not found.</p>
+    </section>
+
+    <section id="malta">
+      <div class="section-label">Regional relationship</div>
+      <h2>Relationship with Malta</h2>
+      <p class="lede">No Malta link was found in searches for Wealthsimple.</p>
+      <div class="panel grey">
+        <h3>No Malta presence found</h3>
+        <ul><li>No MFSA licence, Maltese subsidiary or Malta-specific operation surfaced in the sources reviewed.</li></ul>
+      </div>
+      <p style="margin-top:1.4rem;">Absence in searches is not proof of absence; check the MFSA and Malta Business Registry directly.</p>
+    </section>
+
+    <section id="deloitte">
+      <div class="section-label">Professional-services relationship</div>
+      <h2>Relationship with Deloitte</h2>
+      <p class="lede">No Deloitte relationship found for Wealthsimple.</p>
+      <div class="panel grey">
+        <h3>No disclosed relationship identified</h3>
+        <p style="margin-bottom:0;">Deloitte is not reported in the sources reviewed as Wealthsimple's auditor, advisor or alliance partner.</p>
+      </div>
+    </section>
+
+    <footer id="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li><a href="https://en.wikipedia.org/wiki/Wealthsimple" target="_blank" rel="noopener">Wikipedia: Wealthsimple</a></li>
+        <li><a href="https://fintech.global/2025/10/28/wealthsimple-raises-750m-hits-10bn-valuation/" target="_blank" rel="noopener">FinTech Global: $750m raise</a></li>
+        <li><a href="https://www.theglobeandmail.com/business/article-wealthsimple-discloses-that-its-profitable-as-it-marks-10-years-in/" target="_blank" rel="noopener">The Globe and Mail: profitable at 10 years</a></li>
+      </ol>
+      <div class="disclaimer">Compiled from publicly available sources for general informational purposes. Items not publicly disclosed or not found in the sources reviewed are flagged rather than estimated. Information reflects the latest public sources found (October 2026) and may have changed. This is not financial, legal or audit advice.</div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i) => { if(s && s.offsetTop <= y) idx = i; });
+    links.forEach(a => a.classList.remove('active'));
+    if(links[idx]) links[idx].classList.add('active');
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? 'Sections ▴' : 'Sections ▾';
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+      navToggle.textContent = 'Sections ▾';
+    });
+  });
+</script>
+</body>
+</html>
